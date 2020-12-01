@@ -6,7 +6,7 @@ Projektidee
 Nutzung einer offenen API, die Quizfragen + Antwortalternativen enthält
 
 - Schwierigkeit (Einfach, Schwer, Mittel)
-- Spielmodi (z.B. mit Zeitdruck, Singleplayeroption)
+- Spielmodi (z.B. mit Zeitdruck, Singleplayeroption, Random Kategorie)
 - Bestenliste
 - Eigene Fragen erstellen
 - Chatfunktion + fertige Phrasenvorschläge
