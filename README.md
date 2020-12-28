@@ -1,7 +1,6 @@
 
+# Multiplayer - Quizspiel   
 
-
- #Multiplayer - Quizspiel   
 `https://opentdb.com/api_config.php`
 
 -Nicole Hammerer(ic19b094)
@@ -50,7 +49,8 @@ Nutzung einer offenen API, die Quizfragen + Antwortalternativen enthält
 
 ------------------------------------------
 
-####Alternative:
+#### Alternative:
+
 ##### Textbasiertes Pokemon-Spiel
 
 - Multiplayer-Kämpfe
