@@ -1,7 +1,6 @@
 
 
-
- #Multiplayer - Quizspiel   
+#Multiplayer - Quizspiel   
 `https://opentdb.com/api_config.php`
 
 -Nicole Hammerer(ic19b094)
