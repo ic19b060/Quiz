@@ -8,24 +8,22 @@ public class QuestionHandle {
         System.out.println("Amount of questions: ");
         String amount = create_amount();
 
-        //System.out.println("Choose a category: ");
-       // String category = create_amount();
+        System.out.println("Choose a category: 9 - 32, nothing = any");
+        String category = create_category();
 
-        //System.out.println("Set difficulty: ");
-       // String difficulty = create_amount();
+        System.out.println("Set difficulty: ");
+        String difficulty = create_difficulty();
 
-        //System.out.println("Choose question type: ");
-       // String type = create_amount();
+        //only multiple choice question type
+        String type = "&type=multiple";
 
-        String link = "https://opentdb.com/api.php?" + amount;
-                //+ category + difficulty + type;
-        //System.out.println("Link: " + link);
+        String link = "https://opentdb.com/api.php?" + amount + category + difficulty + type;
+        System.out.println("Link: " + link);
         return link;
     }
 
 
-    //TODO check if Int
-    //TODO methods for other settings - override?
+    //TODO user input: check if Int
     static String create_amount() {
         Scanner user = new Scanner(System.in);
         String amount = user.next();
@@ -33,5 +31,31 @@ public class QuestionHandle {
             amount = "amount=" + amount;
         }
         return amount;
+    }
+
+    static String create_category() {
+        String category = "";
+        Scanner user = new Scanner(System.in);
+        category = user.next();
+        if (category.length() != 0) {
+            category = "&category=" + category;
+        }
+        return category;
+    }
+
+    static String create_difficulty() {
+        Scanner user = new Scanner(System.in);
+        String difficulty = user.next();
+
+        if (difficulty.length() != 0 && (difficulty.contains("easy") || difficulty.contains("medium")) || difficulty.contains("hard")){
+            difficulty = "&difficulty=" + difficulty;
+        }
+        else if (difficulty.length() != 0) {
+            System.out.println("Input Error!");
+        }
+        else {
+            difficulty="";
+        }
+        return difficulty;
     }
 }
