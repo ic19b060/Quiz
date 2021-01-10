@@ -1,24 +1,22 @@
 package fhtw;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextArea;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class Controller {
 
@@ -65,16 +63,22 @@ public class Controller {
     private Tab mp_tab;
 
     @FXML
-    private Spinner<?> diff_drpdwn_mp;
-
-    @FXML
     private Button start_btn_mp;
 
     @FXML
-    private Spinner<?> cat_drpdwn_mp;
+    private Spinner<?> nbr_drpdwn_mp;
+
+
+    ObservableList<String> categorylist = FXCollections.observableArrayList();
+    @FXML
+    private ChoiceBox<String> cat_drp_mp;
+
+
+    ObservableList<String> difficultylist;
+
 
     @FXML
-    private Spinner<?> nbr_drpdwn_mp;
+    private ChoiceBox<String> dif_drp_mp;
 
     @FXML
     private Tab profil_tab;
@@ -88,8 +92,9 @@ public class Controller {
     @FXML
     private TextArea highscore_field_prof;
 
+
     @FXML
-    private Tab bestenliste_tab;
+    private Tab highscore_tab;
 
     @FXML
     private TextArea txt_area_highscore;
@@ -99,7 +104,6 @@ public class Controller {
 
     @FXML
     private Button lgout_btn;
-
 
 
     @FXML
@@ -127,6 +131,23 @@ public class Controller {
     @FXML
     private Label lbl_usr1;
 
+
+//    @FXML
+//    public void initialize(){
+//        difficultylist = FXCollections.observableArrayList();
+//        String a = "easy";
+//        String b = "medium";
+//        String c = "hard";
+//        difficultylist.addAll(a, b, c);
+//        dif_drp_mp.setItems(difficultylist);
+//
+//        //???
+//        //funktioniert noch nicht
+//    }
+
+
+
+
     public Controller() {
     }
 
@@ -145,12 +166,22 @@ public class Controller {
     }
 
 
-
-     public void logout(ActionEvent actionEvent) throws IOException {
+    public void logout(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) lgout_btn.getScene().getWindow();
-       stage.close();
+        stage.close();
     }
 
 
+    public void gotoProfile(ActionEvent actionEvent) {
+        start_tab.getTabPane().getSelectionModel().select(profil_tab);
+    }
+
+    public void gotoHighscores(ActionEvent actionEvent) {
+        start_tab.getTabPane().getSelectionModel().select(highscore_tab);
+    }
+
+
+
 }
+
 
