@@ -168,6 +168,14 @@ public class Controller {
 
 
     public void logout(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
+        Stage three = new Stage();
+        three.setTitle("Quiz");
+        three.setScene(new Scene(root));
+        three.show();
+
         Stage stage = (Stage) lgout_btn.getScene().getWindow();
         stage.close();
     }
