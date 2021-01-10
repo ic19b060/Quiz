@@ -89,6 +89,7 @@ public class Controller {
     @FXML
     private TextArea login_field_prof;
 
+
     @FXML
     private TextArea highscore_field_prof;
 
