@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="fhtw.Controller">
+  <tabs>
+    <Tab fx:id="start_tab" text="Start">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="Welcom_lbl" contentDisplay="CENTER" layoutX="100.0" layoutY="31.0" prefHeight="120.0" prefWidth="400.0" text="Welcome!" textAlignment="CENTER" textFill="#ca2626" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="gotoprofile_btn" layoutX="205.0" layoutY="216.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="128.0" text="go to Profile" />
+                  <Button fx:id="highscore_btn" layoutX="205.0" layoutY="264.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="127.0" text="Highscores" />
+                  <Label fx:id="explanation_lbl" layoutX="176.0" layoutY="121.0" prefHeight="78.0" prefWidth="185.0" text="erklärung blabla" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="sp_tab" text="Singleplayer">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Spinner fx:id="nmb_dropdwn" layoutX="315.0" layoutY="59.0" prefHeight="37.0" prefWidth="149.0" />
+                  <Label fx:id="nbr_lbl" layoutX="159.0" layoutY="56.0" prefHeight="44.0" prefWidth="118.0" text="Number of Questions" />
+                  <Label fx:id="diff_lbl" layoutX="159.0" layoutY="220.0" text="Difficulty" />
+                  <Label fx:id="cat_lbl" layoutX="159.0" layoutY="140.0" prefHeight="32.0" prefWidth="101.0" text="Category" />
+                  <Button fx:id="start_btn_sp" layoutX="210.0" layoutY="288.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="162.0" text="Start Quiz" />
+                  <Spinner fx:id="diff_drpdwn" layoutX="315.0" layoutY="219.0" prefHeight="37.0" prefWidth="149.0" />
+                  <Spinner fx:id="cat_drpdwn" layoutX="315.0" layoutY="137.0" prefHeight="37.0" prefWidth="149.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="mp_tab" text="Multiplayer">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Spinner fx:id="diff_drpdwn_mp" layoutX="378.0" layoutY="215.0" prefHeight="37.0" prefWidth="149.0" />
+                  <Label layoutX="167.0" layoutY="56.0" prefHeight="44.0" prefWidth="118.0" text="Number of Questions" />
+                  <Label layoutX="173.0" layoutY="225.0" text="Difficulty" />
+                  <Label layoutX="176.0" layoutY="140.0" prefHeight="32.0" prefWidth="101.0" text="Kategory" />
+                  <Button fx:id="start_btn_mp" layoutX="197.0" layoutY="288.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="162.0" text="Start Quiz" />
+                  <Spinner fx:id="cat_drpdwn_mp" layoutX="378.0" layoutY="137.0" prefHeight="37.0" prefWidth="149.0" />
+                  <Spinner fx:id="nbr_drpdwn_mp" layoutX="378.0" layoutY="62.0" prefHeight="37.0" prefWidth="149.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="profil_tab" text="Profile">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextArea fx:id="name_field_prof" layoutX="153.0" layoutY="111.0" prefHeight="37.0" prefWidth="258.0" />
+                  <TextArea fx:id="login_field_prof" layoutX="153.0" layoutY="185.0" prefHeight="37.0" prefWidth="258.0" />
+                  <TextArea fx:id="highscore_field_prof" layoutX="153.0" layoutY="257.0" prefHeight="37.0" prefWidth="258.0" />
+                  <Label layoutX="153.0" layoutY="157.0" text="last Login" />
+                  <Label layoutX="153.0" layoutY="74.0" text="Name" />
+                  <Label layoutX="155.0" layoutY="239.0" prefHeight="18.0" prefWidth="76.0" text="Highscore" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="bestenliste_tab" text="Highscores">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextArea fx:id="txt_area_highscore" layoutX="149.0" layoutY="80.0" prefHeight="249.0" prefWidth="274.0" />
+                  <Label layoutX="123.0" layoutY="25.0" prefHeight="55.0" prefWidth="311.0" text="Highscores">
+                     <font>
+                        <Font size="38.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="logout_tab" text="Logout">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="lgout_btn" layoutX="188.0" layoutY="181.0" mnemonicParsing="false" onAction="#logout" prefHeight="53.0" prefWidth="226.0" text="Logout" />
+                  <Label layoutX="166.0" layoutY="54.0" prefHeight="106.0" prefWidth="312.0" text="Goodbye">
+                     <font>
+                        <Font size="53.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>

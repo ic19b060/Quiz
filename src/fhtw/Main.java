@@ -2,7 +2,6 @@ package fhtw;
 
 import com.google.gson.JsonObject;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +20,8 @@ public class Main extends Application {
         primaryStage.setTitle("Quiz");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+
     }
 
 
