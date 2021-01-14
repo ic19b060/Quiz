@@ -1,6 +1,5 @@
 package fhtw;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,16 +8,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
 
-public class Controller {
+public class Controller  {
+
+    ArrayList<mainuserdatabase> userdatabase = new ArrayList<>();
+
+
+    ObservableList<String> categorylist = FXCollections.observableArrayList();
+
 
     @FXML
     private Tab start_tab;
@@ -69,16 +71,13 @@ public class Controller {
     private Spinner<?> nbr_drpdwn_mp;
 
 
-    ObservableList<String> categorylist = FXCollections.observableArrayList();
+
     @FXML
     private ChoiceBox<String> cat_drp_mp;
 
 
-    ObservableList<String> difficultylist;
-
-
     @FXML
-    private ChoiceBox<String> dif_drp_mp;
+    public ChoiceBox<String> dif_drp_mp;
 
     @FXML
     private Tab profil_tab;
@@ -132,38 +131,99 @@ public class Controller {
     @FXML
     private Label lbl_usr1;
 
+    @FXML
+    private Button button_a;
 
-//    @FXML
-//    public void initialize(){
-//        difficultylist = FXCollections.observableArrayList();
-//        String a = "easy";
-//        String b = "medium";
-//        String c = "hard";
-//        difficultylist.addAll(a, b, c);
-//        dif_drp_mp.setItems(difficultylist);
-//
-//        //???
-//        //funktioniert noch nicht
-//    }
+    @FXML
+    private Button button_d;
+
+    @FXML
+    private Button button_b;
+
+    @FXML
+    private Button button_c;
+
+    @FXML
+    private TextArea text_fragen;
+
+    @FXML
+    private Button button_Quizgamequiz;
+
+    @FXML
+    private Button button_joker;
+
+    @FXML
+    private TextArea chat_fenster;
+
+    @FXML
+    private TextField chat_textfenster;
+
+    @FXML
+    private Button send_button_chat;
+
+    @FXML
+    private Label lbl_loginstatus;
+
+    @FXML
+    private TextField enter_user_signup;
+
+    @FXML
+    private PasswordField enter_password_signup;
+
+    @FXML
+    private Button ok_signup_btn;
+
+    @FXML
+    void quitgamequiz(ActionEvent event) throws IOException {
+       Stage stage = (Stage) button_Quizgamequiz.getScene().getWindow();
+        stage.close();
+
+
+        //highscores speichern in files
+        //aktualisieren im Profil
+
+    }
+
+    @FXML
+    public void initialize() {
+
+
+        //???
+        //funktioniert noch nicht
 
 
 
+        //arraylist einfügen für login/registrierung
+    }
 
     public Controller() {
+
     }
 
 
     public void buttononAction_Login(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
+
+        String user = user_field.getText();
+        String pwd = psw_field.getText();
+
+        if (userdatabase.contains(user) && userdatabase.contains(pwd)) {
 
 
-        Stage two = new Stage();
-        two.setTitle("Quiz");
-        two.setScene(new Scene(root));
-        two.show();
+            Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
 
-        Stage stage = (Stage) lgn_btn.getScene().getWindow();
-        stage.close();
+            Stage two = new Stage();
+            two.setTitle("Quiz");
+            two.setScene(new Scene(root));
+            two.show();
+
+            Stage stage = (Stage) lgn_btn.getScene().getWindow();
+            stage.close();
+
+        } else {
+            lbl_loginstatus.setText("no such user - please sign up!");
+        }
+
+        //beim login passwort checken.
     }
 
 
@@ -190,7 +250,106 @@ public class Controller {
     }
 
 
+    @FXML
+    void startmultiplayerquiz(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Game_quiz.fxml"));
 
+
+        Stage two = new Stage();
+        two.setTitle("Quiz");
+        two.setScene(new Scene(root));
+        two.show();
+    }
+
+    @FXML
+    void startquiz(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Game_quiz.fxml"));
+
+        Stage two = new Stage();
+        two.setTitle("Quiz");
+        two.setScene(new Scene(root));
+        two.show();
+
+        //socket öffnen für den chat??
+
+
+    }
+    @FXML
+    public void load_data_catbutton(ContextMenuEvent mouseEvent) {
+        ObservableList<String> difficultylist;
+
+        difficultylist = FXCollections.observableArrayList();
+        String a = "easy";
+        String b = "medium";
+        String c = "hard";
+        difficultylist.addAll(a, b, c);
+        dif_drp_mp.getItems().addAll(difficultylist);
+    }
+
+
+
+    public void signup_newuserentry(ActionEvent actionEvent) {
+
+        //funktioniert noch nicht.. datenbank wird nach schließen der gui gelöscht.
+
+
+
+        String user = enter_user_signup.getText();
+        String pwd = enter_password_signup.getText();
+
+        mainuserdatabase u = new mainuserdatabase(user,pwd);
+
+        userdatabase.add(u);
+
+        enter_password_signup.clear();
+        enter_user_signup.clear();
+        for(mainuserdatabase p : userdatabase){
+            enter_user_signup.appendText(p.toString() +"\n");
+            enter_password_signup.appendText(p.toString() + "\n");
+
+
+        }
+
+        for(mainuserdatabase p : userdatabase){
+            System.out.println(p);
+
+        }
+
+
+
+        //entry in list speichern
+        Stage stage = (Stage) ok_signup_btn.getScene().getWindow();
+        stage.close();
+    }
+
+    public void opensignup_btn(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("sign_up.fxml"));
+
+        Stage two = new Stage();
+        two.setTitle("Sign-up");
+        two.setScene(new Scene(root));
+        two.show();
+    }
+
+
+    class mainuserdatabase{
+
+        String user;
+        String password;
+
+        public mainuserdatabase(String user, String password) {
+            this.user = user;
+            this.password = password;
+        }
+
+        @Override
+        public String toString() {
+            return "userdatabase{" +
+                    "user='" + user + '\'' +
+                    ", password='" + password + '\'' +
+                    '}';
+        }
+    }
 }
 
 

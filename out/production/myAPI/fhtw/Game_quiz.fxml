@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<TitledPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.Controller">
+   <content>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="678.0">
+         <children>
+            <Button fx:id="button_a" layoutX="102.0" layoutY="188.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="133.0" text="Button" />
+            <Button fx:id="button_d" layoutX="352.0" layoutY="249.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="133.0" text="Button" />
+            <Button fx:id="button_b" layoutX="352.0" layoutY="188.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="133.0" text="Button" />
+            <Button fx:id="button_c" layoutX="102.0" layoutY="249.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="133.0" text="Button" />
+            <TextArea fx:id="text_fragen" layoutX="88.0" layoutY="64.0" prefHeight="91.0" prefWidth="405.0" />
+            <Button fx:id="button_Quizgamequiz" layoutX="58.0" layoutY="368.0" mnemonicParsing="false" onAction="#quitgamequiz" prefHeight="47.0" prefWidth="88.0" text="Quit Game" />
+            <Button fx:id="button_joker" layoutX="463.0" layoutY="365.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="112.0" text="Joker" />
+            <ProgressBar layoutX="191.0" layoutY="330.0" prefWidth="200.0" progress="0.0" />
+            <TextArea fx:id="chat_fenster" layoutX="203.0" layoutY="401.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="chat_textfenster" layoutX="203.0" layoutY="613.0" prefHeight="22.0" prefWidth="200.0" />
+            <Button fx:id="send_button_chat" layoutX="419.0" layoutY="613.0" mnemonicParsing="false" text="Send" />
+         </children>
+      </Pane>
+   </content>
+</TitledPane>
