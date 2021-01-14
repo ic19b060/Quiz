@@ -206,7 +206,7 @@ public class Controller  {
         String user = user_field.getText();
         String pwd = psw_field.getText();
 
-        if (userdatabase.contains(user) && userdatabase.contains(pwd)) {
+       // if (userdatabase.contains(user) && userdatabase.contains(pwd)) {
 
 
             Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
@@ -219,9 +219,9 @@ public class Controller  {
             Stage stage = (Stage) lgn_btn.getScene().getWindow();
             stage.close();
 
-        } else {
-            lbl_loginstatus.setText("no such user - please sign up!");
-        }
+      //  } else {
+      //      lbl_loginstatus.setText("no such user - please sign up!");
+      //  }
 
         //beim login passwort checken.
     }
