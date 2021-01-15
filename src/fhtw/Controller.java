@@ -331,6 +331,24 @@ public class Controller  {
         two.show();
     }
 
+    @FXML
+    void button_a_click(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    void button_b_click(ActionEvent event) {
+
+    }
+
+    @FXML
+    void button_c_click(ActionEvent event) {
+
+    }
+
+    @FXML
+    void button_d_click(ActionEvent event) {
+
+    }
 
     class mainuserdatabase{
 
