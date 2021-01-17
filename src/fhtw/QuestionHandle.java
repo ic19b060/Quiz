@@ -23,7 +23,6 @@ public class QuestionHandle {
     }
 
 
-    //TODO user input: check if Int
     static String create_amount() {
         Scanner user = new Scanner(System.in);
         String amount = user.next();

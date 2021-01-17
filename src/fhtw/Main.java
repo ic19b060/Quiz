@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import static fhtw.QuestionHandle.Link;
 import static fhtw.APIHandle.Json_complete;
+import static fhtw.gameplay.play;
 
 public class Main extends Application {
 
@@ -35,6 +36,7 @@ public class Main extends Application {
         JsonObject questions = Json_complete(link);
 
         //gameplay logic
+        play(questions);
         launch(args);
 
     }
