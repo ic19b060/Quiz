@@ -2,15 +2,13 @@ package fhtw;
 
 import com.google.gson.*;
 
-import javax.xml.transform.Result;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Gameplay {
 
     static void singleplay(JsonObject json) {
+
+        //TODO Startbildschirm mit Nachricht oder so
 
         Integer user_points = 0;
 
@@ -33,25 +31,30 @@ public class Gameplay {
                 answers.add(answer);
             }
             System.out.println(jsonQuestion.get("question"));
-            System.out.println(answers);
+            System.out.println(shuffle_answers(answers));
+
+           /* String string_answers = (String) answers.toString();
+            Collections.shuffle(Arrays.asList(string_answers));
+            System.out.println(string_answers);
+
+            List<String> rand_answers = Arrays.asList(string_answers);
+            Collections.shuffle(Arrays.asList(rand_answers, new Random()));
+            System.out.println(rand_answers);
+
+*/
 
             //player answers
 
             String round_stats = get_answer(correct_answer, user_points);
             System.out.println(round_stats);
             System.out.println("The correct answer was: " + correct_answer + "\n");
-            //
+
+            //TODO wenn Ende erreicht: Nachricht über Ende + Punktezahl
+            //TODO Zufallselement Goodie(Joker) erhalten
         }
     }
 
 
-        public static int shuffle () {
-            Random rd = new Random(); // creating Random object
-            int upperbound = 4;
-            //generate random values from 0-3
-            int int_random = rd.nextInt(upperbound);
-            return int_random;
-        }
 
     static String get_answer(JsonElement correct_answer, Integer user_points) {
 
@@ -71,4 +74,14 @@ public class Gameplay {
         return message ;
     }
 
+    public static List<JsonElement> shuffle_answers (List<JsonElement> answers) {
+
+        List<JsonElement>  rand_answers = new ArrayList<>();
+
+        for(JsonElement element : answers){
+            rand_answers.add(element);
+        }
+        Collections.shuffle(rand_answers);
+        return rand_answers;
+    }
 }
