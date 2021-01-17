@@ -2,7 +2,7 @@ package fhtw;
 
 import java.util.Scanner;
 
-public class QuestionHandle {
+public class Link {
     public static String Link() {
 
         System.out.println("Amount of questions: ");

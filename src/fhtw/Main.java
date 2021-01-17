@@ -7,12 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import static fhtw.QuestionHandle.Link;
-import static fhtw.APIHandle.Json_complete;
-import static fhtw.gameplay.play;
+import static fhtw.Link.Link;
+import static fhtw.APIReader.Json_complete;
+import static fhtw.Gameplay.singleplay;
 
 public class Main extends Application {
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -22,9 +21,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
-
     }
-
 
     public static void main(String[] args) {
 
@@ -35,8 +32,9 @@ public class Main extends Application {
         //create question set with created link for API
         JsonObject questions = Json_complete(link);
 
-        //gameplay logic
-        play(questions);
+        //Gameplay logic
+        singleplay(questions);
+        //multiplay(questions)
         launch(args);
 
     }

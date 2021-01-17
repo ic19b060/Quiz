@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class APIHandle {
+public class APIReader {
     static JsonObject Json_complete(String link) {
 
         //Pass the desired URL as an object:
@@ -91,11 +91,11 @@ public class APIHandle {
 
                 for (Object objInArr : namearr) {
                     JsonObject jsonFrage = (JsonObject) objInArr;
-                    System.out.println(jsonFrage.get("question"));
+                   // System.out.println(jsonFrage.get("question"));
                     List<JsonElement> answers = new ArrayList<>();
                     answers.add(jsonFrage.get("correct_answer"));
                     answers.add(jsonFrage.get("incorrect_answers"));
-                    System.out.println(answers + "\n");
+                   // System.out.println(answers + "\n");
                 }
 
             } catch (Exception ex) {
