@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 public class Controller  {
 
+
+
     ArrayList<mainuserdatabase> userdatabase = new ArrayList<>();
 
 
@@ -269,6 +271,7 @@ public class Controller  {
         two.setTitle("Quiz");
         two.setScene(new Scene(root));
         two.show();
+
 
         //socket öffnen für den chat??
 

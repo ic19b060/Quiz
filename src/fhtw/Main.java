@@ -33,6 +33,7 @@ public class Main extends Application {
         JsonObject questions = Json_complete(link);
 
         //Gameplay logic
+        Answers.create_answer_list(questions);
         singleplay(questions);
         //multiplay(questions)
         launch(args);
