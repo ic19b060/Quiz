@@ -5,7 +5,7 @@ import java.util.List;
 
 
 
-public class Questions {
+public class Question {
 
      private String category;
      private String type;
@@ -63,3 +63,5 @@ public class Questions {
     }
 
 }
+
+

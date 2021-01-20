@@ -1,15 +1,29 @@
 package fhtw;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Link {
     public static String Link() {
 
+
+
+      //  List<Integer> values = Controller.get_values();
+
+        //values.get(0);
+        //int amount = 12;// values.get(0);
+       //int category = 12;// values.get(1);
+        //int difficulty2 = 1; // values.get(2);
+
+        //String difficulty = "";
+        //if (difficulty2 == 1){
+       //     difficulty = "easy";
+       // }
         System.out.println("Amount of questions: ");
         String amount = create_amount();
 
         System.out.println("Choose a category: 9 - 32, nothing = any");
-        String category = create_category();
+       String category = create_category();
 
         System.out.println("Set difficulty: ");
         String difficulty = create_difficulty();

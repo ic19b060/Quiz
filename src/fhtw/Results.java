@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Results {
 
-        protected ArrayList<Questions> results;
+        protected ArrayList<Question> results;
 
-        public ArrayList<Questions> getResults() {
+        public ArrayList<Question> getResults() {
                 return results;
         }
 
-        public void setResults(ArrayList<Questions> results) {
+        public void setResults(ArrayList<Question> results) {
                 this.results = results;
         }
 

@@ -1,5 +1,6 @@
 package fhtw;
 
+import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,11 +14,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class Controller  {
+import static fhtw.APIReader.Json_complete;
+import static fhtw.Link.Link;
+
+public class Controller {
+
+    private static controller_gamequiz controllerGamequiz;
+
+    @FXML
+    controller_gamequiz controller_Gamequiz;
 
 
 
+    private Question currentquestion;
     ArrayList<mainuserdatabase> userdatabase = new ArrayList<>();
 
 
@@ -43,7 +55,7 @@ public class Controller  {
     private Tab sp_tab;
 
     @FXML
-    private Spinner<?> nmb_dropdwn;
+    private static Spinner<Integer> nmb_dropdwn;
 
     @FXML
     private Label nbr_lbl;
@@ -58,10 +70,10 @@ public class Controller  {
     private Button start_btn_sp;
 
     @FXML
-    private Spinner<?> diff_drpdwn;
+    private static Spinner<Integer> diff_drpdwn;
 
     @FXML
-    private Spinner<?> cat_drpdwn;
+    private static Spinner<Integer> cat_drpdwn;
 
     @FXML
     private Tab mp_tab;
@@ -133,35 +145,6 @@ public class Controller  {
     @FXML
     private Label lbl_usr1;
 
-    @FXML
-    private Button button_a;
-
-    @FXML
-    private Button button_d;
-
-    @FXML
-    private Button button_b;
-
-    @FXML
-    private Button button_c;
-
-    @FXML
-    private TextArea text_fragen;
-
-    @FXML
-    private Button button_Quizgamequiz;
-
-    @FXML
-    private Button button_joker;
-
-    @FXML
-    private TextArea chat_fenster;
-
-    @FXML
-    private TextField chat_textfenster;
-
-    @FXML
-    private Button send_button_chat;
 
     @FXML
     private Label lbl_loginstatus;
@@ -177,7 +160,7 @@ public class Controller  {
 
     @FXML
     void quitgamequiz(ActionEvent event) throws IOException {
-       Stage stage = (Stage) button_Quizgamequiz.getScene().getWindow();
+       Stage stage = (Stage) fhtw.Controller.controllerGamequiz.button_Quizgamequiz.getScene().getWindow();
         stage.close();
 
 
@@ -265,7 +248,13 @@ public class Controller  {
 
     @FXML
     void startquiz(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Game_quiz.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Game_quiz.fxml"));
+        Parent root = (Parent) loader.load();
+
+        //loader.setController(this);
+        this.controller_Gamequiz = loader.getController(); // controller aus dem Loader bekommen
+        this.controller_Gamequiz.setController1(this);
+
 
         Stage two = new Stage();
         two.setTitle("Quiz");
@@ -273,6 +262,32 @@ public class Controller  {
         two.show();
 
 
+        List<Question> questions = QuestionRepository.getInstance().getQuestions();
+
+        currentquestion = questions.get(0);
+
+       // controller_gamequiz.text_fragen.setText(currentquestion.getQuestion());
+
+        List<String> answers = shuffle_answers(currentquestion);
+        controller_Gamequiz.setData(answers.get(0), answers.get(1), answers.get(2), answers.get(3),currentquestion.getQuestion() );
+       // controller_Gamequiz.button_a.setText(answers.get(0));
+       // controller_Gamequiz.button_b.setText(answers.get(1));
+        //controller_Gamequiz.button_c.setText(answers.get(2));
+        //controller_Gamequiz.button_d.setText(answers.get(3));
+
+
+        controller_Gamequiz.button_a.setOnAction((ActionEvent) ->{
+
+                    });
+
+
+
+        //Felder einlesen für schwierigkeit,usw
+        //Quiz starten /api laden?
+        //Fragen in Textfeld schreiben
+        //Antworten mit button verknüpfen.
+
+       //text_fragen.setText("Hallo");
         //socket öffnen für den chat??
 
 
@@ -334,24 +349,6 @@ public class Controller  {
         two.show();
     }
 
-    @FXML
-    void button_a_click(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    void button_b_click(ActionEvent event) {
-
-    }
-
-    @FXML
-    void button_c_click(ActionEvent event) {
-
-    }
-
-    @FXML
-    void button_d_click(ActionEvent event) {
-
-    }
 
     class mainuserdatabase{
 
@@ -370,6 +367,32 @@ public class Controller  {
                     ", password='" + password + '\'' +
                     '}';
         }
+    }
+    public static List<String> shuffle_answers (Question question) {
+
+        List<String>  rand_answers = new ArrayList<>();
+        rand_answers.addAll(question.getIncorrect_answers());
+        rand_answers.add(question.getCorrect_answer());
+
+        Collections.shuffle(rand_answers);
+        return rand_answers;
+    }
+
+
+    public static List<Integer> get_values () {
+
+        int value = nmb_dropdwn.getValue();
+        System.out.println(value);
+        System.out.println(nmb_dropdwn.getValue());
+
+        List <Integer> game_values = new ArrayList<>();
+        game_values.add(nmb_dropdwn.getValue());
+        game_values.add(diff_drpdwn.getValue());
+        game_values.add(cat_drpdwn.getValue());
+
+
+
+        return game_values;
     }
 }
 

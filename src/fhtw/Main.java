@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 import static fhtw.Link.Link;
 import static fhtw.APIReader.Json_complete;
 import static fhtw.Gameplay.singleplay;
@@ -30,11 +32,12 @@ public class Main extends Application {
         String link = Link();
 
         //create question set with created link for API
-        JsonObject questions = Json_complete(link);
+        JsonObject questionsjson = Json_complete(link);
 
         //Gameplay logic
-        Answers.create_answer_list(questions);
-        singleplay(questions);
+        List<Question> questions = Answers.parseQuestionJson(questionsjson);
+        QuestionRepository.getInstance().setQuestions(questions);
+        //singleplay(questions);
         //multiplay(questions)
         launch(args);
 
