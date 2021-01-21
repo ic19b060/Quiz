@@ -29,14 +29,14 @@ public class Main extends Application {
 
         //create link for question set based on user choice
         //connect with gui!
-        String link = Link();
+       // String link = Link();
 
         //create question set with created link for API
-        JsonObject questionsjson = Json_complete(link);
+       // JsonObject questionsjson = Json_complete(link);
 
         //Gameplay logic
-        List<Question> questions = Answers.parseQuestionJson(questionsjson);
-        QuestionRepository.getInstance().setQuestions(questions);
+     //   List<Question> questions = Answers.parseQuestionJson(questionsjson);
+       // QuestionRepository.getInstance().setQuestions(questions);
         //singleplay(questions);
         //multiplay(questions)
         launch(args);

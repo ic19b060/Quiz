@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,14 +14,16 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static fhtw.APIReader.Json_complete;
 import static fhtw.Link.Link;
 
-public class Controller {
+public class Controller implements Initializable {
 
     private static controller_gamequiz controllerGamequiz;
 
@@ -169,17 +172,7 @@ public class Controller {
 
     }
 
-    @FXML
-    public void initialize() {
 
-
-        //???
-        //funktioniert noch nicht
-
-
-
-        //arraylist einfügen für login/registrierung
-    }
 
     public Controller() {
 
@@ -255,6 +248,15 @@ public class Controller {
         this.controller_Gamequiz = loader.getController(); // controller aus dem Loader bekommen
         this.controller_Gamequiz.setController1(this);
 
+        String link = Link();
+
+        //create question set with created link for API
+        JsonObject questionsjson = Json_complete(link);
+
+        //Gameplay logic
+        List<Question> questions = Answers.parseQuestionJson(questionsjson);
+        QuestionRepository.getInstance().setQuestions(questions);
+
 
         Stage two = new Stage();
         two.setTitle("Quiz");
@@ -262,19 +264,13 @@ public class Controller {
         two.show();
 
 
-        List<Question> questions = QuestionRepository.getInstance().getQuestions();
+        List<Question> question = QuestionRepository.getInstance().getQuestions();
 
-        currentquestion = questions.get(0);
+        currentquestion = question.get(0);
 
-       // controller_gamequiz.text_fragen.setText(currentquestion.getQuestion());
 
         List<String> answers = shuffle_answers(currentquestion);
         controller_Gamequiz.setData(answers.get(0), answers.get(1), answers.get(2), answers.get(3),currentquestion.getQuestion() );
-       // controller_Gamequiz.button_a.setText(answers.get(0));
-       // controller_Gamequiz.button_b.setText(answers.get(1));
-        //controller_Gamequiz.button_c.setText(answers.get(2));
-        //controller_Gamequiz.button_d.setText(answers.get(3));
-
 
         controller_Gamequiz.button_a.setOnAction((ActionEvent) ->{
 
@@ -289,6 +285,16 @@ public class Controller {
 
        //text_fragen.setText("Hallo");
         //socket öffnen für den chat??
+
+
+
+
+
+
+
+
+
+
 
 
     }
@@ -307,9 +313,6 @@ public class Controller {
 
 
     public void signup_newuserentry(ActionEvent actionEvent) {
-
-        //funktioniert noch nicht.. datenbank wird nach schließen der gui gelöscht.
-
 
 
         String user = enter_user_signup.getText();
@@ -347,6 +350,20 @@ public class Controller {
         two.setTitle("Sign-up");
         two.setScene(new Scene(root));
         two.show();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        ObservableList<String> difficultylist;
+
+        difficultylist = FXCollections.observableArrayList();
+        String a = "easy";
+        String b = "medium";
+        String c = "hard";
+        difficultylist.addAll(a, b, c);
+        //dif_drp_mp.getItems().addAll(difficultylist);
+
     }
 
 
