@@ -36,8 +36,8 @@
                   <Label fx:id="diff_lbl" layoutX="159.0" layoutY="220.0" text="Difficulty" />
                   <Label fx:id="cat_lbl" layoutX="159.0" layoutY="140.0" prefHeight="32.0" prefWidth="101.0" text="Category" />
                   <Button fx:id="start_btn_sp" layoutX="210.0" layoutY="288.0" mnemonicParsing="false" onAction="#startquiz" prefHeight="32.0" prefWidth="162.0" text="Start Quiz" />
-                  <Spinner fx:id="diff_drpdwn" amountToStepBy="1" initialValue="1" layoutX="315.0" layoutY="219.0" max="50" min="1" prefHeight="37.0" prefWidth="149.0" />
-                  <Spinner fx:id="cat_drpdwn" amountToStepBy="1" initialValue="9" layoutX="315.0" layoutY="137.0" max="32" min="9" prefHeight="37.0" prefWidth="149.0" />
+                  <ChoiceBox fx:id="cat_drp_sp" layoutX="314.0" layoutY="143.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="diff_drpdwn_sp" layoutX="314.0" layoutY="216.0"  prefWidth="150.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -50,7 +50,7 @@
                   <Label layoutX="176.0" layoutY="140.0" prefHeight="32.0" prefWidth="101.0" text="Kategory" />
                   <Button fx:id="start_btn_mp" layoutX="197.0" layoutY="288.0" mnemonicParsing="false" onAction="#startmultiplayerquiz" prefHeight="32.0" prefWidth="162.0" text="Start Quiz" />
                   <Spinner fx:id="nbr_drpdwn_mp" amountToStepBy="1" initialValue="1" layoutX="378.0" layoutY="62.0" max="50" min="1" prefHeight="37.0" prefWidth="149.0" />
-                  <ChoiceBox fx:id="cat_drp_mp" layoutX="377.0" layoutY="143.0" onContextMenuRequested="#load_data_catbutton" prefWidth="150.0" />
+                  <ChoiceBox fx:id="cat_drp_mp" layoutX="377.0" layoutY="143.0" prefWidth="150.0" />
                   <ChoiceBox fx:id="dif_drp_mp" layoutX="377.0" layoutY="221.0" prefWidth="150.0" />
                </children>
             </AnchorPane>

@@ -4,30 +4,34 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Link {
+
+    public Link() {
+    }
+
     public static String Link() {
 
 
 
-        List<Integer> values = Controller.get_values();
+       // List<Integer> values = Controller.get_values();
 
-        int amount = values.get(0);
-       int category = values.get(1);
-       int difficulty2 = values.get(2);
+       // int amount = values.get(0);
+     //  int category = values.get(1);
+      // int difficulty2 = values.get(2);
 
-        String difficulty = "";
-        if (difficulty2 == 1){
-            difficulty = "easy";
+    //    String difficulty = "";
+     //   if (difficulty2 == 1){
+     //       difficulty = "easy";
 
-        }
+     //   }
 
-        //System.out.println("Amount of questions: ");
-        //String amount = create_amount();
+        System.out.println("Amount of questions: ");
+        String amount = create_amount();
 
-        //System.out.println("Choose a category: 9 - 32, nothing = any");
-        //String category = create_category();
+        System.out.println("Choose a category: 9 - 32, nothing = any");
+        String category = create_category();
 
-        //System.out.println("Set difficulty: ");
-        //String difficulty = create_difficulty();
+        System.out.println("Set difficulty: ");
+        String difficulty = create_difficulty();
 
         //only multiple choice question type
         String type = "&type=multiple";

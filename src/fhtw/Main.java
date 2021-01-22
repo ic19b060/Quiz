@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-import static fhtw.Link.Link;
+//import static fhtw.Link.Link;
 import static fhtw.APIReader.Json_complete;
 import static fhtw.Gameplay.singleplay;
 
@@ -28,7 +28,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        MongoDB.connect_to_db();
+      //  MongoDB.connect_to_db();
         //create link for question set based on user choice
         //connect with gui!
        // String link = Link();

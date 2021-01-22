@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,26 +20,25 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static fhtw.APIReader.Json_complete;
-import static fhtw.Link.Link;
 
 public class Controller implements Initializable {
 
-    private static controller_gamequiz controllerGamequiz;
+    private static GamequizController controllerGamequiz;
 
     @FXML
-    controller_gamequiz controller_Gamequiz;
+    GamequizController gamequizController;
 
 
 
     private Question currentquestion;
-    ArrayList<mainuserdatabase> userdatabase = new ArrayList<>();
+
 
 
     ObservableList<String> categorylist = FXCollections.observableArrayList();
 
 
     @FXML
-    private Tab start_tab;
+    public Tab start_tab;
 
     @FXML
     private Label Welcom_lbl;
@@ -58,7 +56,7 @@ public class Controller implements Initializable {
     private Tab sp_tab;
 
     @FXML
-    private static Spinner<Integer> nmb_dropdwn;
+    private Spinner<Integer> nmb_dropdwn;
 
     @FXML
     private Label nbr_lbl;
@@ -73,10 +71,11 @@ public class Controller implements Initializable {
     private Button start_btn_sp;
 
     @FXML
-    private static Spinner<Integer> diff_drpdwn;
+    public ChoiceBox<String> cat_drp_sp;
 
     @FXML
-    private static Spinner<Integer> cat_drpdwn;
+    public ChoiceBox<String> diff_drpdwn_sp;
+
 
     @FXML
     private Tab mp_tab;
@@ -85,7 +84,7 @@ public class Controller implements Initializable {
     private Button start_btn_mp;
 
     @FXML
-    private Spinner<?> nbr_drpdwn_mp;
+    private static Spinner<Integer> nbr_drpdwn_mp;
 
 
 
@@ -111,7 +110,7 @@ public class Controller implements Initializable {
 
 
     @FXML
-    private Tab highscore_tab;
+    public Tab highscore_tab;
 
     @FXML
     private TextArea txt_area_highscore;
@@ -122,44 +121,6 @@ public class Controller implements Initializable {
     @FXML
     private Button lgout_btn;
 
-
-    @FXML
-    private PasswordField psw_field;
-
-    @FXML
-    private Button lgn_btn;
-
-
-    @FXML
-    private Button sign_up_btn;
-
-    @FXML
-    private Label lbl_usr;
-
-    @FXML
-    private Label lbl_pwd;
-
-    @FXML
-    private Label welcome_txt;
-
-    @FXML
-    private TextField user_field;
-
-    @FXML
-    private Label lbl_usr1;
-
-
-    @FXML
-    private Label lbl_loginstatus;
-
-    @FXML
-    private TextField enter_user_signup;
-
-    @FXML
-    private PasswordField enter_password_signup;
-
-    @FXML
-    private Button ok_signup_btn;
 
     @FXML
     void quitgamequiz(ActionEvent event) throws IOException {
@@ -179,30 +140,6 @@ public class Controller implements Initializable {
     }
 
 
-    public void buttononAction_Login(ActionEvent actionEvent) throws IOException {
-
-        String user = user_field.getText();
-        String pwd = psw_field.getText();
-
-       // if (userdatabase.contains(user) && userdatabase.contains(pwd)) {
-
-
-            Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
-
-            Stage two = new Stage();
-            two.setTitle("Quiz");
-            two.setScene(new Scene(root));
-            two.show();
-
-            Stage stage = (Stage) lgn_btn.getScene().getWindow();
-            stage.close();
-
-      //  } else {
-      //      lbl_loginstatus.setText("no such user - please sign up!");
-      //  }
-
-        //beim login passwort checken.
-    }
 
 
     public void logout(ActionEvent actionEvent) throws IOException {
@@ -245,17 +182,18 @@ public class Controller implements Initializable {
         Parent root = (Parent) loader.load();
 
         //loader.setController(this);
-        this.controller_Gamequiz = loader.getController(); // controller aus dem Loader bekommen
-        this.controller_Gamequiz.setController1(this);
+        this.gamequizController = loader.getController(); // controller aus dem Loader bekommen
+        this.gamequizController.setController1(this);
 
-        String link = Link();
+        String link = fhtw.Link.Link();
+
+       // String link = get_values().getApiPath();
+
 
         //create question set with created link for API
         JsonObject questionsjson = Json_complete(link);
 
         //Gameplay logic
-        List<Question> questions = Answers.parseQuestionJson(questionsjson);
-        QuestionRepository.getInstance().setQuestions(questions);
 
 
         Stage two = new Stage();
@@ -263,19 +201,15 @@ public class Controller implements Initializable {
         two.setScene(new Scene(root));
         two.show();
 
-
-        List<Question> question = QuestionRepository.getInstance().getQuestions();
-
-        currentquestion = question.get(0);
+        //Gameplaylogic
 
 
-        List<String> answers = shuffle_answers(currentquestion);
-        controller_Gamequiz.setData(answers.get(0), answers.get(1), answers.get(2), answers.get(3),currentquestion.getQuestion() );
+        List<Question> questions = Answers.parseQuestionJson(questionsjson);
 
-        controller_Gamequiz.button_a.setOnAction((ActionEvent) ->{
+        QuestionRepository.getInstance().setQuestions(questions);
 
-                    });
 
+        gamequizController.setNextQuestion();
 
 
         //Felder einlesen für schwierigkeit,usw
@@ -287,105 +221,42 @@ public class Controller implements Initializable {
         //socket öffnen für den chat??
 
 
-
-
-
-
-
-
-
-
-
-
     }
+
+
+
+
     @FXML
-    public void load_data_catbutton(ContextMenuEvent mouseEvent) {
+    public void loadDataDiffbutton(ChoiceBox<String> name){
         ObservableList<String> difficultylist;
-
         difficultylist = FXCollections.observableArrayList();
-        String a = "easy";
-        String b = "medium";
-        String c = "hard";
-        difficultylist.addAll(a, b, c);
-        dif_drp_mp.getItems().addAll(difficultylist);
+        difficultylist.addAll("easy", "medium", "hard");
+        name.getItems().addAll(difficultylist);
+            }
+
+
+    @FXML
+    public void loadDataCatbutton(ChoiceBox<String> name){
+        ObservableList<String> categorylist;
+        categorylist = FXCollections.observableArrayList();
+        categorylist.addAll("General Knowledge", "Books", "Film","Music",
+                "Musical & Theatres","Television","Video Games","Board Games","Science & Nature",
+                "Computers","Mathematics","Mythology","Sports","Geography","History","Politics");
+
+        name.getItems().addAll(categorylist);
     }
 
-
-
-    public void signup_newuserentry(ActionEvent actionEvent) {
-
-
-        String user = enter_user_signup.getText();
-        String pwd = enter_password_signup.getText();
-
-        mainuserdatabase u = new mainuserdatabase(user,pwd);
-
-        userdatabase.add(u);
-
-        enter_password_signup.clear();
-        enter_user_signup.clear();
-        for(mainuserdatabase p : userdatabase){
-            enter_user_signup.appendText(p.toString() +"\n");
-            enter_password_signup.appendText(p.toString() + "\n");
-
-
-        }
-
-        for(mainuserdatabase p : userdatabase){
-            System.out.println(p);
-
-        }
-
-
-
-        //entry in list speichern
-        Stage stage = (Stage) ok_signup_btn.getScene().getWindow();
-        stage.close();
-    }
-
-    public void opensignup_btn(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("sign_up.fxml"));
-
-        Stage two = new Stage();
-        two.setTitle("Sign-up");
-        two.setScene(new Scene(root));
-        two.show();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        ObservableList<String> difficultylist;
-
-        difficultylist = FXCollections.observableArrayList();
-        String a = "easy";
-        String b = "medium";
-        String c = "hard";
-        difficultylist.addAll(a, b, c);
-        //dif_drp_mp.getItems().addAll(difficultylist);
-
+        loadDataDiffbutton(diff_drpdwn_sp);
+        loadDataDiffbutton(dif_drp_mp);
+        loadDataCatbutton(cat_drp_mp);
+        loadDataCatbutton(cat_drp_sp);
     }
 
 
-    class mainuserdatabase{
-
-        String user;
-        String password;
-
-        public mainuserdatabase(String user, String password) {
-            this.user = user;
-            this.password = password;
-        }
-
-        @Override
-        public String toString() {
-            return "userdatabase{" +
-                    "user='" + user + '\'' +
-                    ", password='" + password + '\'' +
-                    '}';
-        }
-    }
-    public static List<String> shuffle_answers (Question question) {
+    public static List<String> shuffleAnswers(Question question) {
 
         List<String>  rand_answers = new ArrayList<>();
         rand_answers.addAll(question.getIncorrect_answers());
@@ -396,21 +267,21 @@ public class Controller implements Initializable {
     }
 
 
-    public static List<Integer> get_values () {
+    public QuestionProvider get_values() {
 
         //int value = nmb_dropdwn.getValue();
         //System.out.println(value);
         //System.out.println(nmb_dropdwn.getValue());
 
-        List <Integer> game_values = new ArrayList<>();
-        game_values.add(nmb_dropdwn.getValue());
-        game_values.add(diff_drpdwn.getValue());
-        game_values.add(cat_drpdwn.getValue());
+
+        QuestionProvider questionProvider = new QuestionProvider(nmb_dropdwn.getValue(),diff_drpdwn_sp.getSelectionModel().getSelectedItem(),cat_drp_sp.getSelectionModel().getSelectedItem(),"&type=multiple" );
 
 
 
-        return game_values;
+
+        return questionProvider;
     }
+
 }
 
 
