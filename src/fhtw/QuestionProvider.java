@@ -1,19 +1,22 @@
 package fhtw;
 
+import fhtw.enums.Category;
+
 public class QuestionProvider {
 
 
     Integer amount;
-    String category;
+    Enum category;
     String difficulty;
     String type;
 
-    public QuestionProvider(Integer amount, String category, String difficulty, String type) {
+    public QuestionProvider(Integer amount, String difficulty, String category, String type) {
         this.amount = amount;
-        this.category = category;
+       // this.category = category;
         this.difficulty = difficulty;
         this.type = type;
 
+      //  Enum category = Category.valueOf()
 
     }
 

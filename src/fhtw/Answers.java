@@ -36,17 +36,6 @@ public class Answers {
         return questions;
     }
 
-
-    public static List<JsonElement> shuffle_answers (List<JsonElement> answers) {
-
-        List<JsonElement>  rand_answers = new ArrayList<>();
-
-        for(JsonElement element : answers){
-            rand_answers.add(element);
-        }
-        Collections.shuffle(rand_answers);
-        return rand_answers;
-    }
 }
 
 

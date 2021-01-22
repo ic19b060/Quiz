@@ -65,18 +65,19 @@ public class GamequizController {
 
     @FXML
     void JokerClicked(ActionEvent event) {
-     if(currentquestion.getCorrect_answer().equals((button_a.getText()))){
+        if (currentquestion.getCorrect_answer().equals((button_a.getText()))) {
             button_b.setText("");
             button_c.setText("");
-        }
-     else if(currentquestion.getCorrect_answer().equals((button_b.getText()))){
-         button_a.setText("");
-         button_d.setText("");
-            }
-     else if(currentquestion.getCorrect_answer().equals((button_c.getText()))){
+        } else if (currentquestion.getCorrect_answer().equals((button_b.getText()))) {
+            button_a.setText("");
             button_d.setText("");
-           button_a.setText("");
-     }
+        } else if (currentquestion.getCorrect_answer().equals((button_c.getText()))) {
+            button_d.setText("");
+            button_a.setText("");
+        } else if (currentquestion.getCorrect_answer().equals((button_d.getText()))) {
+            button_b.setText("");
+            button_a.setText("");
+        }
     }
     @FXML
     void buttonAClick(ActionEvent event) {
