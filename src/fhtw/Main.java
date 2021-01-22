@@ -1,6 +1,7 @@
 package fhtw;
 
 import com.google.gson.JsonObject;
+import com.mongodb.Mongo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,6 +28,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
+        MongoDB.connect_to_db();
         //create link for question set based on user choice
         //connect with gui!
        // String link = Link();
