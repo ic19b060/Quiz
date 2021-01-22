@@ -11,9 +11,12 @@
 
 <TitledPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.GamequizController">
    <content>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="678.0" style="-fx-background-color: lightgreen;">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="678.0" style="-fx-background-color: #C7D0D7;">
          <children>
-            <Button fx:id="button_a" layoutX="102.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonAClick" prefHeight="50.0" prefWidth="133.0" text="Button" />
+            <Button fx:id="button_a" layoutX="102.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonAClick" prefHeight="50.0" prefWidth="133.0" style="-fx-background-color: #657889;" text="Button" textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB" size="16.0" />
+               </font></Button>
             <Button fx:id="button_d" layoutX="352.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonDClick" prefHeight="50.0" prefWidth="133.0" text="Button" />
             <Button fx:id="button_b" layoutX="352.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonBClick" prefHeight="50.0" prefWidth="133.0" text="Button" />
             <Button fx:id="button_c" layoutX="102.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonCClick" prefHeight="50.0" prefWidth="133.0" text="Button" />
@@ -22,11 +25,11 @@
                   <Font size="18.0" />
                </font></TextArea>
             <Button fx:id="button_Quizgamequiz" layoutX="58.0" layoutY="368.0" mnemonicParsing="false" onAction="#quitgamequiz" prefHeight="47.0" prefWidth="88.0" text="Quit Game" />
-            <Button fx:id="button_joker" layoutX="463.0" layoutY="365.0" mnemonicParsing="false" onAction="#JokerClicked" prefHeight="50.0" prefWidth="112.0" text="Joker" />
-            <ProgressBar layoutX="191.0" layoutY="330.0" prefWidth="200.0" progress="0.0" />
-            <TextArea fx:id="chat_fenster" layoutX="203.0" layoutY="401.0" prefHeight="200.0" prefWidth="200.0" />
-            <TextField fx:id="chat_textfenster" layoutX="203.0" layoutY="613.0" prefHeight="22.0" prefWidth="200.0" />
-            <Button fx:id="send_button_chat" layoutX="419.0" layoutY="613.0" mnemonicParsing="false" text="Send" />
+            <Button fx:id="button_joker" layoutX="169.0" layoutY="366.0" mnemonicParsing="false" onAction="#JokerClicked" prefHeight="50.0" prefWidth="112.0" text="Joker" />
+            <ProgressBar layoutX="85.0" layoutY="330.0" prefHeight="18.0" prefWidth="467.0" progress="0.0" />
+            <TextArea fx:id="chat_fenster" layoutX="432.0" layoutY="365.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="chat_textfenster" layoutX="432.0" layoutY="577.0" prefHeight="22.0" prefWidth="200.0" />
+            <Button fx:id="send_button_chat" layoutX="511.0" layoutY="611.0" mnemonicParsing="false" text="Send" />
             <Label fx:id="wrongAnswerLBL" layoutX="91.0" layoutY="132.0" prefHeight="27.0" prefWidth="407.0" />
             <Label fx:id="rightAnswerlbl" layoutX="97.0" layoutY="155.0" prefHeight="29.0" prefWidth="396.0" />
          </children>

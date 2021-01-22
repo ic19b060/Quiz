@@ -123,7 +123,7 @@ public class Controller implements Initializable {
 
 
     @FXML
-    void quitgamequiz(ActionEvent event) throws IOException {
+    void QuitGameQuiz(ActionEvent event) throws IOException {
        Stage stage = (Stage) fhtw.Controller.controllerGamequiz.button_Quizgamequiz.getScene().getWindow();
         stage.close();
 
@@ -166,7 +166,7 @@ public class Controller implements Initializable {
 
 
     @FXML
-    void startmultiplayerquiz(ActionEvent event) throws IOException {
+    void startMultiplayerQuiz(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Game_quiz.fxml"));
 
 
@@ -177,7 +177,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void startquiz(ActionEvent event) throws IOException {
+    void startSPQuiz(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Game_quiz.fxml"));
         Parent root = (Parent) loader.load();
 
@@ -185,9 +185,9 @@ public class Controller implements Initializable {
         this.gamequizController = loader.getController(); // controller aus dem Loader bekommen
         this.gamequizController.setController1(this);
 
-        String link = fhtw.Link.Link();
+       // String link = fhtw.Link.Link();
 
-       // String link = get_values().getApiPath();
+        String link = get_values().getApiPath();
 
 
         //create question set with created link for API
@@ -274,7 +274,7 @@ public class Controller implements Initializable {
         //System.out.println(nmb_dropdwn.getValue());
 
 
-        QuestionProvider questionProvider = new QuestionProvider(nmb_dropdwn.getValue(),diff_drpdwn_sp.getSelectionModel().getSelectedItem(),cat_drp_sp.getSelectionModel().getSelectedItem(),"&type=multiple" );
+        QuestionProvider questionProvider = new QuestionProvider(nmb_dropdwn.getValue(),diff_drpdwn_sp.getSelectionModel().getSelectedItem(),cat_drp_sp.getSelectionModel().getSelectedItem(),"multiple" );
 
 
 

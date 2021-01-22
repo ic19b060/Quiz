@@ -105,6 +105,9 @@ public class GamequizController {
             button_Quizgamequiz.setStyle("-fx-background-color:orangered");
             //button_Quizgamequiz.setOnAction(Event::consume);
 
+
+
+            //Highscores
         } else {
             currentquestion = questions.get(0);
             questions.remove(0);
