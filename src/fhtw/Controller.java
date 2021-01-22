@@ -398,9 +398,9 @@ public class Controller implements Initializable {
 
     public static List<Integer> get_values () {
 
-        int value = nmb_dropdwn.getValue();
-        System.out.println(value);
-        System.out.println(nmb_dropdwn.getValue());
+        //int value = nmb_dropdwn.getValue();
+        //System.out.println(value);
+        //System.out.println(nmb_dropdwn.getValue());
 
         List <Integer> game_values = new ArrayList<>();
         game_values.add(nmb_dropdwn.getValue());
