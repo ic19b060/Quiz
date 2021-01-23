@@ -3,11 +3,13 @@ package fhtw;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -19,7 +21,10 @@ import java.util.ResourceBundle;
 
 public class ControllerSignUp implements Initializable {
 
-    //ArrayList<mainuserdatabase> userdatabase = new ArrayList<>();
+
+    @FXML
+    private Label signuplbl;
+
     @FXML
     private TextField enter_user_signup;
 
@@ -49,59 +54,27 @@ public class ControllerSignUp implements Initializable {
         query.put("Username", user);
         FindIterable<Document> cur_user = user_collection.find(query);
 
-        if (cur_user != null) {
-            //xy.setText("Error: Username already exists");
+        //check if username is in database
+        MongoCursor<Document> cursor = user_collection.find().iterator();
+        String usernameDB = "";
 
-        } else {
+        while (cursor.hasNext()) {
+            Document userinfo = cursor.next();
+            usernameDB = userinfo.getString("Username");
+
+            if (usernameDB == user && cursor.hasNext()) {
+                signuplbl.setText("Error: Username already exists");
+            }
+            else if ((usernameDB != user) && (!cursor.hasNext())){
                 //Insert document for new user into database
                 Document newUser = new Document();
                 newUser.append("Username", user);
                 newUser.append("Password", pwd);
                 user_collection.insertOne(newUser);
-                //print "Sign-Up successfull! Welcome " + user + "!"
+                signuplbl.setText("Sign-Up successfull! Welcome " + user + "!");
             }
 
-            /*userdatabase.add(u);
-
-        enter_password_signup.clear();
-        enter_user_signup.clear();
-        for (mainuserdatabase p : userdatabase) {
-            enter_user_signup.appendText(p.toString() + "\n");
-            enter_password_signup.appendText(p.toString() + "\n");
-
-
         }
-
-        for (mainuserdatabase p : userdatabase) {
-            System.out.println(p);
-
-        }
-
-
-        //entry in list speichern
-        Stage stage = (Stage) ok_signup_btn.getScene().getWindow();
-        stage.close();
-    }
-
-
-    static class mainuserdatabase {
-
-        String user;
-        String password;
-
-        public mainuserdatabase(String user, String password) {
-            this.user = user;
-            this.password = password;
-        }
-
-        @Override
-        public String toString() {
-            return "userdatabase{" +
-                    "user='" + user + '\'' +
-                    ", password='" + password + '\'' +
-                    '}';
-        }
-    }*/
 
     }
 
