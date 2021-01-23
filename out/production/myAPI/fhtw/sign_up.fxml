@@ -3,36 +3,42 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="417.0" text="Sign Up" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.ControllerSignUp">
+
+<ScrollPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.ControllerSignUp">
    <content>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="330.0" style="-fx-background-color: #C7D0D7;">
-         <children>
-            <TextField fx:id="enter_user_signup" layoutX="70.0" layoutY="155.0" promptText="enter new user" />
-            <PasswordField fx:id="enter_password_signup" layoutX="70.0" layoutY="225.0" promptText="enter new password" />
-            <Button fx:id="ok_signup_btn" layoutX="258.0" layoutY="267.0" mnemonicParsing="false" onAction="#signup_newuserentry" style="-fx-background-color: #657889;" text="Sign up" />
-            <Label layoutX="70.0" layoutY="122.0" text="User" textFill="#657889">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Label>
-            <Label layoutX="70.0" layoutY="186.0" text="Password" textFill="#657889">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Label>
-            <Label layoutX="29.0" layoutY="42.0" prefHeight="58.0" prefWidth="186.0" text="New User - Sign up" textFill="#657889">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="signuplbl" layoutX="20.0" layoutY="270.0" prefHeight="44.0" prefWidth="182.0" textFill="#657889" />
-            <Button fx:id="rtrnLogin" layoutX="220.0" layoutY="314.0" mnemonicParsing="false" onAction="#returnLogin" style="-fx-background-color: #657889;" text="return to Login" />
-         </children>
-      </Pane>
+      <TitledPane text="Sign_up">
+         <content>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="356.0" style="-fx-background-color: #C7D0D7;">
+               <children>
+                  <TextField fx:id="enter_user_signup" layoutX="70.0" layoutY="155.0" promptText="enter new user" />
+                  <PasswordField fx:id="enter_password_signup" layoutX="70.0" layoutY="225.0" promptText="enter new password" />
+                  <Button fx:id="ok_signup_btn" layoutX="258.0" layoutY="267.0" mnemonicParsing="false" onAction="#signup_newuserentry" style="-fx-background-color: #657889;" text="Sign up" />
+                  <Label layoutX="70.0" layoutY="122.0" text="User" textFill="#657889">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="70.0" layoutY="186.0" text="Password" textFill="#657889">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="29.0" layoutY="42.0" prefHeight="58.0" prefWidth="186.0" text="New User - Sign up" textFill="#657889">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="signuplbl" layoutX="20.0" layoutY="270.0" prefHeight="44.0" prefWidth="182.0" textFill="#657889" />
+                  <Button fx:id="rtrnLogin" layoutX="220.0" layoutY="314.0" mnemonicParsing="false" onAction="#returnLogin" style="-fx-background-color: #657889;" text="return to Login" />
+               </children>
+            </Pane>
+         </content>
+      </TitledPane>
    </content>
-</TitledPane>
+</ScrollPane>
