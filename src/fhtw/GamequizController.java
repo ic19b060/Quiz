@@ -1,7 +1,6 @@
 package fhtw;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,11 +18,12 @@ import java.util.List;
 public class GamequizController {
 
     private Question currentquestion;
-    @FXML
-    Controller Controller;
 
-    public void setController1(fhtw.Controller Controller) {
-        this.Controller = Controller;
+    @FXML
+    MenueController MenueController;
+
+    public void setController1(MenueController MenueController) {
+        this.MenueController = MenueController;
     }
 
     @FXML
@@ -123,9 +123,9 @@ public class GamequizController {
         } else {
             currentquestion = questions.get(0);
             questions.remove(0);
-            List<String> answers = Controller.shuffleAnswers(currentquestion);
+            List<String> answers = MenueController.shuffleAnswers(currentquestion);
             setData(answers, currentquestion.getQuestion());
-        }
+            }
     }
     @FXML
     void buttonBClick(ActionEvent event) {
@@ -147,17 +147,22 @@ public class GamequizController {
 
     @FXML
     void quitgamequiz(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
 
-        Stage two = new Stage();
-        two.setTitle("Quiz");
-        two.setScene(new Scene(root));
-        two.show();
+
+      Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
+
+      Stage two = new Stage();
+      two.setTitle("Menue");
+      two.setScene(new Scene(root));
+      two.show();
+
 
         Stage stage = (Stage) button_Quizgamequiz.getScene().getWindow();
         stage.close();
 
     }
+
+
 
     public GamequizController() {
 

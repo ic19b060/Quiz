@@ -13,14 +13,14 @@
    <content>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="678.0" prefWidth="678.0" style="-fx-background-color: #C7D0D7;">
          <children>
-            <Button fx:id="button_a" layoutX="102.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonAClick" prefHeight="50.0" prefWidth="133.0" style="-fx-background-color: #657889;" text="Button" textFill="WHITE">
+            <Button fx:id="button_a" layoutX="102.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonAClick" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: #657889;" text="Button" textFill="WHITE">
                <font>
                   <Font name="Berlin Sans FB" size="16.0" />
                </font></Button>
-            <Button fx:id="button_d" layoutX="352.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonDClick" prefHeight="50.0" prefWidth="133.0" text="Button" />
-            <Button fx:id="button_b" layoutX="352.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonBClick" prefHeight="50.0" prefWidth="133.0" text="Button" />
-            <Button fx:id="button_c" layoutX="102.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonCClick" prefHeight="50.0" prefWidth="133.0" text="Button" />
-            <TextArea fx:id="text_fragen" layoutX="75.0" layoutY="14.0" prefHeight="109.0" prefWidth="457.0">
+            <Button fx:id="button_d" layoutX="352.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonDClick" prefHeight="50.0" prefWidth="190.0" text="Button" />
+            <Button fx:id="button_b" layoutX="352.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonBClick" prefHeight="50.0" prefWidth="190.0" text="Button" />
+            <Button fx:id="button_c" layoutX="102.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonCClick" prefHeight="50.0" prefWidth="190.0" text="Button" />
+            <TextArea fx:id="text_fragen" layoutX="83.0" layoutY="30.0" prefHeight="116.0" prefWidth="471.0">
                <font>
                   <Font size="18.0" />
                </font></TextArea>

@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 
 import static fhtw.APIReader.Json_complete;
 
-public class Controller implements Initializable {
+public class MenueController implements Initializable {
 
     private static GamequizController controllerGamequiz;
 
@@ -31,10 +31,6 @@ public class Controller implements Initializable {
 
 
     private Question currentquestion;
-
-
-
-    ObservableList<String> categorylist = FXCollections.observableArrayList();
 
 
     @FXML
@@ -78,20 +74,13 @@ public class Controller implements Initializable {
     private ComboBox<String> comboDiff;
 
     @FXML
-    private Tab mp_tab;
+    public Tab mp_tab;
 
     @FXML
-    private Button start_btn_mp;
+    private Button startCustomGame_btn;
 
     @FXML
-    private static Spinner<Integer> nbr_drpdwn_mp;
-
-    @FXML
-    private ChoiceBox<String> cat_drp_mp;
-
-
-    @FXML
-    public ChoiceBox<String> dif_drp_mp;
+    private static Spinner<Integer> numberCustomGame;
 
     @FXML
     private Tab profil_tab;
@@ -116,21 +105,30 @@ public class Controller implements Initializable {
     @FXML
     private Button lgout_btn;
 
+    @FXML
+    private ComboBox<String> QuestionCollectionCombo;
 
     @FXML
-    void QuitGameQuiz(ActionEvent event) throws IOException {
-       Stage stage = (Stage) fhtw.Controller.controllerGamequiz.button_Quizgamequiz.getScene().getWindow();
+    private Button createQuestion;
+
+
+    @FXML
+    void createQuestion(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("createQuestions.fxml"));
+
+        Stage three = new Stage();
+        three.setTitle("Creating mode");
+        three.setScene(new Scene(root));
+        three.show();
+
+
+        Stage stage = (Stage) createQuestion.getScene().getWindow();
         stage.close();
-
-
-        //highscores speichern in files
-        //aktualisieren im Profil
-
     }
 
 
 
-    public Controller() {
+    public MenueController() {
 
     }
 
@@ -161,7 +159,7 @@ public class Controller implements Initializable {
 
 
     @FXML
-    void startMultiplayerQuiz(ActionEvent event) throws IOException {
+    void startCustomGame(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Game_quiz.fxml"));
 
 
@@ -169,12 +167,15 @@ public class Controller implements Initializable {
         two.setTitle("Quiz");
         two.setScene(new Scene(root));
         two.show();
+
+        Stage stage = (Stage) startCustomGame_btn.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     void startSPQuiz(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Game_quiz.fxml"));
-        Parent root = (Parent) loader.load();
+        Parent root = loader.load();
 
         //loader.setController(this);
         this.gamequizController = loader.getController(); // controller aus dem Loader bekommen
@@ -203,7 +204,6 @@ public class Controller implements Initializable {
 
         QuestionRepository.getInstance().setQuestions(questions);
 
-
         gamequizController.setNextQuestion();
 
 
@@ -215,7 +215,8 @@ public class Controller implements Initializable {
        //text_fragen.setText("Hallo");
         //socket öffnen für den chat??
 
-
+        Stage stage = (Stage) start_btn_sp.getScene().getWindow();
+        stage.close();
     }
 
 
@@ -233,9 +234,11 @@ public class Controller implements Initializable {
     public void loadDataCatbutton(ComboBox<String> name){
         ObservableList<String> categorylist;
         categorylist = FXCollections.observableArrayList();
-        categorylist.addAll("General Knowledge", "Books", "Film","Music",
-                "Musical & Theatres","Television","Video Games","Board Games","Science & Nature",
-                "Computers","Mathematics","Mythology","Sports","Geography","History","Politics");
+        categorylist.addAll("General_Knowledge", "Books", "Film","Music",
+                "Musical_and_Theatre","Television","VideoGames","BoardGames","Science_and_Nature",
+                "Computers","Mathematics","Mythology","Sports","Geography","History","Politics","Art","Celebreties","Animals","Vehicles",
+                "Comics","Gadgets","Japanese_Anime_Manga","Cartoon_and_Animation");
+
 
         name.getItems().addAll(categorylist);
     }
@@ -250,8 +253,7 @@ public class Controller implements Initializable {
 
     public static List<String> shuffleAnswers(Question question) {
 
-        List<String>  rand_answers = new ArrayList<>();
-        rand_answers.addAll(question.getIncorrect_answers());
+        List<String> rand_answers = new ArrayList<>(question.getIncorrect_answers());
         rand_answers.add(question.getCorrect_answer());
 
         Collections.shuffle(rand_answers);
@@ -266,12 +268,7 @@ public class Controller implements Initializable {
         //System.out.println(nmb_dropdwn.getValue());
 
 
-        QuestionProvider questionProvider = new QuestionProvider(nmb_dropdwn.getValue(),comboDiff.getSelectionModel().getSelectedItem(),comboCat.getSelectionModel().getSelectedItem(),"multiple" );
-
-
-
-
-        return questionProvider;
+        return new QuestionProvider(nmb_dropdwn.getValue(),comboDiff.getSelectionModel().getSelectedItem(),comboCat.getSelectionModel().getSelectedItem(),"multiple" );
     }
 
 }

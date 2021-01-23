@@ -31,7 +31,7 @@ import static fhtw.APIReader.Json_complete;
 public class ControllerLoginwindow implements Initializable {
 
 
-    @Override
+        @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
@@ -77,6 +77,7 @@ public class ControllerLoginwindow implements Initializable {
         stage.close();
     }
 
+
     @FXML
     public void buttononAction_Login(ActionEvent event) throws IOException {
 
@@ -121,10 +122,11 @@ public class ControllerLoginwindow implements Initializable {
                 lbl_loginstatus.setText("Wrong password! Please try again or contact the developer team");
             } else {
                 //all checks passed! Ready for login
+
                 Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
 
                 Stage two = new Stage();
-                two.setTitle("Quiz");
+                two.setTitle("Menue");
                 two.setScene(new Scene(root));
                 two.show();
 

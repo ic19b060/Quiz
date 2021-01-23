@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.Controller">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.MenueController">
   <tabs>
     <Tab fx:id="start_tab" text="Start">
       <content>
@@ -47,12 +46,11 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="167.0" layoutY="56.0" prefHeight="44.0" prefWidth="118.0" text="Number of Questions" />
-                  <Label layoutX="173.0" layoutY="225.0" text="Difficulty" />
-                  <Label layoutX="176.0" layoutY="140.0" prefHeight="32.0" prefWidth="101.0" text="Kategory" />
-                  <Button fx:id="start_btn_mp" layoutX="197.0" layoutY="288.0" mnemonicParsing="false" onAction="#startMultiplayerQuiz" prefHeight="32.0" prefWidth="162.0" text="Start Quiz" />
-                  <Spinner fx:id="nbr_drpdwn_mp" amountToStepBy="1" initialValue="1" layoutX="378.0" layoutY="62.0" max="50" min="1" prefHeight="37.0" prefWidth="149.0" />
-                  <ChoiceBox fx:id="cat_drp_mp" layoutX="377.0" layoutY="143.0" prefWidth="150.0" />
-                  <ChoiceBox fx:id="dif_drp_mp" layoutX="377.0" layoutY="221.0" prefWidth="150.0" />
+                  <Label fx:id="QuestionCollectionlbl" layoutX="167.0" layoutY="140.0" prefHeight="32.0" prefWidth="130.0" text="Question Collections" />
+                  <Button fx:id="startCustomGame_btn" layoutX="197.0" layoutY="288.0" mnemonicParsing="false" onAction="#startCustomGame" prefHeight="32.0" prefWidth="162.0" text="Start Quiz" />
+                  <Spinner fx:id="numberCustomGame" amountToStepBy="1" initialValue="1" layoutX="378.0" layoutY="62.0" max="50" min="1" prefHeight="37.0" prefWidth="149.0" />
+                  <ComboBox fx:id="QuestionCollectionCombo" layoutX="377.0" layoutY="143.0" prefWidth="150.0" />
+                  <Button fx:id="createQuestion" layoutX="198.0" layoutY="230.0" mnemonicParsing="false" onAction="#createQuestion" prefHeight="38.0" prefWidth="160.0" text="Create questions" />
                </children>
             </AnchorPane>
         </content>
