@@ -5,6 +5,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -84,11 +85,26 @@ public class ControllerLoginwindow implements Initializable {
         MongoCollection<Document> user_collection = database.getCollection("Users");
 
         //check if the username exists in the database
-        BasicDBObject query = new BasicDBObject();
-        query.put("Username", user);
-        FindIterable<Document> cur_user = user_collection.find(query);
+        //BasicDBObject query = new BasicDBObject();
+        //query.put("Username", user);
+        //FindIterable<Document> cur_user = user_collection.find(query);
 
-        if (cur_user == null) {
+        //check if username is in database
+        MongoCursor<Document> cursor = user_collection.find().iterator();
+        String usernameDB = "";
+        String passwordDB = "";
+
+            while (cursor.hasNext()) {
+                Document userinfo = cursor.next();
+                usernameDB = userinfo.getString("Username");
+                passwordDB = userinfo.getString("Password");
+
+                if (usernameDB == user) {
+                break;
+                }
+            }
+
+        if (!usernameDB.equals(user)) {
             lbl_loginstatus.setText("no such user - please sign up!");
 
         } else {
@@ -98,11 +114,10 @@ public class ControllerLoginwindow implements Initializable {
             criteria.append("Password", pwd);
             FindIterable<Document> cur_profile = user_collection.find(criteria);
 
-            if (cur_profile == null) {
+            if (!passwordDB.equals(pwd)) {
                 lbl_loginstatus.setText("Wrong password! Please try again or contact the developer team");
             } else {
                 //all checks passed! Ready for login
-
                 Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
 
                 Stage two = new Stage();

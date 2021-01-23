@@ -1,12 +1,14 @@
+package fhtw;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
 import fhtw.MongoDB;
-import fhtw.Question;
 import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class CustomQuestions {
 
@@ -21,7 +23,7 @@ public class CustomQuestions {
         //next interface for entering infos: e.g. 5 Textfields: Question, correct answer, incorrect answers
         //additional buttons: "submit question" (insert question into database) and "done" (return to home interface or whatever)
 
-        //for Lisl:
+        //TODO LISL: add textfield for entering name of collection
         //String customCollectionName = buttonname.getText();
 
         //create collection
@@ -35,7 +37,7 @@ public class CustomQuestions {
         MongoDatabase database = MongoDB.connect_to_db();
         MongoCollection<Document> custom_question_collection = database.getCollection(customCollectionName);
 
-        //for Lisl:
+        //TODO LISL: add textfields
         //String customQuestion = buttonname.getText();
         //String customCorrectAnswer = buttonname.getText();
         //String customIncorrectAnswer1 = buttonname.getText();
@@ -55,6 +57,7 @@ public class CustomQuestions {
 
     }
 
+    //TODO LISL: add option in quizstart menu to choose custom collection
     public static void showCustomCollections(){
         MongoDatabase database = MongoDB.connect_to_db();
 
@@ -64,7 +67,6 @@ public class CustomQuestions {
                 System.out.println(name);
             }
         }
-
     }
 
 }
