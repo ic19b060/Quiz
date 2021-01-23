@@ -2,30 +2,35 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 
-<TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.ControllerCreateQuestions">
+<ScrollPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.ControllerCreateQuestions">
    <content>
-      <Pane prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <TextField fx:id="questionfield" layoutX="71.0" layoutY="62.0" prefHeight="55.0" prefWidth="383.0" promptText="Enter your question" />
-            <TextField fx:id="correctAnswer" layoutX="71.0" layoutY="137.0" prefHeight="37.0" prefWidth="234.0" promptText="enter correct answer" />
-            <TextField fx:id="incorrectAnswer1" layoutX="72.0" layoutY="187.0" prefHeight="38.0" prefWidth="231.0" promptText="enter incorrect answer" />
-            <TextField fx:id="inCorrectAnswer2" layoutX="71.0" layoutY="234.0" prefHeight="35.0" prefWidth="232.0" promptText="enter incorrect answer" />
-            <TextField fx:id="incorrectAnswer3" layoutX="71.0" layoutY="282.0" prefHeight="36.0" prefWidth="233.0" promptText="enter incorrect answer" />
-            <Label layoutX="152.0" layoutY="14.0" prefHeight="36.0" prefWidth="312.0" text="Create your own question">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Button fx:id="AddQuestion" layoutX="397.0" layoutY="165.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="43.0" prefWidth="134.0" text="Add Question" />
-            <Button fx:id="createPackage" layoutX="398.0" layoutY="222.0" mnemonicParsing="false" onAction="#createPackage" prefHeight="60.0" prefWidth="134.0" text="create Package&#10;and return to Menu" />
-            <Button fx:id="cancel" layoutX="397.0" layoutY="295.0" mnemonicParsing="false" onAction="#cancelAndDelete" prefHeight="44.0" prefWidth="135.0" text="cancel" />
-         </children>
-      </Pane>
+      <TitledPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <content>
+            <Pane prefHeight="262.0" prefWidth="408.0">
+               <children>
+                  <TextField fx:id="questionfield" layoutX="71.0" layoutY="62.0" prefHeight="55.0" prefWidth="383.0" promptText="Enter your question" />
+                  <TextField fx:id="correctAnswer" layoutX="71.0" layoutY="137.0" prefHeight="37.0" prefWidth="234.0" promptText="enter correct answer" />
+                  <TextField fx:id="incorrectAnswer1" layoutX="72.0" layoutY="187.0" prefHeight="38.0" prefWidth="231.0" promptText="enter incorrect answer" />
+                  <TextField fx:id="inCorrectAnswer2" layoutX="71.0" layoutY="234.0" prefHeight="35.0" prefWidth="232.0" promptText="enter incorrect answer" />
+                  <TextField fx:id="incorrectAnswer3" layoutX="71.0" layoutY="282.0" prefHeight="36.0" prefWidth="233.0" promptText="enter incorrect answer" />
+                  <Label layoutX="152.0" layoutY="14.0" prefHeight="36.0" prefWidth="312.0" text="Create your own question">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="AddQuestion" layoutX="397.0" layoutY="165.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="43.0" prefWidth="134.0" text="Add Question" />
+                  <Button fx:id="createPackage" layoutX="398.0" layoutY="222.0" mnemonicParsing="false" onAction="#createPackage" prefHeight="60.0" prefWidth="134.0" text="create Package&#10;and return to Menu" />
+                  <Button fx:id="cancel" layoutX="397.0" layoutY="295.0" mnemonicParsing="false" onAction="#cancelAndDelete" prefHeight="44.0" prefWidth="135.0" text="cancel" />
+               </children>
+            </Pane>
+         </content>
+      </TitledPane>
    </content>
-</TitledPane>
+</ScrollPane>

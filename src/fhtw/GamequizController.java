@@ -100,7 +100,7 @@ public class GamequizController {
     private void answer(String answer) {
             if (currentquestion.getCorrect_answer().equals(answer)){
             rightAnswerlbl.setText("Correct!");
-            //Highscores speichern
+            //Highscores speichern und erhöhen
             }else{
             String answerLabel = currentquestion.getCorrect_answer();
             wrongAnswerLBL.setText("That was the wrong answer :( - The right answer was:");
@@ -119,7 +119,7 @@ public class GamequizController {
 
 
 
-            //Highscores
+            //Highscores speichern!
         } else {
             currentquestion = questions.get(0);
             questions.remove(0);
