@@ -7,7 +7,10 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -15,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.bson.Document;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -34,6 +38,21 @@ public class ControllerSignUp implements Initializable {
     @FXML
     private Button ok_signup_btn;
 
+    @FXML
+    private Button rtrnLogin;
+
+    @FXML
+    void returnLogin(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
+        Stage two = new Stage();
+        two.setTitle("Login");
+        two.setScene(new Scene(root));
+        two.show();
+
+        Stage stage = (Stage) rtrnLogin.getScene().getWindow();
+        stage.close();
+        }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,7 +90,9 @@ public class ControllerSignUp implements Initializable {
                 newUser.append("Username", user);
                 newUser.append("Password", pwd);
                 user_collection.insertOne(newUser);
-                signuplbl.setText("Sign-Up successfull! Welcome " + user + "!");
+                signuplbl.setText("Sign-Up successful! \n Welcome " + user + "!");
+                ok_signup_btn.setDisable(true);
+              
             }
 
         }

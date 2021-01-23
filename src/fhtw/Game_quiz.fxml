@@ -24,14 +24,15 @@
                <font>
                   <Font size="18.0" />
                </font></TextArea>
-            <Button fx:id="button_Quizgamequiz" layoutX="58.0" layoutY="368.0" mnemonicParsing="false" onAction="#quitgamequiz" prefHeight="47.0" prefWidth="88.0" text="Quit Game" />
-            <Button fx:id="button_joker" layoutX="169.0" layoutY="366.0" mnemonicParsing="false" onAction="#JokerClicked" prefHeight="50.0" prefWidth="112.0" text="Joker" />
+            <Button fx:id="button_Quizgamequiz" layoutX="545.0" layoutY="598.0" mnemonicParsing="false" onAction="#quitgamequiz" prefHeight="47.0" prefWidth="88.0" text="Quit Game" />
+            <Button fx:id="button_joker" layoutX="352.0" layoutY="377.0" mnemonicParsing="false" onAction="#JokerClicked" prefHeight="45.0" prefWidth="106.0" text="Joker" />
             <ProgressBar layoutX="85.0" layoutY="330.0" prefHeight="18.0" prefWidth="467.0" progress="0.0" />
-            <TextArea fx:id="chat_fenster" layoutX="432.0" layoutY="365.0" prefHeight="200.0" prefWidth="200.0" />
-            <TextField fx:id="chat_textfenster" layoutX="432.0" layoutY="577.0" prefHeight="22.0" prefWidth="200.0" />
-            <Button fx:id="send_button_chat" layoutX="511.0" layoutY="611.0" mnemonicParsing="false" text="Send" />
+            <TextArea fx:id="chat_fenster" layoutX="69.0" layoutY="377.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="chat_textfenster" layoutX="69.0" layoutY="586.0" prefHeight="22.0" prefWidth="200.0" />
+            <Button fx:id="send_button_chat" layoutX="282.0" layoutY="586.0" mnemonicParsing="false" text="Send" />
             <Label fx:id="wrongAnswerLBL" layoutX="91.0" layoutY="132.0" prefHeight="27.0" prefWidth="407.0" />
             <Label fx:id="rightAnswerlbl" layoutX="97.0" layoutY="155.0" prefHeight="29.0" prefWidth="396.0" />
+            <Button fx:id="nextQuestion" layoutX="507.0" layoutY="377.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="45.0" prefWidth="106.0" text="next Question" />
          </children>
       </Pane>
    </content>

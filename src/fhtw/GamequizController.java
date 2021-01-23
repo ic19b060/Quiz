@@ -62,6 +62,17 @@ public class GamequizController {
     @FXML
     private Label rightAnswerlbl;
 
+    @FXML
+    private Button nextQuestion;
+
+
+    @FXML
+    void nextQuestion(ActionEvent event) {
+        wrongAnswerLBL.setText("");
+        rightAnswerlbl.setText("");
+        setNextQuestion();
+
+    }
 
     @FXML
     void JokerClicked(ActionEvent event) {
@@ -95,7 +106,7 @@ public class GamequizController {
             wrongAnswerLBL.setText("That was the wrong answer :( - The right answer was:");
             rightAnswerlbl.setText(answerLabel);
                     }
-        setNextQuestion();
+       // setNextQuestion();
 
     }
 
@@ -103,7 +114,8 @@ public class GamequizController {
         List<Question> questions = QuestionRepository.getInstance().getQuestions();
         if (questions.isEmpty()) {
             button_Quizgamequiz.setStyle("-fx-background-color:orangered");
-            //button_Quizgamequiz.setOnAction(Event::consume);
+            nextQuestion.setDisable(true);
+            button_joker.setDisable(true);
 
 
 

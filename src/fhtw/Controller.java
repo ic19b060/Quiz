@@ -70,12 +70,12 @@ public class Controller implements Initializable {
     @FXML
     private Button start_btn_sp;
 
-    @FXML
-    public ChoiceBox<String> cat_drp_sp;
 
     @FXML
-    public ChoiceBox<String> diff_drpdwn_sp;
+    private ComboBox<String> comboCat;
 
+    @FXML
+    private ComboBox<String> comboDiff;
 
     @FXML
     private Tab mp_tab;
@@ -85,8 +85,6 @@ public class Controller implements Initializable {
 
     @FXML
     private static Spinner<Integer> nbr_drpdwn_mp;
-
-
 
     @FXML
     private ChoiceBox<String> cat_drp_mp;
@@ -100,9 +98,6 @@ public class Controller implements Initializable {
 
     @FXML
     private TextArea name_field_prof;
-
-    @FXML
-    private TextArea login_field_prof;
 
 
     @FXML
@@ -227,16 +222,15 @@ public class Controller implements Initializable {
 
 
     @FXML
-    public void loadDataDiffbutton(ChoiceBox<String> name){
+    public void loadDataDiffbutton(ComboBox<String> name){
         ObservableList<String> difficultylist;
         difficultylist = FXCollections.observableArrayList();
         difficultylist.addAll("easy", "medium", "hard");
         name.getItems().addAll(difficultylist);
             }
 
-
     @FXML
-    public void loadDataCatbutton(ChoiceBox<String> name){
+    public void loadDataCatbutton(ComboBox<String> name){
         ObservableList<String> categorylist;
         categorylist = FXCollections.observableArrayList();
         categorylist.addAll("General Knowledge", "Books", "Film","Music",
@@ -246,13 +240,11 @@ public class Controller implements Initializable {
         name.getItems().addAll(categorylist);
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadDataDiffbutton(diff_drpdwn_sp);
-        loadDataDiffbutton(dif_drp_mp);
-        loadDataCatbutton(cat_drp_mp);
-        loadDataCatbutton(cat_drp_sp);
+        loadDataDiffbutton(comboDiff);
+        loadDataCatbutton(comboCat);
+
     }
 
 
@@ -274,7 +266,7 @@ public class Controller implements Initializable {
         //System.out.println(nmb_dropdwn.getValue());
 
 
-        QuestionProvider questionProvider = new QuestionProvider(nmb_dropdwn.getValue(),diff_drpdwn_sp.getSelectionModel().getSelectedItem(),cat_drp_sp.getSelectionModel().getSelectedItem(),"multiple" );
+        QuestionProvider questionProvider = new QuestionProvider(nmb_dropdwn.getValue(),comboDiff.getSelectionModel().getSelectedItem(),comboCat.getSelectionModel().getSelectedItem(),"multiple" );
 
 
 

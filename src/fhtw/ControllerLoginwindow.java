@@ -72,6 +72,9 @@ public class ControllerLoginwindow implements Initializable {
         two.setTitle("Sign-up");
         two.setScene(new Scene(root));
         two.show();
+
+        Stage stage = (Stage) sign_up_btn.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
