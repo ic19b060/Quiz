@@ -114,7 +114,7 @@ public class MenueController implements Initializable {
 
     @FXML
     void createQuestion(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("createQuestions.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("collectionsname.fxml"));
 
         Stage three = new Stage();
         three.setTitle("Creating mode");
