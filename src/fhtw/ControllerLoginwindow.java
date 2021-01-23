@@ -101,14 +101,14 @@ public class ControllerLoginwindow implements Initializable {
                 Document userinfo = cursor.next();
                 usernameDB = userinfo.getString("Username");
                 passwordDB = userinfo.getString("Password");
-
-                if (usernameDB == user) {
+                if (usernameDB.equals(user)) {
                 break;
                 }
             }
 
         if (!usernameDB.equals(user)) {
             lbl_loginstatus.setText("no such user - please sign up!");
+            System.out.println(usernameDB + "-usernameDB, user-" + user);
 
         } else {
             //check if the password is correct

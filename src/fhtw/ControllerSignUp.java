@@ -81,10 +81,10 @@ public class ControllerSignUp implements Initializable {
             Document userinfo = cursor.next();
             usernameDB = userinfo.getString("Username");
 
-            if (usernameDB == user && cursor.hasNext()) {
+            if (usernameDB.equals(user)) {
                 signuplbl.setText("Error: Username already exists");
             }
-            else if ((usernameDB != user) && (!cursor.hasNext())){
+            else if ((!usernameDB.equals(user)) && (!cursor.hasNext())){
                 //Insert document for new user into database
                 Document newUser = new Document();
                 newUser.append("Username", user);
