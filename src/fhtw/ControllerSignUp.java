@@ -1,10 +1,7 @@
 package fhtw;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +49,7 @@ public class ControllerSignUp implements Initializable {
 
         Stage stage = (Stage) rtrnLogin.getScene().getWindow();
         stage.close();
-        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,38 +62,39 @@ public class ControllerSignUp implements Initializable {
         String pwd = enter_password_signup.getText();
 
         //connect to the database and retrieve the User profiles
-        MongoDatabase database = MongoDB.connect_to_db();
-        MongoCollection<Document> user_collection = database.getCollection("Users");
+        try (MongoClient client = MongoDB.connect_to_db()) {
+            MongoDatabase db = MongoDB.getDB(client);
+            MongoCollection<Document> user_collection = db.getCollection("Users");
 
-        //check if the username exists in the database
-        BasicDBObject query = new BasicDBObject();
-        query.put("Username", user);
-        FindIterable<Document> cur_user = user_collection.find(query);
+            //check if the username exists in the database
+            BasicDBObject query = new BasicDBObject();
+            query.put("Username", user);
+            FindIterable<Document> cur_user = user_collection.find(query);
 
-        //check if username is in database
-        MongoCursor<Document> cursor = user_collection.find().iterator();
-        String usernameDB = "";
+            //check if username is in database
+            MongoCursor<Document> cursor = user_collection.find().iterator();
+            String usernameDB = "";
 
-        while (cursor.hasNext()) {
-            Document userinfo = cursor.next();
-            usernameDB = userinfo.getString("Username");
+            while (cursor.hasNext()) {
+                Document userinfo = cursor.next();
+                usernameDB = userinfo.getString("Username");
 
-            if (usernameDB.equals(user)) {
-                signuplbl.setText("Error: Username already exists");
-            }
-            else if ((!usernameDB.equals(user)) && (!cursor.hasNext())){
-                //Insert document for new user into database
-                Document newUser = new Document();
-                newUser.append("Username", user);
-                newUser.append("Password", pwd);
-                user_collection.insertOne(newUser);
-                signuplbl.setText("Sign-Up successful! \n Welcome " + user + "!");
-                ok_signup_btn.setDisable(true);
-              
+                if (usernameDB.equals(user)) {
+                    signuplbl.setText("Error: Username already exists");
+                } else if ((!usernameDB.equals(user)) && (!cursor.hasNext())) {
+                    //Insert document for new user into database
+                    Document newUser = new Document();
+                    newUser.append("Username", user);
+                    newUser.append("Password", pwd);
+                    user_collection.insertOne(newUser);
+                    signuplbl.setText("Sign-Up successful! \n Welcome " + user + "!");
+                    ok_signup_btn.setDisable(true);
+
+                }
+
             }
 
         }
 
     }
-
 }

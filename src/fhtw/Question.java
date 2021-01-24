@@ -1,18 +1,25 @@
 package fhtw;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class Question {
 
-     private String category;
-     private String type;
-     private String difficulty;
-     private String question;
-     private String correct_answer;
-     private List<String> incorrect_answers;
+    @Expose
+    private String category;
+    @Expose
+    private String type;
+    @Expose
+    private String question;
+    @Expose
+    private String difficulty;
+    @Expose
+    private String correct_answer;
+    @Expose
+    private List<String> incorrect_answers;
 
     public String getCategory() {
         return category;

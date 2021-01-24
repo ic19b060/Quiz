@@ -1,13 +1,20 @@
 package fhtw;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.mongodb.BasicDBObject;
 import com.mongodb.Mongo;
+import com.mongodb.client.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.bson.Document;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 //import static fhtw.Link.Link;
@@ -27,6 +34,36 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+
+        try (MongoClient client = MongoDB.connect_to_db()) {
+            MongoDatabase db = MongoDB.getDB(client);
+            MongoCollection collections = db.getCollection("CustomGame");
+
+            CustomQuestionCollection cur = new CustomQuestionCollection();
+            cur.setName("1");
+            ArrayList<Question> objects = new ArrayList<>();
+            Question question = new Question();
+            question.setCorrect_answer("ad");
+            question.setIncorrect_answers(Arrays.asList("b", "c", "d"));
+            question.setQuestion("Frage");
+            objects.add(question);
+            cur.setQuestions(objects);
+
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            String jsonString = gson.toJson(cur);
+            collections.insertOne(Document.parse(jsonString));
+
+            BasicDBObject criteria = new BasicDBObject();
+            criteria.append("name", "1");
+            FindIterable<Document> cur_profile = collections.find(criteria);
+            for (Document document : cur_profile) {
+                CustomQuestionCollection v = gson.fromJson(document.toJson(), CustomQuestionCollection.class);
+                System.out.println(v);
+            }
+
+            //collections.find("Name", name);
+
+        }
 
       //  MongoDB.connect_to_db();
         //create link for question set based on user choice
