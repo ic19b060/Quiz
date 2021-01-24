@@ -88,12 +88,8 @@ public class ControllerSignUp implements Initializable {
                     user_collection.insertOne(newUser);
                     signuplbl.setText("Sign-Up successful! \n Welcome " + user + "!");
                     okSignupBtn.setDisable(true);
-
                 }
-
             }
-
         }
-
     }
 }

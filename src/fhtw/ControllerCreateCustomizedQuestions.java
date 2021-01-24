@@ -51,29 +51,39 @@ public class ControllerCreateCustomizedQuestions {
     @FXML
     void addQuestion(ActionEvent event) {
 
+        //connect to database and open collection "CustomGame"
         try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection collections = db.getCollection("CustomGame");
 
-            CustomQuestionCollection cur = new CustomQuestionCollection();
-            cur.setName("1");
-            ArrayList<Question> objects = new ArrayList<>();
+            //get the user input
+            CustomQuestionList cur = new CustomQuestionList();
             Question question = new Question();
-            question.setCorrectAnswer("ad");
-            question.setIncorrectAnswers(Arrays.asList("b", "c", "d"));
-            question.setQuestion("Frage");
-            objects.add(question);
-            cur.setQuestions(objects);
+            ArrayList<Question> questionarray = new ArrayList<>();
 
+            //TODO read in document name in name-creation-interface
+
+            //set the name of our current custom question set
+            cur.setName("get document name from other interface"); //name of the document in the database collection
+
+            //add user input to our Question object
+            question.setQuestion(questionfield.getText());
+            question.setCorrectAnswer(correctAnswer.getText());
+            question.setIncorrectAnswers(Arrays.asList(incorrectAnswer1.getText(), incorrectAnswer2.getText(), incorrectAnswer3.getText()));
+
+            //add the question to our current custom question set
+            questionarray.add(question);
+            cur.setQuestions(questionarray);
+
+            //insert the new question into our database
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
             String jsonString = gson.toJson(cur);
             collections.insertOne(Document.parse(jsonString));
 
-            //connect to database
        /*     try (MongoClient client = MongoDB.connect_to_db()) {
                 MongoDatabase db = MongoDB.getDB(client);
 
-                MongoCollection<Document> custom_question_collection = createCustomQuestionCollection();
+                MongoCollection<Document> custom_question_collection = createCustomQuestionName();
 
                 String customQuestion = questionfield.getText();
                 String customCorrectAnswer = correctAnswer.getText();
@@ -99,22 +109,20 @@ public class ControllerCreateCustomizedQuestions {
         @FXML
         void cancelAndDelete (ActionEvent event) throws IOException {
 
+        //TODO NICI
             //delete fragenpackage!
-
-
             //return back to menue
             loadMenu();
         }
 
+        //TODO LISL: können wir createPackage löschen?
         @FXML
         void createPackage (ActionEvent event) throws IOException {
 
             //create Package
-
             //go back to menue
             loadMenu();
         }
-
 
         public void loadMenu () throws IOException {
             Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
@@ -127,7 +135,6 @@ public class ControllerCreateCustomizedQuestions {
             Stage stage = (Stage) cancel.getScene().getWindow();
             stage.close();
         }
-
 
     }
 

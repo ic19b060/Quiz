@@ -43,7 +43,6 @@ public class APIReader {
 
         //Open a connection stream to the corresponding API.
         //Get the corresponding response code.
-
         int responsecode = 0;
         try {
             conn.connect();
@@ -64,9 +63,6 @@ public class APIReader {
                 while (sc.hasNext()) {
                     inline = sc.nextLine();
                 }
-              //  System.out.println("\n JSON data in string format");
-                //System.out.println(inline);
-
                 sc.close();
 
             } catch (IOException e) {
@@ -74,15 +70,7 @@ public class APIReader {
             }
 
             try {
-
                 jsonObject = JsonParser.parseString(inline).getAsJsonObject();
-
-                /*
-                JsonParser parser = new JsonParser();
-                Object obj = parser.parse(inline);
-                JsonObject jsonObject = (JsonObject) obj;
-                JsonArray namearr = (JsonArray) jsonObject.get("results");
-*/
                 JsonArray namearr = (JsonArray) jsonObject.get("results");
 
                 Gson gson = new GsonBuilder().setPrettyPrinting().create(); // pretty print
@@ -90,20 +78,16 @@ public class APIReader {
                 System.out.println(prettyJson);
 
                 for (Object objInArr : namearr) {
-                    JsonObject jsonFrage = (JsonObject) objInArr;
-                   // System.out.println(jsonFrage.get("question"));
+                    JsonObject jsonquestion = (JsonObject) objInArr;
                     List<JsonElement> answers = new ArrayList<>();
-                    answers.add(jsonFrage.get("correct_answer"));
-                    answers.add(jsonFrage.get("incorrect_answers"));
-                   // System.out.println(answers + "\n");
+                    answers.add(jsonquestion.get("correct_answer"));
+                    answers.add(jsonquestion.get("incorrect_answers"));
                 }
 
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-
         }
-
         return jsonObject;
     }
 }

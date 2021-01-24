@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParseQuestionstoJson {
-    //create Array of questions
 
+    //create Array of questions
     static List<Question> parseQuestionJson(JsonObject json) {
 
         JsonArray questionArray = (JsonArray) json.get("results");
@@ -29,7 +29,6 @@ public class ParseQuestionstoJson {
             cur.setQuestion(jsonQuestion.get("question").getAsString());
             questions.add(cur);
             //create Object for question
-
         }
 
         return questions;

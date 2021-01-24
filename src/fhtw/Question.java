@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Question {
 
+    //This is our question that we get from the API
     @Expose
     private String category;
     @Expose

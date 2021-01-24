@@ -55,9 +55,7 @@ public class getCategory {
         @SerializedName("Cartoon & Animation")
         Cartoon_and_Animation(32);
 
-
         private int value;
-
 
         Category(int value) {
             this.value = value;
@@ -65,8 +63,7 @@ public class getCategory {
 
         public int value(){
             return value;
-            }
-
+        }
 
     }
 }

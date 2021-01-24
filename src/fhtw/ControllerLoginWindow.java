@@ -82,11 +82,6 @@ public class ControllerLoginWindow implements Initializable {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection<Document> user_collection = db.getCollection("Users");
 
-            //check if the username exists in the database
-            //BasicDBObject query = new BasicDBObject();
-            //query.put("Username", user);
-            //FindIterable<Document> cur_user = user_collection.find(query);
-
             //check if username is in database
             MongoCursor<Document> cursor = user_collection.find().iterator();
             String usernameDB = "";
@@ -102,21 +97,12 @@ public class ControllerLoginWindow implements Initializable {
             }
 
             if (!usernameDB.equals(user)) {
-                lblLoginstatus.setText("no such user - please sign up!");
-                System.out.println(usernameDB + "-usernameDB, user-" + user);
-
+                lblLoginstatus.setText("No such user - please sign up!");
             } else {
-                //check if the password is correct
-                BasicDBObject criteria = new BasicDBObject();
-                criteria.append("Username", user);
-                criteria.append("Password", pwd);
-                FindIterable<Document> cur_profile = user_collection.find(criteria);
-
                 if (!passwordDB.equals(pwd)) {
                     lblLoginstatus.setText("Wrong password! Please try again or contact the developer team");
                 } else {
                     //all checks passed! Ready for login
-
                     Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 
                     Stage two = new Stage();
@@ -126,10 +112,8 @@ public class ControllerLoginWindow implements Initializable {
 
                     Stage stage = (Stage) lgnBtn.getScene().getWindow();
                     stage.close();
-
                 }
             }
-
         }
     }
 }

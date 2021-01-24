@@ -10,6 +10,7 @@ public class MongoDB {
     }
 
     public static MongoDatabase getDB(MongoClient client){
+
         return client.getDatabase("quizDB");
     }
 

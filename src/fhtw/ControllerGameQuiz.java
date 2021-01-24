@@ -30,6 +30,7 @@ public class ControllerGameQuiz implements Initializable {
     ControllerMenue ControllerMenue;
 
     public void setController1(ControllerMenue ControllerMenue) {
+
         this.ControllerMenue = ControllerMenue;
     }
 
@@ -84,7 +85,6 @@ public class ControllerGameQuiz implements Initializable {
         rightAnswerlbl.setText("");
         setNextQuestion();
         JokerCounter = 0;
-
     }
 
     @FXML
@@ -103,27 +103,26 @@ public class ControllerGameQuiz implements Initializable {
                 buttonB.setText("");
                 buttonA.setText("");
             }
-            JokerCounter ++;
+            JokerCounter++;
         }
-       }
+    }
+
     @FXML
     void buttonAClick(ActionEvent event) {
         wrongAnswerLBL.setText("");
-       this.answer(buttonA.getText());
-
+        this.answer(buttonA.getText());
     }
 
     private void answer(String answer) {
-            if (currentquestion.getCorrectAnswer().equals(answer)){
+        if (currentquestion.getCorrectAnswer().equals(answer)) {
             rightAnswerlbl.setText("Correct!");
             //Highscores speichern und erhöhen
-            }else{
+        } else {
             String answerLabel = currentquestion.getCorrectAnswer();
             wrongAnswerLBL.setText("That was the wrong answer :( - The right answer was:");
             rightAnswerlbl.setText(answerLabel);
-                    }
-       // setNextQuestion();
-
+        }
+        // setNextQuestion();
     }
 
     public void setNextQuestion() {
@@ -133,16 +132,15 @@ public class ControllerGameQuiz implements Initializable {
             nextQuestion.setDisable(true);
             buttonJoker.setDisable(true);
             imageView.setVisible(true);
-
-
             //Highscores speichern!
         } else {
             currentquestion = questions.get(0);
             questions.remove(0);
             List<String> answers = fhtw.ControllerMenue.shuffleAnswers(currentquestion);
             setData(answers, currentquestion.getQuestion());
-            }
+        }
     }
+
     @FXML
     void buttonBClick(ActionEvent event) {
         wrongAnswerLBL.setText("");
@@ -164,28 +162,24 @@ public class ControllerGameQuiz implements Initializable {
     @FXML
     void quitGameQuiz(ActionEvent event) throws IOException {
 
+        Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 
-      Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
-
-      Stage two = new Stage();
-      two.setTitle("Menue");
-      two.setScene(new Scene(root));
-      two.show();
-
+        Stage two = new Stage();
+        two.setTitle("Menue");
+        two.setScene(new Scene(root));
+        two.show();
 
         Stage stage = (Stage) buttonQuizgamequiz.getScene().getWindow();
         stage.close();
-
     }
 
 
-
     public ControllerGameQuiz() {
-
     }
 
 
     public void setData(List<String> answers, String question) {
+
         textFragen.setText(question);
 
         buttonA.setText(answers.get(0));
@@ -199,6 +193,6 @@ public class ControllerGameQuiz implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
+
 }

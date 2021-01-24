@@ -6,22 +6,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ControllergetCollectionsName {
+public class ControllerGetCustomGameName {
 
     @FXML
     private Button forwardButton;
 
     @FXML
-    private TextField enterCollectionName;
+    private TextField enterCustomGameName;
 
     @FXML
     void gotonextWindow(ActionEvent event) throws IOException {
-        CustomQuestions.createCustomQuestionCollection(getCollectionName());
+       // getCustomGameName.createCustomQuestionName(getCollectionName());
         Parent root = FXMLLoader.load(getClass().getResource("createCustomizedQuestions.fxml"));
 
         Stage two = new Stage();
@@ -33,10 +34,10 @@ public class ControllergetCollectionsName {
         stage.close();
     }
 
-
-     public String getCollectionName(){
-         return enterCollectionName.getText();
-
+     public String getName(){
+        return enterCustomGameName.getText();
      }
+
+
 
 }

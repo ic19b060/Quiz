@@ -35,7 +35,7 @@ public class Main extends Application {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection collections = db.getCollection("CustomGame");
 
-            CustomQuestionCollection cur = new CustomQuestionCollection();
+            CustomQuestionList cur = new CustomQuestionList();
             cur.setName("1");
             ArrayList<Question> objects = new ArrayList<>();
             Question question = new Question();
@@ -53,7 +53,7 @@ public class Main extends Application {
             criteria.append("name", "1");
             FindIterable<Document> cur_profile = collections.find(criteria);
             for (Document document : cur_profile) {
-                CustomQuestionCollection v = gson.fromJson(document.toJson(), CustomQuestionCollection.class);
+                CustomQuestionList v = gson.fromJson(document.toJson(), CustomQuestionList.class);
                 System.out.println(v);
             }
 

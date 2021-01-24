@@ -28,8 +28,6 @@ public class ControllerMenue implements Initializable {
     @FXML
     ControllerGameQuiz controllerGameQuiz;
 
-
-
     private Question currentquestion;
 
     //Welcome Tab
@@ -111,9 +109,6 @@ public class ControllerMenue implements Initializable {
     @FXML
     private Button lgoutBtn;
 
-
-
-
     @FXML
     void createQuestion(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("getCollectionsName.fxml"));
@@ -123,19 +118,13 @@ public class ControllerMenue implements Initializable {
         three.setScene(new Scene(root));
         three.show();
 
-
         Stage stage = (Stage) createQuestion.getScene().getWindow();
         stage.close();
     }
 
-
-
     public ControllerMenue() {
 
     }
-
-
-
 
     public void logout(ActionEvent actionEvent) throws IOException {
 
@@ -164,7 +153,6 @@ public class ControllerMenue implements Initializable {
     void startCustomGame(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("gameQuiz.fxml"));
 
-
         Stage two = new Stage();
         two.setTitle("Quiz");
         two.setScene(new Scene(root));
@@ -183,16 +171,11 @@ public class ControllerMenue implements Initializable {
         this.controllerGameQuiz = loader.getController(); // controller aus dem Loader bekommen
         this.controllerGameQuiz.setController1(this);
 
-       // String link = fhtw.Link.Link();
-
         String link = get_values().getApiPath();
-
-
         //create question set with created link for API
         JsonObject questionsjson = jsonComplete(link);
 
         //Gameplay logic
-
 
         Stage two = new Stage();
         two.setTitle("Quiz");
@@ -201,13 +184,11 @@ public class ControllerMenue implements Initializable {
 
         //Gameplaylogic
 
-
         List<Question> questions = ParseQuestionstoJson.parseQuestionJson(questionsjson);
 
         QuestionRepository.getInstance().setQuestions(questions);
 
         controllerGameQuiz.setNextQuestion();
-
 
         //Felder einlesen für schwierigkeit,usw
         //Quiz starten /api laden?
@@ -215,7 +196,7 @@ public class ControllerMenue implements Initializable {
         //Fragen in Textfeld schreiben
         //Antworten mit button verknüpfen.
 
-       //text_fragen.setText("Hallo");
+        //text_fragen.setText("Hallo");
         //socket öffnen für den chat??
 
         Stage stage = (Stage) startBtnSp.getScene().getWindow();
@@ -223,25 +204,22 @@ public class ControllerMenue implements Initializable {
     }
 
 
-
-
     @FXML
-    public void loadDataDiffbutton(ComboBox<String> name){
+    public void loadDataDiffbutton(ComboBox<String> name) {
         ObservableList<String> difficultylist;
         difficultylist = FXCollections.observableArrayList();
         difficultylist.addAll("easy", "medium", "hard");
         name.getItems().addAll(difficultylist);
-            }
+    }
 
     @FXML
-    public void loadDataCatbutton(ComboBox<String> name){
+    public void loadDataCatbutton(ComboBox<String> name) {
         ObservableList<String> categorylist;
         categorylist = FXCollections.observableArrayList();
-        categorylist.addAll("General_Knowledge", "Books", "Film","Music",
-                "Musical_and_Theatre","Television","VideoGames","BoardGames","Science_and_Nature",
-                "Computers","Mathematics","Mythology","Sports","Geography","History","Politics","Art","Celebreties","Animals","Vehicles",
-                "Comics","Gadgets","Japanese_Anime_Manga","Cartoon_and_Animation");
-
+        categorylist.addAll("General_Knowledge", "Books", "Film", "Music",
+                "Musical_and_Theatre", "Television", "VideoGames", "BoardGames", "Science_and_Nature",
+                "Computers", "Mathematics", "Mythology", "Sports", "Geography", "History", "Politics", "Art", "Celebreties", "Animals", "Vehicles",
+                "Comics", "Gadgets", "Japanese_Anime_Manga", "Cartoon_and_Animation");
 
         name.getItems().addAll(categorylist);
     }
@@ -270,8 +248,7 @@ public class ControllerMenue implements Initializable {
         //System.out.println(value);
         //System.out.println(nmb_dropdwn.getValue());
 
-
-        return new QuestionProvider(spinnerQuestionNumber.getValue(),comboDiff.getSelectionModel().getSelectedItem(),comboCat.getSelectionModel().getSelectedItem(),"multiple" );
+        return new QuestionProvider(spinnerQuestionNumber.getValue(), comboDiff.getSelectionModel().getSelectedItem(), comboCat.getSelectionModel().getSelectedItem(), "multiple");
     }
 
 }
