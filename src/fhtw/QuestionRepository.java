@@ -5,6 +5,8 @@ import java.util.List;
 
 public class QuestionRepository {
 
+    //sicherstellen dass es nur genau 1 gibt
+    //singleton pattern
     private static final QuestionRepository instance = new QuestionRepository();
 
     public static QuestionRepository getInstance() {

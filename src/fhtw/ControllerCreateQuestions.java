@@ -1,5 +1,9 @@
 package fhtw;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoIterable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import java.io.IOException;
 
@@ -26,7 +37,7 @@ public class ControllerCreateQuestions {
         private TextField incorrectAnswer1;
 
         @FXML
-        private TextField inCorrectAnswer2;
+        private TextField incorrectAnswer2;
 
         @FXML
         private TextField incorrectAnswer3;
@@ -43,15 +54,49 @@ public class ControllerCreateQuestions {
         @FXML
         void addQuestion(ActionEvent event) {
 
+            try (MongoClient client = MongoDB.connect_to_db()) {
+                MongoDatabase db = MongoDB.getDB(client);
+                MongoCollection collections = db.getCollection("CustomGame");
 
-            //Fragen zum Package hinzufügen
+                CustomQuestionCollection cur = new CustomQuestionCollection();
+                cur.setName("1");
+                ArrayList<Question> objects = new ArrayList<>();
+                Question question = new Question();
+                question.setCorrect_answer("ad");
+                question.setIncorrect_answers(Arrays.asList("b", "c", "d"));
+                question.setQuestion("Frage");
+                objects.add(question);
+                cur.setQuestions(objects);
 
-            //Bspcode fürs einlesen der textfelder!
-            //correctAnswer.getText();
-            //incorrectAnswer1.getText();
-           // inCorrectAnswer2.getText();
-           // incorrectAnswer3.getText();
+                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+                String jsonString = gson.toJson(cur);
+                collections.insertOne(Document.parse(jsonString));
 
+                //connect to database
+       /*     try (MongoClient client = MongoDB.connect_to_db()) {
+                MongoDatabase db = MongoDB.getDB(client);
+
+                MongoCollection<Document> custom_question_collection = createCustomQuestionCollection();
+
+                String customQuestion = questionfield.getText();
+                String customCorrectAnswer = correctAnswer.getText();
+                String customIncorrectAnswer1 = incorrectAnswer1.getText();
+                String customIncorrectAnswer2 = incorrectAnswer2.getText();
+                String customIncorrectAnswer3 = incorrectAnswer3.getText();
+
+                List<String> customIncorrectAnswerList = new ArrayList<>();
+                customIncorrectAnswerList.add(customIncorrectAnswer1);
+                customIncorrectAnswerList.add(customIncorrectAnswer2);
+                customIncorrectAnswerList.add(customIncorrectAnswer3);
+
+                Document newCustomQuestion = new Document();
+                newCustomQuestion.append("question", customQuestion);
+                newCustomQuestion.append("correct_answer", customCorrectAnswer);
+                newCustomQuestion.append("incorrect_answers", customIncorrectAnswerList);
+
+                //Inserting the document into the collection
+                custom_question_collection.insertOne(newCustomQuestion);
+            }*/
         }
 
         @FXML

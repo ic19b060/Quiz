@@ -1,75 +1,54 @@
 package fhtw;
-import com.mongodb.client.MongoCollection;
+
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
-import fhtw.MongoDB;
-import org.bson.Document;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Iterator;
 
 
 public class CustomQuestions {
 
-    public static String createCustomQuestionCollection() {
+
+    public static String createCustomQuestionCollection(String collectionName) {
 
         //connect to database
-        MongoDatabase database = MongoDB.connect_to_db();
+        try (MongoClient client = MongoDB.connect_to_db()) {
+            MongoDatabase db = MongoDB.getDB(client);
+            MongoIterable<String> collections = db.listCollectionNames();
 
-        //TODO LISL: interface for creating custom questions and answers
-        //first: create collection name (customCollectionName)
-        //TODO NICI: check if collection name doesn't already exist in database
-        //next interface for entering infos: e.g. 5 Textfields: Question, correct answer, incorrect answers
-        //additional buttons: "submit question" (insert question into database) and "done" (return to home interface or whatever)
+            for (String collection : collections) {
 
-        //TODO LISL: add textfield for entering name of collection
-        //String customCollectionName = buttonname.getText();
-
-        //create collection
-        //database.createCollection(customCollectionName);
-
-        return "customCollectionName";
+            }
+            //check if collection is already in database
+            Iterator<String> iterator = collections.iterator();
+            while (iterator.hasNext()) {
+                String current = iterator.next();
+                if (current.equals(collectionName)) {
+                    //TODO Error MEssage
+                } else if ((!iterator.hasNext()) && (!current.equals(collectionName))) {
+                    db.createCollection(collectionName);
+                    //TODO Message: Collection successfully created
+                }
+            }
+            return collectionName;
+        }
     }
 
-    public static void createCustomQuestions(String customCollectionName){
-
-        MongoDatabase database = MongoDB.connect_to_db();
-        MongoCollection<Document> custom_question_collection = database.getCollection(customCollectionName);
-
-        //TODO LISL: add textfields
-        //String customQuestion = buttonname.getText();
-        //String customCorrectAnswer = buttonname.getText();
-        //String customIncorrectAnswer1 = buttonname.getText();
-        //String customIncorrectAnswer2 = buttonname.getText();
-        //String customIncorrectAnswer3 = buttonname.getText();
-
-        List<String> customIncorrectAnswerList = new ArrayList<>();
-        //customIncorrectAnswerList.addAll(customIncorrectAnswer1, customIncorrectAnswer2, customIncorrectAnswer3);
-
-        Document newCustomQuestion = new Document();
-       /* newCustomQuestion.append("question", customQuestion);
-        newCustomQuestion.append("correct_answer", customCorrectAnswer);
-        newCustomQuestion.append("incorrect_answers", customIncorrectAnswerList);
-       */
-        //Inserting the document into the collection
-        custom_question_collection.insertOne(newCustomQuestion);
-
-    }
-
-    //TODO LISL: add option in quizstart menu to choose custom collection
-    public static void showCustomCollections(){
+}
+//TODO LISL: add option in quizstart menu to choose custom collection
+ /*   public static void showCustomCollections(){
         MongoDatabase database = MongoDB.connect_to_db();
 
         MongoIterable<String> customCollectionList = database.listCollectionNames();
         for (String name : customCollectionList) {
-            if (!(name.equals("Users") && name.equals("Highscores"))){
+            if (!(name.equals("Users") && !name.equals("Highscores"))){
                 System.out.println(name);
             }
         }
     }
 
 }
-
+        */
 //Idea if we have time:
 //Make existing custom question collections editable (show all questions, add and delete questions)

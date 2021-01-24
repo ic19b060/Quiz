@@ -3,10 +3,7 @@ package fhtw;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +28,7 @@ import static fhtw.APIReader.Json_complete;
 public class ControllerLoginwindow implements Initializable {
 
 
-        @Override
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
@@ -85,57 +82,59 @@ public class ControllerLoginwindow implements Initializable {
         String pwd = psw_field.getText();
 
         //connect to the database and retrieve the User profiles
-        MongoDatabase database = MongoDB.connect_to_db();
-        MongoCollection<Document> user_collection = database.getCollection("Users");
+        try (MongoClient client = MongoDB.connect_to_db()) {
+            MongoDatabase db = MongoDB.getDB(client);
+            MongoCollection<Document> user_collection = db.getCollection("Users");
 
-        //check if the username exists in the database
-        //BasicDBObject query = new BasicDBObject();
-        //query.put("Username", user);
-        //FindIterable<Document> cur_user = user_collection.find(query);
+            //check if the username exists in the database
+            //BasicDBObject query = new BasicDBObject();
+            //query.put("Username", user);
+            //FindIterable<Document> cur_user = user_collection.find(query);
 
-        //check if username is in database
-        MongoCursor<Document> cursor = user_collection.find().iterator();
-        String usernameDB = "";
-        String passwordDB = "";
+            //check if username is in database
+            MongoCursor<Document> cursor = user_collection.find().iterator();
+            String usernameDB = "";
+            String passwordDB = "";
 
             while (cursor.hasNext()) {
                 Document userinfo = cursor.next();
                 usernameDB = userinfo.getString("Username");
                 passwordDB = userinfo.getString("Password");
                 if (usernameDB.equals(user)) {
-                break;
+                    break;
                 }
             }
 
-        if (!usernameDB.equals(user)) {
-            lbl_loginstatus.setText("no such user - please sign up!");
-            System.out.println(usernameDB + "-usernameDB, user-" + user);
+            if (!usernameDB.equals(user)) {
+                lbl_loginstatus.setText("no such user - please sign up!");
+                System.out.println(usernameDB + "-usernameDB, user-" + user);
 
-        } else {
-            //check if the password is correct
-            BasicDBObject criteria = new BasicDBObject();
-            criteria.append("Username", user);
-            criteria.append("Password", pwd);
-            FindIterable<Document> cur_profile = user_collection.find(criteria);
-
-            if (!passwordDB.equals(pwd)) {
-                lbl_loginstatus.setText("Wrong password! Please try again or contact the developer team");
             } else {
-                //all checks passed! Ready for login
+                //check if the password is correct
+                BasicDBObject criteria = new BasicDBObject();
+                criteria.append("Username", user);
+                criteria.append("Password", pwd);
+                FindIterable<Document> cur_profile = user_collection.find(criteria);
 
-                Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
+                if (!passwordDB.equals(pwd)) {
+                    lbl_loginstatus.setText("Wrong password! Please try again or contact the developer team");
+                } else {
+                    //all checks passed! Ready for login
 
-                Stage two = new Stage();
-                two.setTitle("Menue");
-                two.setScene(new Scene(root));
-                two.show();
+                    Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
 
-                Stage stage = (Stage) lgn_btn.getScene().getWindow();
-                stage.close();
+                    Stage two = new Stage();
+                    two.setTitle("Menue");
+                    two.setScene(new Scene(root));
+                    two.show();
 
+                    Stage stage = (Stage) lgn_btn.getScene().getWindow();
+                    stage.close();
+
+                }
             }
-        }
 
+        }
     }
 }
 
