@@ -111,7 +111,7 @@ public class ControllerMenue implements Initializable {
 
     @FXML
     void createQuestion(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("getCollectionsName.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("createCustomizedQuestions.fxml"));
 
         Stage three = new Stage();
         three.setTitle("Creating mode");

@@ -6,6 +6,7 @@ import com.mongodb.client.MongoClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,10 +17,12 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 
-public class ControllerCreateCustomizedQuestions {
+public class ControllerCreateCustomizedQuestions implements Initializable {
 
     @FXML
     ControllerMenue controllerMenue;
@@ -33,8 +36,6 @@ public class ControllerCreateCustomizedQuestions {
     @FXML
     private TextField incorrectAnswer1;
 
-    @FXML
-    private TextField incorrectAnswer2;
 
     @FXML
     private TextField incorrectAnswer3;
@@ -49,6 +50,45 @@ public class ControllerCreateCustomizedQuestions {
     private Button cancel;
 
     @FXML
+    private TextField CollectionTxtName;
+
+    @FXML
+    private Button commitName;
+    @FXML
+    private TextField incorrectAnswer2;
+
+    @FXML
+    void commitNameButton(ActionEvent event) {
+        questionfield.setDisable(false);
+        correctAnswer.setDisable(false);
+        incorrectAnswer1.setDisable(false);
+        incorrectAnswer2.setDisable(false);
+        incorrectAnswer3.setDisable(false);
+        AddQuestion.setDisable(false);
+        cancel.setDisable(false);
+        createPackage.setDisable(false);
+
+
+        CollectionTxtName.setDisable(true);
+        commitName.setDisable(true);
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        questionfield.setDisable(true);
+        correctAnswer.setDisable(true);
+        incorrectAnswer1.setDisable(true);
+        incorrectAnswer2.setDisable(true);
+        incorrectAnswer3.setDisable(true);
+        AddQuestion.setDisable(true);
+        cancel.setDisable(true);
+        createPackage.setDisable(true);
+
+    }
+
+    @FXML
     void addQuestion(ActionEvent event) {
 
         //connect to database and open collection "CustomGame"
@@ -61,10 +101,14 @@ public class ControllerCreateCustomizedQuestions {
             Question question = new Question();
             ArrayList<Question> questionarray = new ArrayList<>();
 
+
+            String Name = CollectionTxtName.getText();
             //TODO read in document name in name-creation-interface
 
             //set the name of our current custom question set
-            cur.setName("get document name from other interface"); //name of the document in the database collection
+
+            cur.setName(Name); //name of the document in the database collection
+
 
             //add user input to our Question object
             question.setQuestion(questionfield.getText());
@@ -75,10 +119,15 @@ public class ControllerCreateCustomizedQuestions {
             questionarray.add(question);
             cur.setQuestions(questionarray);
 
-            //insert the new question into our database
-            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-            String jsonString = gson.toJson(cur);
-            collections.insertOne(Document.parse(jsonString));
+
+
+                //insert the new question into our database
+                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+                String jsonString = gson.toJson(cur);
+                collections.insertOne(Document.parse(jsonString));
+
+
+
 
        /*     try (MongoClient client = MongoDB.connect_to_db()) {
                 MongoDatabase db = MongoDB.getDB(client);
@@ -106,36 +155,40 @@ public class ControllerCreateCustomizedQuestions {
             }*/
         }
     }
-        @FXML
-        void cancelAndDelete (ActionEvent event) throws IOException {
+
+
+    @FXML
+    void cancelAndDelete(ActionEvent event) throws IOException {
 
         //TODO NICI
-            //delete fragenpackage!
-            //return back to menue
-            loadMenu();
-        }
+        //delete fragenpackage!
+        //return back to menue
+        loadMenu();
+    }
 
-        //TODO LISL: können wir createPackage löschen?
-        @FXML
-        void createPackage (ActionEvent event) throws IOException {
+    //TODO LISL: können wir createPackage löschen?
+    @FXML
+    void createPackage (ActionEvent event) throws IOException {
 
-            //create Package
-            //go back to menue
-            loadMenu();
-        }
+    loadMenu();
 
-        public void loadMenu () throws IOException {
-            Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
+    //create Package
+    //go back to menue
+    //loadMenu();
+    }
 
-            Stage two = new Stage();
-            two.setTitle("Menue");
-            two.setScene(new Scene(root));
-            two.show();
+    public void loadMenu() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 
-            Stage stage = (Stage) cancel.getScene().getWindow();
-            stage.close();
-        }
+        Stage two = new Stage();
+        two.setTitle("Menue");
+        two.setScene(new Scene(root));
+        two.show();
 
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        stage.close();
     }
 
 
+
+    }
