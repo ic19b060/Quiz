@@ -1,8 +1,6 @@
 package fhtw;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.client.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,11 +19,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static fhtw.APIReader.Json_complete;
-//import static fhtw.Link.Link;
 
 
-public class ControllerLoginwindow implements Initializable {
+public class ControllerLoginWindow implements Initializable {
 
 
     @Override
@@ -35,54 +31,54 @@ public class ControllerLoginwindow implements Initializable {
 
 
     @FXML
-    private PasswordField psw_field;
+    private PasswordField passwordField;
 
     @FXML
-    private Button lgn_btn;
+    private Button lgnBtn;
 
     @FXML
-    private Button sign_up_btn;
+    private Button signUpBtn;
 
     @FXML
-    private Label lbl_usr;
+    private Label lblUsr;
 
     @FXML
-    private Label lbl_pwd;
+    private Label lblPwd;
 
     @FXML
-    private Label welcome_txt;
+    private Label welcomeTxt;
 
     @FXML
-    private TextField user_field;
+    private TextField userField;
 
     @FXML
-    private Label lbl_usr1;
+    private Label lblUsr1;
 
     @FXML
-    private Label lbl_loginstatus;
+    private Label lblLoginstatus;
 
     @FXML
-    public void opensignup_btn(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("sign_up.fxml"));
+    public void opensignupBtn(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("signUp.fxml"));
 
         Stage two = new Stage();
         two.setTitle("Sign-up");
         two.setScene(new Scene(root));
         two.show();
 
-        Stage stage = (Stage) sign_up_btn.getScene().getWindow();
+        Stage stage = (Stage) signUpBtn.getScene().getWindow();
         stage.close();
     }
 
 
     @FXML
-    public void buttononAction_Login(ActionEvent event) throws IOException {
+    public void buttononActionLogin(ActionEvent event) throws IOException {
 
-        String user = user_field.getText();
-        String pwd = psw_field.getText();
+        String user = userField.getText();
+        String pwd = passwordField.getText();
 
         //connect to the database and retrieve the User profiles
-        try (MongoClient client = MongoDB.connect_to_db()) {
+        try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection<Document> user_collection = db.getCollection("Users");
 
@@ -106,7 +102,7 @@ public class ControllerLoginwindow implements Initializable {
             }
 
             if (!usernameDB.equals(user)) {
-                lbl_loginstatus.setText("no such user - please sign up!");
+                lblLoginstatus.setText("no such user - please sign up!");
                 System.out.println(usernameDB + "-usernameDB, user-" + user);
 
             } else {
@@ -117,18 +113,18 @@ public class ControllerLoginwindow implements Initializable {
                 FindIterable<Document> cur_profile = user_collection.find(criteria);
 
                 if (!passwordDB.equals(pwd)) {
-                    lbl_loginstatus.setText("Wrong password! Please try again or contact the developer team");
+                    lblLoginstatus.setText("Wrong password! Please try again or contact the developer team");
                 } else {
                     //all checks passed! Ready for login
 
-                    Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 
                     Stage two = new Stage();
                     two.setTitle("Menue");
                     two.setScene(new Scene(root));
                     two.show();
 
-                    Stage stage = (Stage) lgn_btn.getScene().getWindow();
+                    Stage stage = (Stage) lgnBtn.getScene().getWindow();
                     stage.close();
 
                 }

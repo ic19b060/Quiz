@@ -3,7 +3,6 @@ package fhtw;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoIterable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,63 +15,61 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import java.io.IOException;
+public class ControllerCreateCustomizedQuestions {
 
-public class ControllerCreateQuestions {
+    @FXML
+    ControllerMenue controllerMenue;
 
-       @FXML
-        MenueController menueController;
+    @FXML
+    private TextField questionfield;
 
-        @FXML
-        private TextField questionfield;
+    @FXML
+    private TextField correctAnswer;
 
-        @FXML
-        private TextField correctAnswer;
+    @FXML
+    private TextField incorrectAnswer1;
 
-        @FXML
-        private TextField incorrectAnswer1;
+    @FXML
+    private TextField incorrectAnswer2;
 
-        @FXML
-        private TextField incorrectAnswer2;
+    @FXML
+    private TextField incorrectAnswer3;
 
-        @FXML
-        private TextField incorrectAnswer3;
+    @FXML
+    private Button AddQuestion;
 
-        @FXML
-        private Button AddQuestion;
+    @FXML
+    private Button createPackage;
 
-        @FXML
-        private Button createPackage;
+    @FXML
+    private Button cancel;
 
-        @FXML
-        private Button cancel;
+    @FXML
+    void addQuestion(ActionEvent event) {
 
-        @FXML
-        void addQuestion(ActionEvent event) {
+        try (MongoClient client = MongoDB.connectToDb()) {
+            MongoDatabase db = MongoDB.getDB(client);
+            MongoCollection collections = db.getCollection("CustomGame");
 
-            try (MongoClient client = MongoDB.connect_to_db()) {
-                MongoDatabase db = MongoDB.getDB(client);
-                MongoCollection collections = db.getCollection("CustomGame");
+            CustomQuestionCollection cur = new CustomQuestionCollection();
+            cur.setName("1");
+            ArrayList<Question> objects = new ArrayList<>();
+            Question question = new Question();
+            question.setCorrectAnswer("ad");
+            question.setIncorrectAnswers(Arrays.asList("b", "c", "d"));
+            question.setQuestion("Frage");
+            objects.add(question);
+            cur.setQuestions(objects);
 
-                CustomQuestionCollection cur = new CustomQuestionCollection();
-                cur.setName("1");
-                ArrayList<Question> objects = new ArrayList<>();
-                Question question = new Question();
-                question.setCorrect_answer("ad");
-                question.setIncorrect_answers(Arrays.asList("b", "c", "d"));
-                question.setQuestion("Frage");
-                objects.add(question);
-                cur.setQuestions(objects);
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+            String jsonString = gson.toJson(cur);
+            collections.insertOne(Document.parse(jsonString));
 
-                Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-                String jsonString = gson.toJson(cur);
-                collections.insertOne(Document.parse(jsonString));
-
-                //connect to database
+            //connect to database
        /*     try (MongoClient client = MongoDB.connect_to_db()) {
                 MongoDatabase db = MongoDB.getDB(client);
 
@@ -98,30 +95,29 @@ public class ControllerCreateQuestions {
                 custom_question_collection.insertOne(newCustomQuestion);
             }*/
         }
-
+    }
         @FXML
-        void cancelAndDelete(ActionEvent event) throws IOException {
+        void cancelAndDelete (ActionEvent event) throws IOException {
 
             //delete fragenpackage!
 
 
-
             //return back to menue
-          loadMenu();
+            loadMenu();
         }
 
         @FXML
-        void createPackage(ActionEvent event) throws IOException {
+        void createPackage (ActionEvent event) throws IOException {
 
             //create Package
 
             //go back to menue
-           loadMenu();
+            loadMenu();
         }
 
 
-        public void loadMenu() throws IOException {
-            Parent root = FXMLLoader.load(getClass().getResource("Quiz_Menue.fxml"));
+        public void loadMenu () throws IOException {
+            Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 
             Stage two = new Stage();
             two.setTitle("Menue");

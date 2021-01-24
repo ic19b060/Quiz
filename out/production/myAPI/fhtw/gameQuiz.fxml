@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane prefHeight="743.0" prefWidth="697.0" style="-fx-background-color: #C7D0D7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.ControllerGameQuiz">
+   <content>
+      <TitledPane prefHeight="576.0" prefWidth="462.0" style="-fx-background-color: #C7D0D7;">
+         <content>
+            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="692.0" style="-fx-background-color: #C7D0D7;">
+               <children>
+                  <Button fx:id="buttonA" layoutX="102.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonAClick" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: #657889;" text="Button" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="buttonD" layoutX="352.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonDClick" prefHeight="50.0" prefWidth="190.0" text="Button" />
+                  <Button fx:id="buttonB" layoutX="352.0" layoutY="188.0" mnemonicParsing="false" onAction="#buttonBClick" prefHeight="50.0" prefWidth="190.0" text="Button" />
+                  <Button fx:id="buttonC" layoutX="102.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonCClick" prefHeight="50.0" prefWidth="190.0" text="Button" />
+                  <TextArea fx:id="textFragen" layoutX="89.0" layoutY="14.0" prefHeight="116.0" prefWidth="471.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextArea>
+                  <Button fx:id="buttonQuizgamequiz" layoutX="545.0" layoutY="598.0" mnemonicParsing="false" onAction="#quitGameQuiz" prefHeight="47.0" prefWidth="88.0" text="Quit Game" />
+                  <Button fx:id="buttonJoker" layoutX="352.0" layoutY="377.0" mnemonicParsing="false" onAction="#JokerClicked" prefHeight="45.0" prefWidth="106.0" text="Joker" />
+                  <ProgressBar layoutX="85.0" layoutY="330.0" prefHeight="18.0" prefWidth="467.0" progress="0.0" />
+                  <TextArea fx:id="chatFenster" layoutX="69.0" layoutY="377.0" prefHeight="200.0" prefWidth="200.0" />
+                  <TextField fx:id="chatTextfenster" layoutX="69.0" layoutY="586.0" prefHeight="22.0" prefWidth="200.0" />
+                  <Button fx:id="sendButtonChat" layoutX="282.0" layoutY="586.0" mnemonicParsing="false" text="Send" />
+                  <Label fx:id="wrongAnswerLBL" layoutX="100.0" layoutY="130.0" prefHeight="27.0" prefWidth="407.0" />
+                  <Label fx:id="rightAnswerlbl" layoutX="97.0" layoutY="158.0" prefHeight="26.0" prefWidth="396.0" />
+                  <Button fx:id="nextQuestion" layoutX="507.0" layoutY="377.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="45.0" prefWidth="106.0" text="next Question" />
+                  <ImageView fx:id="imageView" visible="false" fitHeight="86.0" fitWidth="140.0" layoutX="490.0" layoutY="456.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@end.jpg" backgroundLoading="true"/>
+                  </ImageView>
+               </children>
+            </Pane>
+         </content>
+      </TitledPane>
+   </content>
+</ScrollPane>

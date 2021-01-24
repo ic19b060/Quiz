@@ -4,7 +4,7 @@ import com.mongodb.client.MongoClient;
 
 public class MongoDB {
 
-    public static MongoClient connect_to_db() {
+    public static MongoClient connectToDb() {
         return MongoClients.create(
                 "mongodb+srv://admin:mongodbpw@cluster0.n568g.mongodb.net/quizDB?retryWrites=true&w=majority");
     }

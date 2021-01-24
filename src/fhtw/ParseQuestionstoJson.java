@@ -5,10 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class Answers {
+public class ParseQuestionstoJson {
     //create Array of questions
 
     static List<Question> parseQuestionJson(JsonObject json) {
@@ -21,12 +20,12 @@ public class Answers {
             List<String> answers = new ArrayList<>();
             Question cur = new Question();
             JsonObject jsonQuestion = (JsonObject) question;
-            JsonArray wrong_answer = jsonQuestion.get("incorrect_answers").getAsJsonArray();
-            for (JsonElement jsonElement : wrong_answer) {
+            JsonArray wrongAnswer = jsonQuestion.get("incorrect_answers").getAsJsonArray();
+            for (JsonElement jsonElement : wrongAnswer) {
                answers.add(jsonElement.getAsString());
             }
-            cur.setCorrect_answer(jsonQuestion.get("correct_answer").getAsString());
-            cur.setIncorrect_answers(answers);
+            cur.setCorrectAnswer(jsonQuestion.get("correct_answer").getAsString());
+            cur.setIncorrectAnswers(answers);
             cur.setQuestion(jsonQuestion.get("question").getAsString());
             questions.add(cur);
             //create Object for question

@@ -19,53 +19,53 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static fhtw.APIReader.Json_complete;
+import static fhtw.APIReader.jsonComplete;
 
-public class MenueController implements Initializable {
+public class ControllerMenue implements Initializable {
 
-    private static GamequizController controllerGamequiz;
+    private static ControllerGameQuiz controllerGamequiz;
 
     @FXML
-    GamequizController gamequizController;
+    ControllerGameQuiz controllerGameQuiz;
 
 
 
     private Question currentquestion;
 
+    //Welcome Tab
+    @FXML
+    public Tab startTab;
 
     @FXML
-    public Tab start_tab;
+    private Label welcomLbl;
 
     @FXML
-    private Label Welcom_lbl;
+    private Button gotoprofileBtn;
 
     @FXML
-    private Button gotoprofile_btn;
+    private Button highscoreBtn;
 
     @FXML
-    private Button highscore_btn;
+    private Label explanationLbl;
+
+    //SingleplayerTab
+    @FXML
+    private Tab spTab;
 
     @FXML
-    private Label explanation_lbl;
+    private Spinner<Integer> spinnerQuestionNumber;
 
     @FXML
-    private Tab sp_tab;
+    private Label nbrLbl;
 
     @FXML
-    private Spinner<Integer> nmb_dropdwn;
+    private Label diffLbl;
 
     @FXML
-    private Label nbr_lbl;
+    private Label catLbl;
 
     @FXML
-    private Label diff_lbl;
-
-    @FXML
-    private Label cat_lbl;
-
-    @FXML
-    private Button start_btn_sp;
-
+    private Button startBtnSp;
 
     @FXML
     private ComboBox<String> comboCat;
@@ -73,37 +73,12 @@ public class MenueController implements Initializable {
     @FXML
     private ComboBox<String> comboDiff;
 
+    //CustomGameTab
     @FXML
-    public Tab mp_tab;
-
-    @FXML
-    private Button startCustomGame_btn;
+    public Tab customGameTab;
 
     @FXML
-    private static Spinner<Integer> numberCustomGame;
-
-    @FXML
-    private Tab profil_tab;
-
-    @FXML
-    private TextArea name_field_prof;
-
-
-    @FXML
-    private TextArea highscore_field_prof;
-
-
-    @FXML
-    public Tab highscore_tab;
-
-    @FXML
-    private TextArea txt_area_highscore;
-
-    @FXML
-    private Tab logout_tab;
-
-    @FXML
-    private Button lgout_btn;
+    private Button startCustomGameBtn;
 
     @FXML
     private ComboBox<String> QuestionCollectionCombo;
@@ -111,10 +86,37 @@ public class MenueController implements Initializable {
     @FXML
     private Button createQuestion;
 
+    //Profil tab
+    @FXML
+    private Tab profilTab;
+
+    @FXML
+    private TextArea nameFieldProf;
+
+
+    @FXML
+    private TextArea highscoreFieldProf;
+
+    //Highscore Tab
+    @FXML
+    public Tab highscoreTab;
+
+    @FXML
+    private TextArea txtAreaHighscore;
+
+    //Logout Tab
+    @FXML
+    private Tab logoutTab;
+
+    @FXML
+    private Button lgoutBtn;
+
+
+
 
     @FXML
     void createQuestion(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("collectionsname.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("getCollectionsName.fxml"));
 
         Stage three = new Stage();
         three.setTitle("Creating mode");
@@ -128,7 +130,7 @@ public class MenueController implements Initializable {
 
 
 
-    public MenueController() {
+    public ControllerMenue() {
 
     }
 
@@ -137,30 +139,30 @@ public class MenueController implements Initializable {
 
     public void logout(ActionEvent actionEvent) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("loginWindow.fxml"));
 
         Stage three = new Stage();
         three.setTitle("Quiz");
         three.setScene(new Scene(root));
         three.show();
 
-        Stage stage = (Stage) lgout_btn.getScene().getWindow();
+        Stage stage = (Stage) lgoutBtn.getScene().getWindow();
         stage.close();
     }
 
 
     public void gotoProfile(ActionEvent actionEvent) {
-        start_tab.getTabPane().getSelectionModel().select(profil_tab);
+        startTab.getTabPane().getSelectionModel().select(profilTab);
     }
 
     public void gotoHighscores(ActionEvent actionEvent) {
-        start_tab.getTabPane().getSelectionModel().select(highscore_tab);
+        startTab.getTabPane().getSelectionModel().select(highscoreTab);
     }
 
 
     @FXML
     void startCustomGame(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Game_quiz.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gameQuiz.fxml"));
 
 
         Stage two = new Stage();
@@ -168,18 +170,18 @@ public class MenueController implements Initializable {
         two.setScene(new Scene(root));
         two.show();
 
-        Stage stage = (Stage) startCustomGame_btn.getScene().getWindow();
+        Stage stage = (Stage) startCustomGameBtn.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     void startSPQuiz(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Game_quiz.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gameQuiz.fxml"));
         Parent root = loader.load();
 
         //loader.setController(this);
-        this.gamequizController = loader.getController(); // controller aus dem Loader bekommen
-        this.gamequizController.setController1(this);
+        this.controllerGameQuiz = loader.getController(); // controller aus dem Loader bekommen
+        this.controllerGameQuiz.setController1(this);
 
        // String link = fhtw.Link.Link();
 
@@ -187,7 +189,7 @@ public class MenueController implements Initializable {
 
 
         //create question set with created link for API
-        JsonObject questionsjson = Json_complete(link);
+        JsonObject questionsjson = jsonComplete(link);
 
         //Gameplay logic
 
@@ -200,22 +202,23 @@ public class MenueController implements Initializable {
         //Gameplaylogic
 
 
-        List<Question> questions = Answers.parseQuestionJson(questionsjson);
+        List<Question> questions = ParseQuestionstoJson.parseQuestionJson(questionsjson);
 
         QuestionRepository.getInstance().setQuestions(questions);
 
-        gamequizController.setNextQuestion();
+        controllerGameQuiz.setNextQuestion();
 
 
         //Felder einlesen für schwierigkeit,usw
         //Quiz starten /api laden?
+
         //Fragen in Textfeld schreiben
         //Antworten mit button verknüpfen.
 
        //text_fragen.setText("Hallo");
         //socket öffnen für den chat??
 
-        Stage stage = (Stage) start_btn_sp.getScene().getWindow();
+        Stage stage = (Stage) startBtnSp.getScene().getWindow();
         stage.close();
     }
 
@@ -253,8 +256,8 @@ public class MenueController implements Initializable {
 
     public static List<String> shuffleAnswers(Question question) {
 
-        List<String> rand_answers = new ArrayList<>(question.getIncorrect_answers());
-        rand_answers.add(question.getCorrect_answer());
+        List<String> rand_answers = new ArrayList<>(question.getIncorrectAnswers());
+        rand_answers.add(question.getCorrectAnswer());
 
         Collections.shuffle(rand_answers);
         return rand_answers;
@@ -268,7 +271,7 @@ public class MenueController implements Initializable {
         //System.out.println(nmb_dropdwn.getValue());
 
 
-        return new QuestionProvider(nmb_dropdwn.getValue(),comboDiff.getSelectionModel().getSelectedItem(),comboCat.getSelectionModel().getSelectedItem(),"multiple" );
+        return new QuestionProvider(spinnerQuestionNumber.getValue(),comboDiff.getSelectionModel().getSelectedItem(),comboCat.getSelectionModel().getSelectedItem(),"multiple" );
     }
 
 }

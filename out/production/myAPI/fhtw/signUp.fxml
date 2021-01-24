@@ -16,9 +16,9 @@
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="356.0" style="-fx-background-color: #C7D0D7;">
                <children>
-                  <TextField fx:id="enter_user_signup" layoutX="70.0" layoutY="155.0" promptText="enter new user" />
-                  <PasswordField fx:id="enter_password_signup" layoutX="70.0" layoutY="225.0" promptText="enter new password" />
-                  <Button fx:id="ok_signup_btn" layoutX="258.0" layoutY="267.0" mnemonicParsing="false" onAction="#signup_newuserentry" style="-fx-background-color: #657889;" text="Sign up" />
+                  <TextField fx:id="enterUserSignup" layoutX="70.0" layoutY="155.0" promptText="enter new user" />
+                  <PasswordField fx:id="enterPasswordSignup" layoutX="70.0" layoutY="225.0" promptText="enter new password" />
+                  <Button fx:id="okSignupBtn" layoutX="258.0" layoutY="267.0" mnemonicParsing="false" onAction="#signupNewuserentry" style="-fx-background-color: #657889;" text="Sign up" />
                   <Label layoutX="70.0" layoutY="122.0" text="User" textFill="#657889">
                      <font>
                         <Font size="21.0" />
