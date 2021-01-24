@@ -13,7 +13,7 @@ public class CustomQuestions {
     public static String createCustomQuestionCollection(String collectionName) {
 
         //connect to database
-        try (MongoClient client = MongoDB.connect_to_db()) {
+        try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
             MongoIterable<String> collections = db.listCollectionNames();
 

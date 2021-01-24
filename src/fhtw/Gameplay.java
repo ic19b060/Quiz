@@ -115,7 +115,7 @@ public class Gameplay {
     }
 
     public void startquiz(ActionEvent event, List<JsonElement> answers) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Game_quiz.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gameQuiz.fxml"));
 
         Stage two = new Stage();
         two.setTitle("Quiz");

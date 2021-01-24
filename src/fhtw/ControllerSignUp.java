@@ -17,7 +17,6 @@ import org.bson.Document;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ControllerSignUp implements Initializable {
@@ -27,20 +26,20 @@ public class ControllerSignUp implements Initializable {
     private Label signuplbl;
 
     @FXML
-    private TextField enter_user_signup;
+    private TextField enterUserSignup;
 
     @FXML
-    private PasswordField enter_password_signup;
+    private PasswordField enterPasswordSignup;
 
     @FXML
-    private Button ok_signup_btn;
+    private Button okSignupBtn;
 
     @FXML
     private Button rtrnLogin;
 
     @FXML
     void returnLogin(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("loginWindow.fxml"));
 
         Stage two = new Stage();
         two.setTitle("Login");
@@ -56,20 +55,20 @@ public class ControllerSignUp implements Initializable {
 
     }
 
-    public void signup_newuserentry(ActionEvent actionEvent) {
+    public void signupNewuserentry(ActionEvent actionEvent) {
 
-        String user = enter_user_signup.getText();
-        String pwd = enter_password_signup.getText();
+        String user = enterUserSignup.getText();
+        String pwd = enterPasswordSignup.getText();
 
         //connect to the database and retrieve the User profiles
-        try (MongoClient client = MongoDB.connect_to_db()) {
+        try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection<Document> user_collection = db.getCollection("Users");
 
             //check if the username exists in the database
             BasicDBObject query = new BasicDBObject();
             query.put("Username", user);
-            FindIterable<Document> cur_user = user_collection.find(query);
+            FindIterable<Document> curUser = user_collection.find(query);
 
             //check if username is in database
             MongoCursor<Document> cursor = user_collection.find().iterator();
@@ -88,7 +87,7 @@ public class ControllerSignUp implements Initializable {
                     newUser.append("Password", pwd);
                     user_collection.insertOne(newUser);
                     signuplbl.setText("Sign-Up successful! \n Welcome " + user + "!");
-                    ok_signup_btn.setDisable(true);
+                    okSignupBtn.setDisable(true);
 
                 }
 

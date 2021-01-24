@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class APIReader {
-    static JsonObject Json_complete(String link) {
+    static JsonObject jsonComplete(String link) {
 
         //Pass the desired URL as an object:
         URL url = null;
@@ -30,14 +30,14 @@ public class APIReader {
 
         try {
             conn = (HttpURLConnection) url.openConnection();
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         }
 
         //Set the request type, as in, whether the request to the API is a GET request or a POST request.
         try {
             conn.setRequestMethod("GET");
-        } catch (ProtocolException e) {
+        } catch (ProtocolException | NullPointerException e) {
             e.printStackTrace();
         }
 
@@ -53,7 +53,7 @@ public class APIReader {
         }
 
         //Now we need to perform a check so that if the response code is not 200, we throw a runtime exception, or otherwise carry on the rest of the procedure. The structure would be like this:
-        JsonObject json_object = null;
+        JsonObject jsonObject = null;
         if (responsecode != 200) {
             throw new RuntimeException("Runtime Error");
         } else {
@@ -75,7 +75,7 @@ public class APIReader {
 
             try {
 
-                json_object = JsonParser.parseString(inline).getAsJsonObject();
+                jsonObject = JsonParser.parseString(inline).getAsJsonObject();
 
                 /*
                 JsonParser parser = new JsonParser();
@@ -83,10 +83,10 @@ public class APIReader {
                 JsonObject jsonObject = (JsonObject) obj;
                 JsonArray namearr = (JsonArray) jsonObject.get("results");
 */
-                JsonArray namearr = (JsonArray) json_object.get("results");
+                JsonArray namearr = (JsonArray) jsonObject.get("results");
 
                 Gson gson = new GsonBuilder().setPrettyPrinting().create(); // pretty print
-                String prettyJson = gson.toJson(json_object);
+                String prettyJson = gson.toJson(jsonObject);
                 System.out.println(prettyJson);
 
                 for (Object objInArr : namearr) {
@@ -104,6 +104,6 @@ public class APIReader {
 
         }
 
-        return json_object;
+        return jsonObject;
     }
 }

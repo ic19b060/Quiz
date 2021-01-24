@@ -2,9 +2,7 @@ package fhtw;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import com.mongodb.BasicDBObject;
-import com.mongodb.Mongo;
 import com.mongodb.client.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,17 +13,15 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 //import static fhtw.Link.Link;
-import static fhtw.APIReader.Json_complete;
-import static fhtw.Gameplay.singleplay;
+
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("loginWindow.fxml"));
 
         primaryStage.setTitle("Login_Quiz");
         primaryStage.setScene(new Scene(root));
@@ -35,7 +31,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        try (MongoClient client = MongoDB.connect_to_db()) {
+        try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection collections = db.getCollection("CustomGame");
 
@@ -43,8 +39,8 @@ public class Main extends Application {
             cur.setName("1");
             ArrayList<Question> objects = new ArrayList<>();
             Question question = new Question();
-            question.setCorrect_answer("ad");
-            question.setIncorrect_answers(Arrays.asList("b", "c", "d"));
+            question.setCorrectAnswer("ad");
+            question.setIncorrectAnswers(Arrays.asList("b", "c", "d"));
             question.setQuestion("Frage");
             objects.add(question);
             cur.setQuestions(objects);

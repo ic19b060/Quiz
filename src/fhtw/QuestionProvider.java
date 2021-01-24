@@ -4,8 +4,6 @@ package fhtw;
 import com.google.gson.annotations.SerializedName;
 import fhtw.enums.getCategory;
 
-import java.util.Locale;
-
 public class QuestionProvider {
 
     @SerializedName("category")
