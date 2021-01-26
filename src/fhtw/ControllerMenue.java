@@ -1,6 +1,9 @@
 package fhtw;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -156,6 +159,43 @@ public class ControllerMenue implements Initializable {
 
     @FXML
     void startCustomGame(ActionEvent event) throws IOException {
+
+        //get document name from dropdown menu
+        String name = QuestionCollectionCombo.getSelectionModel().getSelectedItem();
+
+        try (MongoClient client = MongoDB.connectToDb()) {
+            MongoDatabase db = MongoDB.getDB(client);
+            MongoCollection<Document> game_collection = db.getCollection("CustomGame");
+
+            MongoCursor<Document> cursor = game_collection.find().iterator();
+
+
+            String dbname = "";
+            Document game = new Document();
+
+            while (cursor.hasNext()) {
+                 game = cursor.next();
+                dbname = game.getString("name");
+
+                if (dbname.equals(name)) {
+                    break;
+                }
+            }
+
+            Gson g = new Gson();
+
+            System.out.println(game.toString());
+            g.fromJson(game.toJson(), ArrayList.class).forEach(q -> System.out.println(q.toString()));
+
+            //        List < Question > questions = ParseQuestionstoJson.parseQuestionJson(questionsjson);
+
+            //QuestionRepository.getInstance().setQuestions(questions);
+
+            controllerGameQuiz.setNextQuestion();
+
+
+        }
+
         Parent root = FXMLLoader.load(getClass().getResource("gameQuiz.fxml"));
 
         Stage two = new Stage();
