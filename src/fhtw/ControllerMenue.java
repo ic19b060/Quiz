@@ -1,6 +1,10 @@
 package fhtw;
 
 import com.google.gson.JsonObject;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.bson.Document;
 
 import java.io.IOException;
 import java.net.URL;
@@ -190,13 +195,7 @@ public class ControllerMenue implements Initializable {
 
         controllerGameQuiz.setNextQuestion();
 
-        //Felder einlesen für schwierigkeit,usw
-        //Quiz starten /api laden?
 
-        //Fragen in Textfeld schreiben
-        //Antworten mit button verknüpfen.
-
-        //text_fragen.setText("Hallo");
         //socket öffnen für den chat??
 
         Stage stage = (Stage) startBtnSp.getScene().getWindow();
@@ -229,6 +228,25 @@ public class ControllerMenue implements Initializable {
         loadDataDiffbutton(comboDiff);
         loadDataCatbutton(comboCat);
 
+        //TODO - Daten von DB holen für Dropdownmenü in customgame.
+        try (MongoClient client = MongoDB.connectToDb()) {
+            MongoDatabase db = MongoDB.getDB(client);
+            MongoCollection<Document> user_collection = db.getCollection("CustomGame");
+
+            MongoCursor<Document> cursor = user_collection.find().iterator();
+
+            ArrayList<String> gameNames = new ArrayList<>();
+
+            while (cursor.hasNext()) {
+                Document gameinfo = cursor.next();
+                gameNames.add(gameinfo.getString("name"));
+            }
+
+            QuestionCollectionCombo.getItems().addAll(gameNames);
+
+
+
+        }
     }
 
 

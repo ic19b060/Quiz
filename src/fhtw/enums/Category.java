@@ -2,7 +2,7 @@ package fhtw.enums;
 
 import com.google.gson.annotations.SerializedName;
 
-public class getCategory {
+
 
     public enum Category {
 
@@ -61,11 +61,11 @@ public class getCategory {
             this.value = value;
         }
 
-        public int value(){
+        public int getValue(){
             return value;
         }
 
     }
-}
+
 
 

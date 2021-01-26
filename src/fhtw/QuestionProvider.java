@@ -2,12 +2,11 @@ package fhtw;
 
 
 import com.google.gson.annotations.SerializedName;
-import fhtw.enums.getCategory;
 
 public class QuestionProvider {
 
     @SerializedName("category")
-    private getCategory.Category Category;
+    private fhtw.enums.Category Category;
 
     Integer amount;
     String difficulty;
@@ -19,14 +18,14 @@ public class QuestionProvider {
         this.difficulty = difficulty;
         this.type = type;
 
-        Category = getCategory.Category.valueOf(category);
+        Category = Category.valueOf(category);
     }
 
     public String getApiPath() {
 
         return "https://opentdb.com/api.php"
                 + "?amount=" + this.amount.toString()
-                + "&category=" + this.Category.value()
+                + "&category=" + this.Category.getValue()
                 + "&difficulty=" + this.difficulty
                 + "&type=" + this.type;
            }
