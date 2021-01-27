@@ -158,10 +158,26 @@ public class ControllerMenue implements Initializable {
 
     public void gotoProfile(ActionEvent actionEvent) {
         startTab.getTabPane().getSelectionModel().select(profilTab);
+
+        String name = PersonalData.getInstance().getUsername();
+        Integer highscore = PersonalData.getInstance().getHighscore();
+        Integer joker = PersonalData.getInstance().getJoker();
+
+        //TODO Textfield
+        //("Hallo " + user + "! Du hast aktuell * " + joker + " Joker!")
+
     }
 
     public void gotoHighscores(ActionEvent actionEvent) {
         startTab.getTabPane().getSelectionModel().select(highscoreTab);
+
+        String name = PersonalData.getInstance().getUsername();
+        Integer highscore = PersonalData.getInstance().getHighscore();
+        if (highscore == 0){
+            txtAreaHighscore.setText("Hallo " + name + ", dein persönlicher Highscore beträgt " + highscore + " Punkte, auweh! :(");
+        } else {
+            txtAreaHighscore.setText("Hallo " + name + ", dein persönlicher Highscore beträgt " + highscore + " Punkte, WOW nice! :)");
+        }
     }
 
     /**

@@ -98,6 +98,9 @@ public class ControllerSignUp implements Initializable {
                     Document newUser = new Document();
                     newUser.append("Username", user);
                     newUser.append("Password", pwd);
+                    newUser.append("Highscore", 0);
+                    newUser.append("TempScore", 0);
+                    newUser.append("Joker", 0);
                     user_collection.insertOne(newUser);
                     signuplbl.setText("Sign-Up successful! \n Welcome " + user + "!");
                     okSignupBtn.setDisable(true);
