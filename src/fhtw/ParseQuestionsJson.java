@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * We parse the Question Array we got from JSON into an ArrayList
+ * "results" is an Array of JsonObjects, each Object is a question, including the answer alternatives, category, question itself etc.
+ * we loop through the questions and store the information in a list consisting of our question class
  *
  */
 

@@ -164,7 +164,15 @@ public class ControllerMenue implements Initializable {
         startTab.getTabPane().getSelectionModel().select(highscoreTab);
     }
 
-
+    /**
+     * To start the custom Gamequiz with Questions from the database
+     * We connect to the database and load the collection "CustomGame"
+     * We look for the Document with the correct name chosen by the player
+     * This Document we get as JsonObject and parse with our own parser function into a question list
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void startCustomGame(ActionEvent event) throws IOException {
 
@@ -196,16 +204,8 @@ public class ControllerMenue implements Initializable {
             }
 
             Gson g = new Gson();
-
-            //g.fromJson(game.toJson(), ArrayList.class).forEach(q -> System.out.println(q.toString()));
-            //List < Question > questions = ParseQuestionstoJson.parseQuestionJson(game.toJson());
-            //Question q = g.fromJson(String.valueOf(game), Question.class);
-          //  JsonParser parser = new JsonParser();
-           // JsonObject json = (JsonObject) parser.parse(game.toJson());
-
             String DBjson = game.toJson();
 
-            //wie "jsoncomplete"
             JsonObject jsonObject = null;
 
             try {
@@ -233,16 +233,8 @@ public class ControllerMenue implements Initializable {
             two.show();
 
             List<Question> questions = ParseQuestionsJson.parseCustomQuestionJson(questionsjson);
-
             QuestionRepository.getInstance().setQuestions(questions);
-            System.out.println("Questionsjson" + questionsjson.toString());
-/*
-            JsonObject questionsjson = jsonComplete(link);
-            List<Question> questions = ParseQuestionsJson.parseQuestionJson(questionsjson);
-            QuestionRepository.getInstance().setQuestions(questions);
-            */
             controllerGameQuiz.setNextQuestion();
-
         }
 
         Stage stage = (Stage) startCustomGameBtn.getScene().getWindow();
