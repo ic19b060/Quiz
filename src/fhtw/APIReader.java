@@ -79,7 +79,7 @@ public class APIReader {
 
                 Gson gson = new GsonBuilder().setPrettyPrinting().create(); // pretty print
                 String prettyJson = gson.toJson(jsonObject);
-                System.out.println(prettyJson);
+                //System.out.println(prettyJson);
 
                 for (Object objInArr : namearr) {
                     JsonObject jsonquestion = (JsonObject) objInArr;

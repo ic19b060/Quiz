@@ -40,6 +40,31 @@ public class ParseQuestionsJson {
     }
 
 
+    static List<Question> parseCustomQuestionJson(JsonObject json) {
+
+        JsonArray questionArray = (JsonArray) json.get("questions");
+        List<Question> questions = new ArrayList<>();
+
+        for (JsonElement question : questionArray) {
+
+            List<String> answers = new ArrayList<>();
+            Question cur = new Question();
+            JsonObject jsonQuestion = (JsonObject) question;
+            JsonArray wrongAnswer = jsonQuestion.get("incorrectAnswers").getAsJsonArray();
+            for (JsonElement jsonElement : wrongAnswer) {
+                answers.add(jsonElement.getAsString());
+            }
+            cur.setCorrectAnswer(jsonQuestion.get("correctAnswer").getAsString());
+            cur.setIncorrectAnswers(answers);
+            cur.setQuestion(jsonQuestion.get("question").getAsString());
+            questions.add(cur);
+            //create Object for question
+        }
+        System.out.println("Questions: (parseQuestionsJson");
+        System.out.println(questions);
+
+        return questions;
+    }
 
 
     }

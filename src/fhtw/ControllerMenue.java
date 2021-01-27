@@ -170,13 +170,12 @@ public class ControllerMenue implements Initializable {
 
         //get document name from dropdown menu
         String name = QuestionCollectionCombo.getSelectionModel().getSelectedItem();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gameQuiz.fxml"));
+        Parent root = loader.load();
 
-        Parent root = FXMLLoader.load(getClass().getResource("gameQuiz.fxml"));
 
-        Stage two = new Stage();
-        two.setTitle("Quiz");
-        two.setScene(new Scene(root));
-        two.show();
+        this.controllerGameQuiz = loader.getController();
+        this.controllerGameQuiz.setController1(this);
 
         try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
@@ -198,29 +197,53 @@ public class ControllerMenue implements Initializable {
 
             Gson g = new Gson();
 
-            System.out.println(game.toString());
-            System.out.println(game.toJson());
-
             //g.fromJson(game.toJson(), ArrayList.class).forEach(q -> System.out.println(q.toString()));
-
             //List < Question > questions = ParseQuestionstoJson.parseQuestionJson(game.toJson());
-
-
-
-
             //Question q = g.fromJson(String.valueOf(game), Question.class);
           //  JsonParser parser = new JsonParser();
            // JsonObject json = (JsonObject) parser.parse(game.toJson());
 
-            //List<Question> questions = ParseQuestionstoJson.parseQuestionJson(json);
+            String DBjson = game.toJson();
 
+            //wie "jsoncomplete"
+            JsonObject jsonObject = null;
 
-            //QuestionRepository.getInstance().setQuestions(questions);
+            try {
+                jsonObject = JsonParser.parseString(DBjson).getAsJsonObject();
+                JsonArray gamearr = (JsonArray) jsonObject.get("questions");
+
+                for (Object objInArr : gamearr) {
+
+                    JsonObject jsonquestion = (JsonObject) objInArr;
+                    List<JsonElement> answers = new ArrayList<>();
+                    System.out.println("correct: " + jsonquestion.get("correctAnswer"));
+                    answers.add(jsonquestion.get("correctAnswer"));
+                    answers.add(jsonquestion.get("incorrectAnswers"));
+                }
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+            JsonObject questionsjson = jsonObject;
+
+            Stage two = new Stage();
+            two.setTitle("Quiz");
+            two.setScene(new Scene(root));
+            two.show();
+
+            List<Question> questions = ParseQuestionsJson.parseCustomQuestionJson(questionsjson);
+
+            QuestionRepository.getInstance().setQuestions(questions);
+            System.out.println("Questionsjson" + questionsjson.toString());
+/*
+            JsonObject questionsjson = jsonComplete(link);
+            List<Question> questions = ParseQuestionsJson.parseQuestionJson(questionsjson);
+            QuestionRepository.getInstance().setQuestions(questions);
+            */
             controllerGameQuiz.setNextQuestion();
 
         }
-
-
 
         Stage stage = (Stage) startCustomGameBtn.getScene().getWindow();
         stage.close();
