@@ -37,6 +37,12 @@ public class ControllerSignUp implements Initializable {
     @FXML
     private Button rtrnLogin;
 
+    /**
+     * Returns to Login-Window
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void returnLogin(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("loginWindow.fxml"));
@@ -55,6 +61,11 @@ public class ControllerSignUp implements Initializable {
 
     }
 
+    /**
+     *  Signs-up New User after checking if User is already created.
+     *
+     * @param actionEvent
+     */
     public void signupNewuserentry(ActionEvent actionEvent) {
 
         String user = enterUserSignup.getText();
@@ -65,6 +76,7 @@ public class ControllerSignUp implements Initializable {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection<Document> user_collection = db.getCollection("Users");
 
+            //TODO Nici, brauchen wir die folgenden 3 Zeilen??
             //check if the username exists in the database
             BasicDBObject query = new BasicDBObject();
             query.put("Username", user);
@@ -80,6 +92,7 @@ public class ControllerSignUp implements Initializable {
 
                 if (usernameDB.equals(user)) {
                     signuplbl.setText("Error: Username already exists");
+                    break;
                 } else if ((!usernameDB.equals(user)) && (!cursor.hasNext())) {
                     //Insert document for new user into database
                     Document newUser = new Document();

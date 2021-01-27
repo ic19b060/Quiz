@@ -7,7 +7,12 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseQuestionstoJson {
+/**
+ * We parse the Question Array we got from JSON into an ArrayList
+ *
+ */
+
+public class ParseQuestionsJson {
 
     //create Array of questions
     static List<Question> parseQuestionJson(JsonObject json) {

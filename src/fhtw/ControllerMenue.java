@@ -1,8 +1,6 @@
 package fhtw;
 
 import com.google.gson.*;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -116,6 +114,12 @@ public class ControllerMenue implements Initializable {
     @FXML
     private Button lgoutBtn;
 
+    /**
+     * If Modus Custom Game is chosen, a new Window for creating personalized Questions is opened.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void createQuestion(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("createCustomizedQuestions.fxml"));
@@ -133,6 +137,11 @@ public class ControllerMenue implements Initializable {
 
     }
 
+    /**
+     * By clicking logout, the Loginwindow will be opened again.
+     * @param actionEvent
+     * @throws IOException
+     */
     public void logout(ActionEvent actionEvent) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("loginWindow.fxml"));
@@ -217,32 +226,35 @@ public class ControllerMenue implements Initializable {
         stage.close();
     }
 
+    /**
+     * To start the normal Gamequiz with Questions from API.
+     * Method call for API_Link, parsing Questions and set the first question into the new fxml Interface File gameQuiz.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void startSPQuiz(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gameQuiz.fxml"));
         Parent root = loader.load();
 
-        //loader.setController(this);
-        this.controllerGameQuiz = loader.getController(); // controller aus dem Loader bekommen
+
+        this.controllerGameQuiz = loader.getController();
         this.controllerGameQuiz.setController1(this);
 
         String link = get_values().getApiPath();
         //create question set with created link for API
         JsonObject questionsjson = jsonComplete(link);
 
-        //Gameplay logic
 
         Stage two = new Stage();
         two.setTitle("Quiz");
         two.setScene(new Scene(root));
         two.show();
 
-        //Gameplaylogic
 
-        List<Question> questions = ParseQuestionstoJson.parseQuestionJson(questionsjson);
-
+        List<Question> questions = ParseQuestionsJson.parseQuestionJson(questionsjson);
         QuestionRepository.getInstance().setQuestions(questions);
-
         controllerGameQuiz.setNextQuestion();
 
 
@@ -252,7 +264,9 @@ public class ControllerMenue implements Initializable {
         stage.close();
     }
 
-
+/**
+ * Fills in the Combobox with data.
+ */
     @FXML
     public void loadDataDiffbutton(ComboBox<String> name) {
         ObservableList<String> difficultylist;
@@ -261,6 +275,9 @@ public class ControllerMenue implements Initializable {
         name.getItems().addAll(difficultylist);
     }
 
+    /**
+     * Fills in the Combobox with data.
+     */
     @FXML
     public void loadDataCatbutton(ComboBox<String> name) {
         ObservableList<String> categorylist;
@@ -273,16 +290,22 @@ public class ControllerMenue implements Initializable {
         name.getItems().addAll(categorylist);
     }
 
+    /**
+     * Method is "called" before opening the fxml.
+     * Initializing Combox_boxes in Normal Game & Custom Game.
+     * Has to connect to MongoDB for loading all customized Documents.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadDataDiffbutton(comboDiff);
         loadDataCatbutton(comboCat);
-        String username = Personaldata.getInstance().getUsername();
-        Integer highscore = Personaldata.getInstance().getHighscore();
+        String username = PersonalData.getInstance().getUsername();
+        Integer highscore = PersonalData.getInstance().getHighscore();
         nameFieldProf.setText(username);
         highscoreFieldProf.setText(String.valueOf(highscore));
 
-        //TODO - Daten von DB holen für Dropdownmenü in customgame.
         try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection<Document> user_collection = db.getCollection("CustomGame");
@@ -303,7 +326,11 @@ public class ControllerMenue implements Initializable {
         }
     }
 
-
+    /**
+     * Shuffles the answers for the GameQuiz.
+     * @param question
+     * @return
+     */
     public static List<String> shuffleAnswers(Question question) {
 
         List<String> rand_answers = new ArrayList<>(question.getIncorrectAnswers());
@@ -313,12 +340,11 @@ public class ControllerMenue implements Initializable {
         return rand_answers;
     }
 
-
+    /**
+     * reads the values from ComboBoxes and Spinner to create the API Link.
+     * @return
+     */
     public QuestionProvider get_values() {
-
-        //int value = nmb_dropdwn.getValue();
-        //System.out.println(value);
-        //System.out.println(nmb_dropdwn.getValue());
 
         return new QuestionProvider(spinnerQuestionNumber.getValue(), comboDiff.getSelectionModel().getSelectedItem(), comboCat.getSelectionModel().getSelectedItem(), "multiple");
     }

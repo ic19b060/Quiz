@@ -35,7 +35,7 @@
                   <ProgressBar layoutX="85.0" layoutY="330.0" prefHeight="18.0" prefWidth="467.0" progress="0.0" />
                   <TextArea fx:id="chatFenster" layoutX="69.0" layoutY="377.0" prefHeight="200.0" prefWidth="200.0" />
                   <TextField fx:id="chatTextfenster" layoutX="69.0" layoutY="586.0" prefHeight="22.0" prefWidth="200.0" />
-                  <Button fx:id="sendButtonChat" layoutX="282.0" layoutY="586.0" mnemonicParsing="false" text="Send" />
+                  <Button fx:id="sendButtonChat" layoutX="282.0" layoutY="586.0" mnemonicParsing="false" onAction="#sendButton" text="Send" />
                   <Label fx:id="wrongAnswerLBL" layoutX="100.0" layoutY="130.0" prefHeight="27.0" prefWidth="407.0" />
                   <Label fx:id="rightAnswerlbl" layoutX="97.0" layoutY="158.0" prefHeight="26.0" prefWidth="396.0" />
                   <Button fx:id="nextQuestion" layoutX="507.0" layoutY="377.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="45.0" prefWidth="106.0" text="next Question" />

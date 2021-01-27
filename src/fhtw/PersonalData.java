@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Personaldata {
+/**
+ * Class for Users personal data
+ *
+ */
+public class PersonalData {
 
     String username;
     Integer Highscore;
@@ -14,9 +18,9 @@ public class Personaldata {
     //Highscoregesamt ??
 
 
-    private static final Personaldata instance = new Personaldata();
+    private static final PersonalData instance = new PersonalData();
 
-    public static Personaldata getInstance() {
+    public static PersonalData getInstance() {
         return instance;
     }
 
@@ -36,6 +40,12 @@ public class Personaldata {
         Highscore = highscore;
     }
 
+
+    /**
+     * Write Highscores from User in txt.File
+     *
+     * @throws IOException
+     */
     public void writerdatainFile() throws IOException {
         File newFile = new File("Highscores.txt");
         FileWriter out = new FileWriter(newFile.getAbsoluteFile(), true);

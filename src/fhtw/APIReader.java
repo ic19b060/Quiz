@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/** //TODO
+ * Nici bitte du erklären was da passiert :-D
+ *
+ */
 public class APIReader {
     static JsonObject jsonComplete(String link) {
 

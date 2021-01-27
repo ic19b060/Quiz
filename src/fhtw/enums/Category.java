@@ -3,7 +3,12 @@ package fhtw.enums;
 import com.google.gson.annotations.SerializedName;
 
 
-
+/**
+ * ENUM for the Categories in ComboBox.
+ * We need an Integer for the API-Link.
+ * Method get Value returns Indexvalue.
+ *
+ */
     public enum Category {
 
         @SerializedName("General Knowledge")

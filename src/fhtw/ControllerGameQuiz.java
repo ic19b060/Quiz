@@ -11,18 +11,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
+/**
+ * Controller for the Game_Quiz
+ */
 public class ControllerGameQuiz implements Initializable {
 
+    OutputStream out;
+    Socket client;
     Integer highscore = 0;
     private Question currentquestion;
 
@@ -79,6 +86,14 @@ public class ControllerGameQuiz implements Initializable {
     @FXML
     private ImageView imageView;
 
+
+    /**
+     * If Button next Question is clicked - all Buttons are resetted and enabled again.
+     * Method call to set the next Question
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void nextQuestion(ActionEvent event) throws IOException {
         wrongAnswerLBL.setText("");
@@ -94,6 +109,11 @@ public class ControllerGameQuiz implements Initializable {
         JokerCounter = 0;
     }
 
+    /**
+     * If Joker is clicked, 2 answers are deleted and the Joker Button will be disabled.
+     *
+     * @param event
+     */
     @FXML
     void JokerClicked(ActionEvent event) {
         if (JokerCounter == 0) {
@@ -116,7 +136,10 @@ public class ControllerGameQuiz implements Initializable {
     }
 
 
-
+    /**
+     * Checks if the Answer is correct and sets the Label.
+     * @param answer
+     */
     private void answer(String answer) {
         if (currentquestion.getCorrectAnswer().equals(answer)) {
             rightAnswerlbl.setText("Correct!");
@@ -126,9 +149,14 @@ public class ControllerGameQuiz implements Initializable {
             wrongAnswerLBL.setText("That was the wrong answer :( - The right answer was:");
             rightAnswerlbl.setText(answerLabel);
         }
-        // setNextQuestion();
     }
 
+    /**
+     * Gets new Question from the Repository, parse it into Question and shuffle the answers.
+     * If there is no question left, the Game is over and Highscore is printed into Tab Profile and in our txt File.
+     *
+     * @throws IOException
+     */
     public void setNextQuestion() throws IOException {
         List<Question> questions = QuestionRepository.getInstance().getQuestions();
         if (questions.isEmpty()) {
@@ -137,10 +165,10 @@ public class ControllerGameQuiz implements Initializable {
             buttonJoker.setDisable(true);
             imageView.setVisible(true);
 
-            Personaldata.getInstance().setHighscore(highscore);
-            Personaldata.getInstance().writerdatainFile();
+            PersonalData.getInstance().setHighscore(highscore);
+            PersonalData.getInstance().writerdatainFile();
 
-            //Highscores speichern!
+            //TODO Highscores speichern in db?
         } else {
             currentquestion = questions.get(0);
             questions.remove(0);
@@ -177,6 +205,13 @@ public class ControllerGameQuiz implements Initializable {
         disableButtons(buttonA,buttonB,buttonC);
     }
 
+    /**
+     * By clicking at Quit, the Menue loads and the window will be closed.
+     *
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void quitGameQuiz(ActionEvent event) throws IOException {
 
@@ -195,7 +230,12 @@ public class ControllerGameQuiz implements Initializable {
     public ControllerGameQuiz() {
     }
 
-
+    /**
+     * Sets all the data into the Buttons.
+     *
+     * @param answers
+     * @param question
+     */
     public void setData(List<String> answers, String question) {
 
         textFragen.setText(question);
@@ -211,13 +251,57 @@ public class ControllerGameQuiz implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        connecttoserver();
+
     }
 
 
+    public void connecttoserver() {
+
+        try {
+            client = new Socket("localhost", 1111);
+            System.out.println("Client connected to " + client.getInetAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+        public void log(String s) {
+        chatFenster.appendText(s + "\n");
+    }
+    /**
+     * Disables all the other unclicked Buttons.
+     *
+     * @param one Button which was not clicked
+     * @param two Button which was not clicked
+     * @param three Button which was not clicked
+     */
     public void disableButtons(Button one, Button two, Button three){
         one.setDisable(true);
         two.setDisable(true);
         three.setDisable(true);
+
+    }
+
+
+    @FXML
+    void sendButton(ActionEvent event) throws IOException {
+
+        out = client.getOutputStream();
+        String message = chatTextfenster.getText();
+       byte[] bmessage = message.getBytes();
+        out.write(bmessage);
+        log(message);
+        chatTextfenster.setText(null);
+
+       // InputStream in = client.getInputStream();
+      //  byte[] received = new byte[100]; //array mit 100 Stellen
+      //  int bytes = in.read(received);
+      //  String r = new String(String.valueOf(bytes));
+        // log("Message from server received: " + r);
+
 
     }
 
