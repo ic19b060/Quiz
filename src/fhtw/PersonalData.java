@@ -13,8 +13,8 @@ public class PersonalData {
 
     String username;
     Integer Highscore;
-    Integer Jokeranzahl;
-    Integer TempScore;
+    Integer joker;
+    Integer tempScore;
     //Highscoregesamt ??
 
 
@@ -40,6 +40,21 @@ public class PersonalData {
         Highscore = highscore;
     }
 
+    public Integer getJoker() {
+        return joker;
+    }
+
+    public void setJoker(Integer joker) {
+        this.joker = joker;
+    }
+
+    public Integer getTempScore() {
+        return tempScore;
+    }
+
+    public void setTempScore(Integer tempScore) {
+        this.tempScore = tempScore;
+    }
 
     /**
      * Write Highscores from User in txt.File

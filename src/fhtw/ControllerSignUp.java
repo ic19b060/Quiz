@@ -76,12 +76,6 @@ public class ControllerSignUp implements Initializable {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection<Document> user_collection = db.getCollection("Users");
 
-            //TODO Nici, brauchen wir die folgenden 3 Zeilen??
-            //check if the username exists in the database
-            BasicDBObject query = new BasicDBObject();
-            query.put("Username", user);
-            FindIterable<Document> curUser = user_collection.find(query);
-
             //check if username is in database
             MongoCursor<Document> cursor = user_collection.find().iterator();
             String usernameDB = "";
@@ -98,6 +92,9 @@ public class ControllerSignUp implements Initializable {
                     Document newUser = new Document();
                     newUser.append("Username", user);
                     newUser.append("Password", pwd);
+                    newUser.append("Highscore", 0);
+                    newUser.append("TempScore", 0);
+                    newUser.append("Joker", 0);
                     user_collection.insertOne(newUser);
                     signuplbl.setText("Sign-Up successful! \n Welcome " + user + "!");
                     okSignupBtn.setDisable(true);

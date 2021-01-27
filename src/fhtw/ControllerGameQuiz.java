@@ -1,6 +1,11 @@
 package fhtw;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +18,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.bson.Document;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,7 +36,7 @@ public class ControllerGameQuiz implements Initializable {
 
     OutputStream out;
     Socket client;
-    Integer highscore = 0;
+    Integer tempscore = 0;
     private Question currentquestion;
 
     @FXML
@@ -143,7 +149,7 @@ public class ControllerGameQuiz implements Initializable {
     private void answer(String answer) {
         if (currentquestion.getCorrectAnswer().equals(answer)) {
             rightAnswerlbl.setText("Correct!");
-            highscore += 20;
+            tempscore += 20;
         } else {
             String answerLabel = currentquestion.getCorrectAnswer();
             wrongAnswerLBL.setText("That was the wrong answer :( - The right answer was:");
@@ -165,7 +171,28 @@ public class ControllerGameQuiz implements Initializable {
             buttonJoker.setDisable(true);
             imageView.setVisible(true);
 
-            PersonalData.getInstance().setHighscore(highscore);
+            PersonalData.getInstance().setTempScore(tempscore);
+
+            if(tempscore >= PersonalData.getInstance().getHighscore() || PersonalData.getInstance().getHighscore() == null) {
+                PersonalData.getInstance().setHighscore(tempscore);
+
+                try (MongoClient client = MongoDB.connectToDb()) {
+                    MongoDatabase db = MongoDB.getDB(client);
+                    MongoCollection userCollection = db.getCollection("Users");
+
+                    //Updating a document
+                    MongoCursor<Document> cursor = userCollection.find().iterator();
+                    String usernameDB = "";
+                    while (cursor.hasNext()) {
+                        Document userinfo = cursor.next();
+                        usernameDB = userinfo.getString("Username");
+
+                        if (usernameDB.equals(PersonalData.getInstance().getUsername())) {
+                            userCollection.updateOne(Filters.eq("Username", PersonalData.getInstance().getUsername()), Updates.set("Highscore", PersonalData.getInstance().getHighscore()));
+                        }
+                    }
+                }
+            }
             PersonalData.getInstance().writerdatainFile();
 
             //TODO Highscores speichern in db?

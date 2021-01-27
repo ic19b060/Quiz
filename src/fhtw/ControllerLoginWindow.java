@@ -101,11 +101,16 @@ public class ControllerLoginWindow implements Initializable {
             MongoCursor<Document> cursor = user_collection.find().iterator();
             String usernameDB = "";
             String passwordDB = "";
+            Integer highscoreDB = 0;
+            Integer jokerDB = 0;
 
             while (cursor.hasNext()) {
                 Document userinfo = cursor.next();
                 usernameDB = userinfo.getString("Username");
                 passwordDB = userinfo.getString("Password");
+                highscoreDB = userinfo.getInteger("Highscore");
+                jokerDB = userinfo.getInteger("Joker");
+
                 if (usernameDB.equals(user)) {
                     break;
                 }
@@ -119,6 +124,8 @@ public class ControllerLoginWindow implements Initializable {
                 } else {
 
                     PersonalData.getInstance().setUsername(user);
+                    PersonalData.getInstance().setHighscore(highscoreDB);
+                    PersonalData.getInstance().setJoker(jokerDB);
 
                     Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 
