@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.bson.Document;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -29,8 +30,9 @@ public class Main extends Application {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
+/*
         try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection collections = db.getCollection("CustomGame");
@@ -60,6 +62,8 @@ public class Main extends Application {
             //collections.find("Name", name);
 
         }
+        */
+
 
       //  MongoDB.connect_to_db();
         //create link for question set based on user choice

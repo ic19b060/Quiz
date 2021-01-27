@@ -15,6 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.bson.Document;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +26,8 @@ import java.util.ResourceBundle;
 
 public class ControllerLoginWindow implements Initializable {
 
+
+    Personaldata personaldata = new Personaldata();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -102,7 +107,9 @@ public class ControllerLoginWindow implements Initializable {
                 if (!passwordDB.equals(pwd)) {
                     lblLoginstatus.setText("Wrong password! Please try again or contact the developer team");
                 } else {
-                    //all checks passed! Ready for login
+
+                    Personaldata.getInstance().setUsername(user);
+
                     Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 
                     Stage two = new Stage();

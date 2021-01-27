@@ -277,6 +277,10 @@ public class ControllerMenue implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadDataDiffbutton(comboDiff);
         loadDataCatbutton(comboCat);
+        String username = Personaldata.getInstance().getUsername();
+        Integer highscore = Personaldata.getInstance().getHighscore();
+        nameFieldProf.setText(username);
+        highscoreFieldProf.setText(String.valueOf(highscore));
 
         //TODO - Daten von DB holen für Dropdownmenü in customgame.
         try (MongoClient client = MongoDB.connectToDb()) {

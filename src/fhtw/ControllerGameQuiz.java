@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 public class ControllerGameQuiz implements Initializable {
 
-
+    Integer highscore = 0;
     private Question currentquestion;
 
     @FXML
@@ -75,14 +75,21 @@ public class ControllerGameQuiz implements Initializable {
     @FXML
     private Button nextQuestion;
 
+
     @FXML
     private ImageView imageView;
 
-
     @FXML
-    void nextQuestion(ActionEvent event) {
+    void nextQuestion(ActionEvent event) throws IOException {
         wrongAnswerLBL.setText("");
         rightAnswerlbl.setText("");
+
+        buttonA.setDisable(false);
+        buttonB.setDisable(false);
+        buttonC.setDisable(false);
+        buttonD.setDisable(false);
+
+        buttonJoker.setDisable(false);
         setNextQuestion();
         JokerCounter = 0;
     }
@@ -104,19 +111,16 @@ public class ControllerGameQuiz implements Initializable {
                 buttonA.setText("");
             }
             JokerCounter++;
+            buttonJoker.setDisable(true);
         }
     }
 
-    @FXML
-    void buttonAClick(ActionEvent event) {
-        wrongAnswerLBL.setText("");
-        this.answer(buttonA.getText());
-    }
+
 
     private void answer(String answer) {
         if (currentquestion.getCorrectAnswer().equals(answer)) {
             rightAnswerlbl.setText("Correct!");
-            //Highscores speichern und erhöhen
+            highscore += 20;
         } else {
             String answerLabel = currentquestion.getCorrectAnswer();
             wrongAnswerLBL.setText("That was the wrong answer :( - The right answer was:");
@@ -125,13 +129,17 @@ public class ControllerGameQuiz implements Initializable {
         // setNextQuestion();
     }
 
-    public void setNextQuestion() {
+    public void setNextQuestion() throws IOException {
         List<Question> questions = QuestionRepository.getInstance().getQuestions();
         if (questions.isEmpty()) {
             buttonQuizgamequiz.setStyle("-fx-background-color:orangered");
             nextQuestion.setDisable(true);
             buttonJoker.setDisable(true);
             imageView.setVisible(true);
+
+            Personaldata.getInstance().setHighscore(highscore);
+            Personaldata.getInstance().writerdatainFile();
+
             //Highscores speichern!
         } else {
             currentquestion = questions.get(0);
@@ -142,21 +150,31 @@ public class ControllerGameQuiz implements Initializable {
     }
 
     @FXML
+    void buttonAClick(ActionEvent event) {
+        wrongAnswerLBL.setText("");
+        this.answer(buttonA.getText());
+        disableButtons(buttonD,buttonB,buttonC);
+    }
+
+    @FXML
     void buttonBClick(ActionEvent event) {
         wrongAnswerLBL.setText("");
         this.answer(buttonB.getText());
+        disableButtons(buttonA,buttonD,buttonC);
     }
 
     @FXML
     void buttonCClick(ActionEvent event) {
         wrongAnswerLBL.setText("");
         this.answer(buttonC.getText());
+        disableButtons(buttonA,buttonB,buttonD);
     }
 
     @FXML
     void buttonDClick(ActionEvent event) {
         wrongAnswerLBL.setText("");
         this.answer(buttonD.getText());
+        disableButtons(buttonA,buttonB,buttonC);
     }
 
     @FXML
@@ -193,6 +211,14 @@ public class ControllerGameQuiz implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+
+    public void disableButtons(Button one, Button two, Button three){
+        one.setDisable(true);
+        two.setDisable(true);
+        three.setDisable(true);
+
     }
 
 }

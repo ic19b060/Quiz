@@ -60,7 +60,7 @@
                   <TextArea fx:id="nameFieldProf" layoutX="153.0" layoutY="111.0" prefHeight="37.0" prefWidth="258.0" />
                   <TextArea fx:id="highscoreFieldProf" layoutX="153.0" layoutY="203.0" prefHeight="37.0" prefWidth="258.0" />
                   <Label layoutX="153.0" layoutY="74.0" text="Name" />
-                  <Label layoutX="153.0" layoutY="175.0" prefHeight="18.0" prefWidth="76.0" text="Highscore" />
+                  <Label layoutX="153.0" layoutY="175.0" prefHeight="18.0" prefWidth="76.0" text="last Highscore" />
                </children>
             </AnchorPane>
         </content>
