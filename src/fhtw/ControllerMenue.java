@@ -19,10 +19,8 @@ import org.bson.Document;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.IntStream;
 
 import static fhtw.APIReader.jsonComplete;
 
@@ -159,25 +157,12 @@ public class ControllerMenue implements Initializable {
     public void gotoProfile(ActionEvent actionEvent) {
         startTab.getTabPane().getSelectionModel().select(profilTab);
 
-        String name = PersonalData.getInstance().getUsername();
-        Integer highscore = PersonalData.getInstance().getHighscore();
-        Integer joker = PersonalData.getInstance().getJoker();
-
-        //TODO Textfield
-        //("Hallo " + user + "! Du hast aktuell * " + joker + " Joker!")
-
     }
 
     public void gotoHighscores(ActionEvent actionEvent) {
         startTab.getTabPane().getSelectionModel().select(highscoreTab);
 
-        String name = PersonalData.getInstance().getUsername();
-        Integer highscore = PersonalData.getInstance().getHighscore();
-        if (highscore == 0){
-            txtAreaHighscore.setText("Hallo " + name + ", dein persönlicher Highscore beträgt " + highscore + " Punkte, auweh! :(");
-        } else {
-            txtAreaHighscore.setText("Hallo " + name + ", dein persönlicher Highscore beträgt " + highscore + " Punkte, WOW nice! :)");
-        }
+
     }
 
     /**
@@ -196,7 +181,6 @@ public class ControllerMenue implements Initializable {
         String name = QuestionCollectionCombo.getSelectionModel().getSelectedItem();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gameQuiz.fxml"));
         Parent root = loader.load();
-
 
         this.controllerGameQuiz = loader.getController();
         this.controllerGameQuiz.setController1(this);
@@ -333,24 +317,58 @@ public class ControllerMenue implements Initializable {
         loadDataDiffbutton(comboDiff);
         loadDataCatbutton(comboCat);
         String username = PersonalData.getInstance().getUsername();
-        Integer highscore = PersonalData.getInstance().getHighscore();
+        Integer curHighscore = PersonalData.getInstance().getTempScore();
+        Integer joker = PersonalData.getInstance().getJoker();
+
+        //TODO Textfield für joker + gesamthighscore
+        //("Hallo " + user + "! Du hast aktuell * " + joker + " Joker!")
+
         nameFieldProf.setText(username);
-        highscoreFieldProf.setText(String.valueOf(highscore));
+        highscoreFieldProf.setText(String.valueOf(curHighscore));
+
+        String name = PersonalData.getInstance().getUsername();
+        Integer highscore = PersonalData.getInstance().getHighscore();
+    /*    if (highscore == 0){
+            textfield.setText("Hallo " + name + ", dein persönlicher Highscore beträgt " + highscore + " Punkte, auweh! :(");
+        } else {
+            textfield.setText("Hallo " + name + ", dein persönlicher Highscore beträgt " + highscore + " Punkte, WOW nice! :)");
+        }*/
 
         try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection<Document> user_collection = db.getCollection("CustomGame");
+            MongoCollection<Document> highscore_collection = db.getCollection("Users");
 
-            MongoCursor<Document> cursor = user_collection.find().iterator();
+            MongoCursor<Document> gameCursor = user_collection.find().iterator();
+            MongoCursor<Document> highscoreCursor = highscore_collection.find().iterator();
 
             ArrayList<String> gameNames = new ArrayList<>();
+            List<Highscore> highscoreList = new ArrayList<>();
+            ArrayList<String> stringList = new ArrayList<>();
 
-            while (cursor.hasNext()) {
-                Document gameinfo = cursor.next();
+
+            while (gameCursor.hasNext()) {
+                Document gameinfo = gameCursor.next();
                 gameNames.add(gameinfo.getString("name"));
             }
 
-            QuestionCollectionCombo.getItems().addAll(gameNames);
+            while (highscoreCursor.hasNext()) {
+                Document user = highscoreCursor.next();
+                Highscore h = new Highscore();
+                h.setHighscoreFromDB(user.getInteger("Highscore"));
+                h.setUsernameHighscoreFromDB(user.getString("Username"));
+                //txtAreaHighscore.(h.getUsernameHighscoreFromDB());
+                //txtAreaHighscore.setItems(h.getHighscoreFromDB());
+            }
+
+            StringBuilder b = new StringBuilder();
+            highscoreList.forEach(b::append);
+
+            // Program to convert Object array to String array in Java
+
+//new textarea
+
+                    QuestionCollectionCombo.getItems().addAll(gameNames);
 
 
 

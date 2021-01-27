@@ -111,7 +111,6 @@ public class ControllerLoginWindow implements Initializable {
                 highscoreDB = userinfo.getInteger("Highscore");
                 jokerDB = userinfo.getInteger("Joker");
 
-
                 if (usernameDB.equals(user)) {
                     break;
                 }
@@ -125,7 +124,6 @@ public class ControllerLoginWindow implements Initializable {
                 } else {
 
                     PersonalData.getInstance().setUsername(user);
-                    PersonalData.getInstance().setTempScore(0);
                     PersonalData.getInstance().setHighscore(highscoreDB);
                     PersonalData.getInstance().setJoker(jokerDB);
 
