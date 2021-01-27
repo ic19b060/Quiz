@@ -1,6 +1,5 @@
 package fhtw;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +22,8 @@ import java.util.ResourceBundle;
 
 public class ControllerLoginWindow implements Initializable {
 
+
+    PersonalData personaldata = new PersonalData();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -57,6 +58,13 @@ public class ControllerLoginWindow implements Initializable {
     @FXML
     private Label lblLoginstatus;
 
+
+    /**
+     * Loads the ned window for signing up a new User.
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     @FXML
     public void opensignupBtn(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("signUp.fxml"));
@@ -70,7 +78,14 @@ public class ControllerLoginWindow implements Initializable {
         stage.close();
     }
 
-
+    /**
+     *
+     * By clicking on Login, we get the userinput, Connect to MongoDB and compare User-input with the Database.
+     * The Labels will be set after checking with the Database if User is valid or not.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void buttononActionLogin(ActionEvent event) throws IOException {
 
@@ -102,7 +117,9 @@ public class ControllerLoginWindow implements Initializable {
                 if (!passwordDB.equals(pwd)) {
                     lblLoginstatus.setText("Wrong password! Please try again or contact the developer team");
                 } else {
-                    //all checks passed! Ready for login
+
+                    PersonalData.getInstance().setUsername(user);
+
                     Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 
                     Stage two = new Stage();

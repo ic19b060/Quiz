@@ -3,6 +3,10 @@ package fhtw;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ *  creates a QuestionRepository with all questions we got from the API.
+ */
 public class QuestionRepository {
 
     //sicherstellen dass es nur genau 1 gibt

@@ -63,6 +63,10 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
         this.cur = new CustomQuestionList();
     }
 
+    /**
+     * We need the Name of the new Document to create this before creating the Questions in this Document.
+     * @param event
+     */
     @FXML
     void commitNameButton(ActionEvent event) {
         questionfield.setDisable(false);
@@ -80,6 +84,12 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
 
     }
 
+    /**
+     * Disabling all Buttons in the beginning until commit Button is clicked.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -94,9 +104,13 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
 
     }
 
+    /**
+     * Adds the question created by the user to the QuestionsList.
+     *
+     * @param event
+     */
     @FXML
     void addQuestion(ActionEvent event) {
-
 
         String name = CollectionTxtName.getText();
 
@@ -105,16 +119,17 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
         //get the user input
         Question question = new Question();
 
-        //TODO read in document name in name-creation-interface
-
-        //set the name of our current custom question set
-
-
 
         //add user input to our Question object
         question.setQuestion(questionfield.getText());
         question.setCorrectAnswer(correctAnswer.getText());
         question.setIncorrectAnswers(Arrays.asList(incorrectAnswer1.getText(), incorrectAnswer2.getText(), incorrectAnswer3.getText()));
+
+        questionfield.setText("");
+        correctAnswer.setText("");
+        incorrectAnswer1.setText("");
+        incorrectAnswer2.setText("");
+        incorrectAnswer3.setText("");
 
         //add the question to our current custom question set
         cur.getQuestions().add(question);
@@ -127,11 +142,15 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
 
         //TODO NICI
         //delete fragenpackage!
-        //return back to menue
         loadMenu();
     }
 
-    //TODO LISL: können wir createPackage löschen?
+    /**
+     * Creates package of new Questions (Documents)
+     * Connects with MongoDB
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void createPackage(ActionEvent event) throws IOException {
 
@@ -148,11 +167,12 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
 
         loadMenu();
 
-    //create Package
-    //go back to menue
-    //loadMenu();
     }
 
+    /**
+     * After creating the package, loadMenu returns to Main Menue.
+     * @throws IOException
+     */
     public void loadMenu() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 

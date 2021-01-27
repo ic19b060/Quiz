@@ -1,29 +1,24 @@
-/*package fhtw;
+package fhtw;
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import java.io.*;
 import java.net.*;
 
-public class Client {
+public class Client extends Application {
 
     public static void main(String[] args) {
 
-        try {
-            Socket client = new Socket("localhost", 1111);
-            System.out.println("Client connected to " + client.getInetAddress());
 
-            byte[] b = new byte[100]; //array mit 100 Stellen
-            OutputStream out = client.getOutputStream();
-            System.out.println("1");
-            String message = "Hello Client";
-            byte[] bmessage = message.getBytes();
-            out.write(bmessage);
-            System.out.println("2");
+    }
 
-        } catch (Exception e){
-        }
+    @Override
+    public void start(Stage stage) throws Exception {
+
     }
 }
 
-*/
+
 
 
 /*

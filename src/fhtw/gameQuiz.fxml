@@ -31,18 +31,20 @@
                         <Font size="18.0" />
                      </font>
                   </TextArea>
-                  <Button fx:id="buttonQuizgamequiz" layoutX="545.0" layoutY="598.0" mnemonicParsing="false" onAction="#quitGameQuiz" prefHeight="47.0" prefWidth="88.0" text="Quit Game" />
                   <Button fx:id="buttonJoker" layoutX="352.0" layoutY="377.0" mnemonicParsing="false" onAction="#JokerClicked" prefHeight="45.0" prefWidth="106.0" text="Joker" />
                   <ProgressBar layoutX="85.0" layoutY="330.0" prefHeight="18.0" prefWidth="467.0" progress="0.0" />
                   <TextArea fx:id="chatFenster" layoutX="69.0" layoutY="377.0" prefHeight="200.0" prefWidth="200.0" />
                   <TextField fx:id="chatTextfenster" layoutX="69.0" layoutY="586.0" prefHeight="22.0" prefWidth="200.0" />
-                  <Button fx:id="sendButtonChat" layoutX="282.0" layoutY="586.0" mnemonicParsing="false" text="Send" />
+                  <Button fx:id="sendButtonChat" layoutX="282.0" layoutY="586.0" mnemonicParsing="false" onAction="#sendButton" text="Send" />
                   <Label fx:id="wrongAnswerLBL" layoutX="100.0" layoutY="130.0" prefHeight="27.0" prefWidth="407.0" />
                   <Label fx:id="rightAnswerlbl" layoutX="97.0" layoutY="158.0" prefHeight="26.0" prefWidth="396.0" />
                   <Button fx:id="nextQuestion" layoutX="507.0" layoutY="377.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="45.0" prefWidth="106.0" text="next Question" />
-                  <ImageView fx:id="imageView" visible="false" fitHeight="86.0" fitWidth="140.0" layoutX="490.0" layoutY="456.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@end.jpg" backgroundLoading="true"/>
+                  <ImageView fx:id="imageView" fitHeight="184.0" fitWidth="261.0" layoutX="330.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@byebye.jpg" />
+                     </image>
                   </ImageView>
+                  <Button fx:id="buttonQuizgamequiz" layoutX="545.0" layoutY="598.0" mnemonicParsing="false" onAction="#quitGameQuiz" prefHeight="47.0" prefWidth="88.0" text="Quit Game" />
                </children>
             </Pane>
          </content>

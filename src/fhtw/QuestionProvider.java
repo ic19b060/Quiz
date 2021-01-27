@@ -3,6 +3,11 @@ package fhtw;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ *
+ * creates the path to API with all set parameters (we got from gui)
+ *
+ */
 public class QuestionProvider {
 
     @SerializedName("category")
@@ -12,6 +17,14 @@ public class QuestionProvider {
     String difficulty;
     String type;
 
+    /**
+     * @brief sets values from gui
+     *
+     * @param amount of questions
+     * @param difficulty of questions
+     * @param category general category
+     * @param type is always multiple
+     */
     public QuestionProvider(Integer amount, String difficulty, String category, String type) {
 
         this.amount = amount;
@@ -21,6 +34,11 @@ public class QuestionProvider {
         Category = Category.valueOf(category);
     }
 
+    /**
+     * Creates the path for API.
+     *
+     * @return API_Path
+     */
     public String getApiPath() {
 
         return "https://opentdb.com/api.php"

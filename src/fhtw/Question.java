@@ -4,7 +4,12 @@ import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
-
+/**
+ * We parse the Questions from API into Class Question (List<Question>)
+ *
+ * We get all answers & incorrect answers from this class to compare with the users input.
+ *
+ */
 public class Question {
 
     //This is our question that we get from the API
