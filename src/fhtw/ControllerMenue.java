@@ -1,7 +1,6 @@
 package fhtw;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.client.MongoClient;
@@ -163,12 +162,18 @@ public class ControllerMenue implements Initializable {
         //get document name from dropdown menu
         String name = QuestionCollectionCombo.getSelectionModel().getSelectedItem();
 
+        Parent root = FXMLLoader.load(getClass().getResource("gameQuiz.fxml"));
+
+        Stage two = new Stage();
+        two.setTitle("Quiz");
+        two.setScene(new Scene(root));
+        two.show();
+
         try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
             MongoCollection<Document> game_collection = db.getCollection("CustomGame");
 
             MongoCursor<Document> cursor = game_collection.find().iterator();
-
 
             String dbname = "";
             Document game = new Document();
@@ -185,23 +190,28 @@ public class ControllerMenue implements Initializable {
             Gson g = new Gson();
 
             System.out.println(game.toString());
-            g.fromJson(game.toJson(), ArrayList.class).forEach(q -> System.out.println(q.toString()));
+            System.out.println(game.toJson());
 
-            //        List < Question > questions = ParseQuestionstoJson.parseQuestionJson(questionsjson);
+            //g.fromJson(game.toJson(), ArrayList.class).forEach(q -> System.out.println(q.toString()));
+
+            //List < Question > questions = ParseQuestionstoJson.parseQuestionJson(game.toJson());
+
+
+
+
+            //Question q = g.fromJson(String.valueOf(game), Question.class);
+          //  JsonParser parser = new JsonParser();
+           // JsonObject json = (JsonObject) parser.parse(game.toJson());
+
+            //List<Question> questions = ParseQuestionstoJson.parseQuestionJson(json);
+
 
             //QuestionRepository.getInstance().setQuestions(questions);
-
             controllerGameQuiz.setNextQuestion();
-
 
         }
 
-        Parent root = FXMLLoader.load(getClass().getResource("gameQuiz.fxml"));
 
-        Stage two = new Stage();
-        two.setTitle("Quiz");
-        two.setScene(new Scene(root));
-        two.show();
 
         Stage stage = (Stage) startCustomGameBtn.getScene().getWindow();
         stage.close();
