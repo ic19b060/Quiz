@@ -258,12 +258,17 @@ public class ControllerMenue implements Initializable {
      */
     @FXML
     void startSPQuiz(ActionEvent event) throws IOException {
+
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gameQuiz.fxml"));
         Parent root = loader.load();
 
 
         this.controllerGameQuiz = loader.getController();
         this.controllerGameQuiz.setController1(this);
+
+
+
 
         String link = get_values().getApiPath();
         //create question set with created link for API

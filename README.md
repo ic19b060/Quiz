@@ -1,5 +1,5 @@
 
-# Multiplayer - Quizspiel   
+# Quizspiel   
 
 `https://opentdb.com/api_config.php`
 
@@ -7,56 +7,43 @@
 
 -Lisa Haas (ic19b060)
 
-Nutzung einer offenen API, die Quizfragen + Antwortalternativen enthält
-
-- Schwierigkeit (Einfach, Schwer, Mittel)
-- Spielmodi (z.B. mit Zeitdruck, Singleplayeroption, Random Kategorie)
-- Bestenliste
-- Eigene Fragen erstellen
-- Chatfunktion + fertige Phrasenvorschläge
-- Profil (Name, Highscore)
-- Joker z.B. 50:50 Joker
-- Random Goodie-Geschenke z.B. Joker
+##Spielablauf
+#####Start/Login
+Quiz wird gestartet nachdem sich ein Client zum Server verbunden hat.
 
 
+Im Login-Fenster muss man sich zuerst neu registieren damit ein Profil angelegt werden kann.
+Dafür gibt es ein eigenes RegistrierungsFenster
 
-## Must Have Features (Genügend - 4)
+#####Spielmodi
+Es gibt insgesamt 2 Spielmodi
+*******
+* Singleplayer
 
-- [ ] Funktionierendes Spiel
-- [ ] Highscores in files
-- [ ] Fragen Generator Thread (API)
-
-## Should Have Features (Befriedigend - 3)
-
-- [ ] einfacher Chat zw Spielern
-- [ ] Userprofile & Login
-
-## Nice to Have Features (Gut - 2)
-
-- [ ] Spielmodi
-- [ ] Joker
-
-## Overkill (Sehr Gut - 1)
-
-- [ ] Fragen erstellen
-- [ ] Schwierigkeiten
-- [ ] Goodies
+  * Die Quiz-Fragen-Collection wird erstellt nachdem Anzahl, Kategorie und Schwierigkeit ausgewählt werden.
+  * Bei klicken auf den Start Quiz Button lädt ein neues Fenster mit den Fragen.
+  * der Next Button lädt die neue Frage. (Erklärungen zum Joker siehe Abschnitt Joker)
 
 
 
+*******
+* Custom Game
+
+  * Die Fragen werden vom User selber erstellt.
+  * Bei Add Question wird die Frage zum Package hinzugefügt.
+  * Sobald der User fertig ist mit den Fragen muss der Button createGame geklickt werden.
+
+Danach kann im Tab Custom Game das soeben erstelle CustomGame ausgewählt werden & gespielt werden.
+Ablauf ist gleich wie beim Singleplayer-Gamemode
+*******
+######Joker
+Ein Joker wird erst nach einem abgeschlossenen Spiel random vergeben und im Userprofil gespeichert.
+Ein Joker kann nur einmal pro Frage angewendet werden.
 
 
-
-------------------------------------------
-
-#### Alternative:
-
-##### Textbasiertes Pokemon-Spiel
-
-- Multiplayer-Kämpfe
-- Pokemon sammeln in Pokedex
-- Pokemon-Tausch
-- Chatfunktion für Kampfmodus und Tauschmodus
-- Pokemon fangen
-- Items bekommen & in Kämpfen einsetzen
-- Singleplayermodus: Kämpfe gegen fixe Personen
+Im Tab Profil können eingelesen werden:
+ * Name
+ * Jokeranzahl
+ * Highscore
+ * last Highscore
+ 

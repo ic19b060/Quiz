@@ -47,25 +47,11 @@ public class Server extends Application {
                 new Thread(clientSock).start();
 
 
-                //}  //while (true) {
-                //            System.out.println("Server connected to " + client.getInetAddress());
-                //            byte[] b = new byte[100]; //array mit 100 Stellen
-                //            InputStream in = client.getInputStream();
-                //
-                //
-                //            //OutputStream out = client.getOutputStream();
-                //
-                //            //messages werden in bytes verschickt
-                //            int bytes = in.read(b); //Rückgabewert = gelesene Bytes (int)
-                //            System.out.println("received " + bytes);
-                //            String s = new String(b);
-                //            System.out.println("message: " + s);
-                launch(args);
             } catch (Exception e) {
                 server.close();
                 e.printStackTrace();
             }
-
+            launch(args);
         }
 
 
