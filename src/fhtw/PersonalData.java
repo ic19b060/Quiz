@@ -18,6 +18,7 @@ public class PersonalData {
     //Highscoregesamt ??
 
 
+
     private static final PersonalData instance = new PersonalData();
 
     public static PersonalData getInstance() {

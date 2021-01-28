@@ -7,10 +7,10 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ListView?>
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.ControllerMenue">
   <tabs>
     <Tab fx:id="startTab" text="Start">
@@ -58,10 +58,14 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea fx:id="nameFieldProf" layoutX="153.0" layoutY="111.0" prefHeight="37.0" prefWidth="258.0" />
-                  <TextArea fx:id="highscoreFieldProf" layoutX="153.0" layoutY="203.0" prefHeight="37.0" prefWidth="258.0" />
-                  <Label layoutX="153.0" layoutY="74.0" text="Name" />
-                  <Label layoutX="153.0" layoutY="175.0" prefHeight="18.0" prefWidth="76.0" text="last Highscore" />
+                  <TextArea fx:id="nameFieldProf" layoutX="153.0" layoutY="41.0" prefHeight="37.0" prefWidth="258.0" />
+                  <TextArea fx:id="highscoreFieldProf" layoutX="153.0" layoutY="116.0" prefHeight="37.0" prefWidth="258.0" />
+                  <Label layoutX="153.0" layoutY="14.0" text="Name" />
+                  <Label layoutX="153.0" layoutY="89.0" prefHeight="18.0" prefWidth="76.0" text="last Game Highscore" />
+                  <TextField fx:id="generalHighscoreProfile" layoutX="155.0" layoutY="185.0" prefHeight="39.0" prefWidth="255.0" />
+                  <TextField fx:id="JokerTextAreaProfil" layoutX="155.0" layoutY="266.0" prefHeight="32.0" prefWidth="250.0" />
+                  <Label layoutX="155.0" layoutY="161.0" prefHeight="18.0" prefWidth="70.0" text="Highscore" />
+                  <Label layoutX="155.0" layoutY="241.0" prefHeight="18.0" prefWidth="83.0" text="Joker" />
                </children>
             </AnchorPane>
         </content>

@@ -94,9 +94,17 @@ public class ControllerMenue implements Initializable {
     @FXML
     private TextArea nameFieldProf;
 
-
     @FXML
     private TextArea highscoreFieldProf;
+
+
+    @FXML
+    private TextField generalHighscoreProfile;
+
+    @FXML
+    private TextField JokerTextAreaProfil;
+
+
 
     //Highscore Tab
     @FXML
@@ -273,8 +281,6 @@ public class ControllerMenue implements Initializable {
         controllerGameQuiz.setNextQuestion();
 
 
-        //socket öffnen für den chat??
-
         Stage stage = (Stage) startBtnSp.getScene().getWindow();
         stage.close();
     }
@@ -322,6 +328,12 @@ public class ControllerMenue implements Initializable {
 
         //TODO Textfield für joker + gesamthighscore
         //("Hallo " + user + "! Du hast aktuell * " + joker + " Joker!")
+
+        //
+        //    generalHighscoreProfile; - Feld für gesamthighscore des users
+        //
+        //
+        //   JokerTextAreaProfil;
 
         nameFieldProf.setText(username);
         highscoreFieldProf.setText(String.valueOf(curHighscore));

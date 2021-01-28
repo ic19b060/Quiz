@@ -41,7 +41,7 @@
                   <Button fx:id="nextQuestion" layoutX="507.0" layoutY="377.0" mnemonicParsing="false" onAction="#nextQuestion" prefHeight="45.0" prefWidth="106.0" text="next Question" />
                   <ImageView fx:id="imageView" fitHeight="184.0" fitWidth="261.0" layoutX="330.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
-                        <Image url="@byebye.jpg" />
+                        <Image url="@byebye.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="buttonQuizgamequiz" layoutX="545.0" layoutY="598.0" mnemonicParsing="false" onAction="#quitGameQuiz" prefHeight="47.0" prefWidth="88.0" text="Quit Game" />
