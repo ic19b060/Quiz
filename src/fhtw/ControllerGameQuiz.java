@@ -1,8 +1,5 @@
 package fhtw;
 
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
@@ -92,6 +89,9 @@ public class ControllerGameQuiz implements Initializable {
     @FXML
     private ImageView imageView;
 
+    @FXML
+    private Label randomJokerlbl;
+
 
     /**
      * If Button next Question is clicked - all Buttons are resetted and enabled again.
@@ -122,24 +122,28 @@ public class ControllerGameQuiz implements Initializable {
      */
     @FXML
     void JokerClicked(ActionEvent event) {
-        if (JokerCounter == 0) {
-            if (currentquestion.getCorrectAnswer().equals((buttonA.getText()))) {
-                buttonB.setText("");
-                buttonC.setText("");
-            } else if (currentquestion.getCorrectAnswer().equals((buttonB.getText()))) {
-                buttonA.setText("");
-                buttonD.setText("");
-            } else if (currentquestion.getCorrectAnswer().equals((buttonC.getText()))) {
-                buttonD.setText("");
-                buttonA.setText("");
-            } else if (currentquestion.getCorrectAnswer().equals((buttonD.getText()))) {
-                buttonB.setText("");
-                buttonA.setText("");
+        if (PersonalData.getInstance().getJoker() > 0) {
+            if (JokerCounter == 0) {
+                if (currentquestion.getCorrectAnswer().equals((buttonA.getText()))) {
+                    buttonB.setText("");
+                    buttonC.setText("");
+                } else if (currentquestion.getCorrectAnswer().equals((buttonB.getText()))) {
+                    buttonA.setText("");
+                    buttonD.setText("");
+                } else if (currentquestion.getCorrectAnswer().equals((buttonC.getText()))) {
+                    buttonD.setText("");
+                    buttonA.setText("");
+                } else if (currentquestion.getCorrectAnswer().equals((buttonD.getText()))) {
+                    buttonB.setText("");
+                    buttonA.setText("");
+                }
+                JokerCounter++;
+                PersonalData.getInstance().setJoker(PersonalData.getInstance().getJoker() - 1);
+                buttonJoker.setDisable(true);
             }
-            JokerCounter++;
-            buttonJoker.setDisable(true);
         }
     }
+
 
 
     /**
@@ -173,8 +177,14 @@ public class ControllerGameQuiz implements Initializable {
 
             PersonalData.getInstance().setTempScore(tempscore);
 
-            if(tempscore >= PersonalData.getInstance().getHighscore() || PersonalData.getInstance().getHighscore() == null) {
-                PersonalData.getInstance().setHighscore(tempscore);
+            //generate random jokers
+            Integer max = 100;
+            Integer min = 0;
+            Double number = Math.random() * (max - min + 1) + min;
+            if (number > 0){
+                PersonalData.getInstance().setJoker(PersonalData.getInstance().getJoker()+1);
+                randomJokerlbl.setText("Congratulations, you've won a Joker!");
+            }
 
                 try (MongoClient client = MongoDB.connectToDb()) {
                     MongoDatabase db = MongoDB.getDB(client);
@@ -188,8 +198,15 @@ public class ControllerGameQuiz implements Initializable {
                         usernameDB = userinfo.getString("Username");
 
                         if (usernameDB.equals(PersonalData.getInstance().getUsername())) {
+                            if(tempscore >= PersonalData.getInstance().getHighscore() || PersonalData.getInstance().getHighscore() == null) {
+                                PersonalData.getInstance().setHighscore(tempscore);
                             userCollection.updateOne(Filters.eq("Username", PersonalData.getInstance().getUsername()), Updates.set("Highscore", PersonalData.getInstance().getHighscore()));
+                            if (!PersonalData.getInstance().getJoker().equals(userinfo.getInteger("Joker"))){
+                                userCollection.updateOne(Filters.eq("Username", PersonalData.getInstance().getUsername()), Updates.set("Joker", PersonalData.getInstance().getJoker()));
+
+                            }
                         }
+
                     }
                 }
             }

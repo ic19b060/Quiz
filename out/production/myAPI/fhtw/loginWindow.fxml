@@ -13,34 +13,34 @@
    <content>
       <Pane id="login_window" prefHeight="352.0" prefWidth="401.0" style="-fx-background-color: #C7D0D7;">
          <children>
-            <PasswordField id="passwort" fx:id="passwordField" layoutX="27.0" layoutY="202.0" promptText="enter password" />
-            <Button id="login" fx:id="lgnBtn" layoutX="269.0" layoutY="262.0" mnemonicParsing="false" onAction="#buttononActionLogin" prefHeight="36.0" prefWidth="96.0" style="-fx-background-color: #657889;" text="Login" textFill="#fffcfc">
+            <PasswordField id="passwort" fx:id="passwordField" layoutX="27.0" layoutY="222.0" promptText="enter password" />
+            <Button id="login" fx:id="lgnBtn" layoutX="27.0" layoutY="270.0" mnemonicParsing="false" onAction="#buttononActionLogin" prefHeight="36.0" prefWidth="96.0" style="-fx-background-color: #657889;" text="Login" textAlignment="CENTER" textFill="#fffcfc" wrapText="true">
                <font>
-                  <Font name="System Bold" size="19.0" />
+                  <Font name="Century Gothic Bold" size="21.0" />
                </font></Button>
-            <Button fx:id="signUpBtn" layoutX="21.0" layoutY="304.0" mnemonicParsing="false" onAction="#opensignupBtn" prefHeight="14.0" prefWidth="88.0" style="-fx-background-color: #657889;" text="Sign up" textFill="WHITE">
+            <Button fx:id="signUpBtn" layoutX="269.0" layoutY="174.0" mnemonicParsing="false" onAction="#opensignupBtn" prefHeight="14.0" prefWidth="88.0" style="-fx-background-color: #657889;" text="Sign up" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Button>
-            <Label fx:id="lblUsr" layoutX="30.0" layoutY="112.0" prefHeight="17.0" prefWidth="54.0" text="User" textFill="#657889">
+            <Label fx:id="lblUsr" layoutX="30.0" layoutY="138.0" prefHeight="17.0" prefWidth="54.0" text="User" textFill="#657889">
                <font>
                   <Font size="17.0" />
                </font></Label>
-            <Label fx:id="lblPwd" layoutX="30.0" layoutY="176.0" text="Password" textFill="#657889">
+            <Label fx:id="lblPwd" layoutX="30.0" layoutY="196.0" text="Password" textFill="#657889">
                <font>
                   <Font size="17.0" />
                </font></Label>
-            <Label id="welcome_board" fx:id="welcomeTxt" contentDisplay="CENTER" layoutX="20.0" layoutY="41.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="84.0" prefWidth="347.0" text="Welcome to the best Quiz in history, maybe ever" textAlignment="CENTER" textFill="#657889">
+            <Label id="welcome_board" fx:id="welcomeTxt" contentDisplay="CENTER" layoutX="27.0" layoutY="28.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="84.0" prefWidth="347.0" text="Welcome to the best Quiz in history, maybe ever" textAlignment="CENTER" textFill="#657889" wrapText="true">
                <font>
-                  <Font name="System Bold Italic" size="13.0" />
+                  <Font name="Century Gothic Bold" size="21.0" />
                </font>
             </Label>
-            <TextField fx:id="userField" layoutX="27.0" layoutY="138.0" promptText="enter user" />
-            <Label fx:id="lblUsr1" layoutX="21.0" layoutY="272.0" prefHeight="21.0" prefWidth="102.0" text="New player? " textFill="#657889">
+            <TextField fx:id="userField" layoutX="27.0" layoutY="164.0" promptText="enter user" />
+            <Label fx:id="lblUsr1" layoutX="269.0" layoutY="141.0" prefHeight="21.0" prefWidth="102.0" text="New player? " textFill="#657889">
                <font>
                   <Font size="15.0" />
                </font></Label>
-            <Label fx:id="lblLoginstatus" layoutX="27.0" layoutY="234.0" prefHeight="37.0" prefWidth="192.0" textFill="#657889" />
+            <Label fx:id="lblLoginstatus" layoutX="141.0" layoutY="274.0" prefHeight="37.0" prefWidth="192.0" textFill="#657889" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
