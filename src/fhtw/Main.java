@@ -9,10 +9,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * Main ohne Server-Client Aufruf
- *
- */
 
 
 public class Main extends Application {

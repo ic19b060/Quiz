@@ -166,7 +166,7 @@ public class ControllerGameQuiz implements Initializable {
             Integer max = 100;
             Integer min = 0;
             Double number = Math.random() * (max - min + 1) + min;
-            if (number > 0){
+            if (number > 75){
                 PersonalData.getInstance().setJoker(PersonalData.getInstance().getJoker()+1);
                 randomJokerlbl.setText("Congratulations, you've won a Joker!");
             }
