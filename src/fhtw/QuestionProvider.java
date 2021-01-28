@@ -18,7 +18,7 @@ public class QuestionProvider {
     String type;
 
     /**
-     * @brief sets values from gui
+     * Sets values from gui
      *
      * @param amount of questions
      * @param difficulty of questions

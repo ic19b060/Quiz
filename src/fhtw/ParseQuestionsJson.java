@@ -18,8 +18,7 @@ public class ParseQuestionsJson {
 
     //create Array of questions
     static List<Question> parseQuestionJson(JsonObject json) {
-    String wrongChar1 = "&#039;";
-    String wrongChar2 = "&quot;";
+
         JsonArray questionArray = (JsonArray) json.get("results");
         List<Question> questions = new ArrayList<>();
 

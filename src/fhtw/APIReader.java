@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/** //TODO
- * Nici bitte du erklären was da passiert :-D
+/**
+ * Connects to the API
  *
  */
 public class APIReader {
@@ -79,7 +79,7 @@ public class APIReader {
 
                 Gson gson = new GsonBuilder().setPrettyPrinting().create(); // pretty print
                 String prettyJson = gson.toJson(jsonObject);
-                //System.out.println(prettyJson);
+
 
                 for (Object objInArr : namearr) {
                     JsonObject jsonquestion = (JsonObject) objInArr;

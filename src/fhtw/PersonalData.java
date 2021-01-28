@@ -15,8 +15,6 @@ public class PersonalData {
     Integer Highscore;
     Integer joker;
     Integer tempScore;
-    //Highscoregesamt ??
-
 
 
     private static final PersonalData instance = new PersonalData();
@@ -29,7 +27,7 @@ public class PersonalData {
         return username;
     }
 
-    public void setUsername(String username) throws IOException {
+    public void setUsername(String username) {
         this.username = username;
     }
 

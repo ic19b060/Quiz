@@ -12,17 +12,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.bson.Document;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.Socket;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -31,8 +26,7 @@ import java.util.ResourceBundle;
  */
 public class ControllerGameQuiz implements Initializable {
 
-    OutputStream out;
-    Socket client;
+
     Integer tempscore = 0;
     private Question currentquestion;
 
@@ -66,15 +60,6 @@ public class ControllerGameQuiz implements Initializable {
 
     @FXML
     private Button buttonJoker;
-
-    @FXML
-    private TextArea chatFenster;
-
-    @FXML
-    private TextField chatTextfenster;
-
-    @FXML
-    private Button sendButtonChat;
 
     @FXML
     private Label wrongAnswerLBL;
@@ -212,7 +197,7 @@ public class ControllerGameQuiz implements Initializable {
             }
             PersonalData.getInstance().writerdatainFile();
 
-            //TODO Highscores speichern in db?
+
         } else {
             currentquestion = questions.get(0);
             questions.remove(0);

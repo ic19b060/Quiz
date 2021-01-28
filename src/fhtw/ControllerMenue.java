@@ -20,7 +20,6 @@ import org.bson.Document;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.IntStream;
 
 import static fhtw.APIReader.jsonComplete;
 
@@ -268,8 +267,6 @@ public class ControllerMenue implements Initializable {
         this.controllerGameQuiz.setController1(this);
 
 
-
-
         String link = get_values().getApiPath();
         //create question set with created link for API
         JsonObject questionsjson = jsonComplete(link);
@@ -320,8 +317,6 @@ public class ControllerMenue implements Initializable {
      * Method is "called" before opening the fxml.
      * Initializing Combox_boxes in Normal Game & Custom Game.
      * Has to connect to MongoDB for loading all customized Documents.
-     * @param url
-     * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -332,13 +327,11 @@ public class ControllerMenue implements Initializable {
         Integer curHighscore = PersonalData.getInstance().getTempScore();
         Integer joker = PersonalData.getInstance().getJoker();
 
-        //TODO Textfield für joker + gesamthighscore
         //Show in Profile:
         proflblname.setText(username);
         proflbljoker.setText(joker.toString());
         proflblhighscore.setText(String.valueOf(highscore));
         proflbltempscore.setText(String.valueOf(curHighscore));
-        //highscoreFieldProf.setText(String.valueOf(curHighscore));
 
 
         try (MongoClient client = MongoDB.connectToDb()) {
@@ -364,18 +357,16 @@ public class ControllerMenue implements Initializable {
                 Highscore h = new Highscore();
                 h.setHighscoreFromDB(user.getInteger("Highscore"));
                 h.setUsernameHighscoreFromDB(user.getString("Username"));
-                //txtAreaHighscore.(h.getUsernameHighscoreFromDB());
+
                 txtAreaHighscore.setText(String.valueOf((h.getUsernameHighscoreFromDB())) + String.valueOf((h.getHighscoreFromDB())));
-                //txtAreaHighscore.setText()
-                //txtLog.getText() + "\n" + s
+
             }
 
             StringBuilder b = new StringBuilder();
             highscoreList.forEach(b::append);
 
-            // Program to convert Object array to String array in Java
-//new textarea
-                    QuestionCollectionCombo.getItems().addAll(gameNames);
+
+            QuestionCollectionCombo.getItems().addAll(gameNames);
         }
     }
 
@@ -386,11 +377,11 @@ public class ControllerMenue implements Initializable {
      */
     public static List<String> shuffleAnswers(Question question) {
 
-        List<String> rand_answers = new ArrayList<>(question.getIncorrectAnswers());
-        rand_answers.add(question.getCorrectAnswer());
+        List<String> randAnswers = new ArrayList<>(question.getIncorrectAnswers());
+        randAnswers.add(question.getCorrectAnswer());
 
-        Collections.shuffle(rand_answers);
-        return rand_answers;
+        Collections.shuffle(randAnswers);
+        return randAnswers;
     }
 
     /**

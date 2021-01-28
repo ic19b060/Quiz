@@ -18,7 +18,6 @@ import org.bson.Document;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -65,7 +64,6 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
 
     /**
      * We need the Name of the new Document to create this before creating the Questions in this Document.
-     * @param event
      */
     @FXML
     void commitNameButton(ActionEvent event) {
@@ -87,8 +85,6 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
     /**
      * Disabling all Buttons in the beginning until commit Button is clicked.
      *
-     * @param url
-     * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -107,7 +103,6 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
     /**
      * Adds the question created by the user to the QuestionsList.
      *
-     * @param event
      */
     @FXML
     void addQuestion(ActionEvent event) {
@@ -136,20 +131,17 @@ public class ControllerCreateCustomizedQuestions implements Initializable {
 
     }
 
-
+    /**
+     * return to Menue
+     */
     @FXML
     void cancelAndDelete(ActionEvent event) throws IOException {
-
-        //TODO NICI
-        //delete fragenpackage!
         loadMenu();
     }
 
     /**
      * Creates package of new Questions (Documents)
      * Connects with MongoDB
-     * @param event
-     * @throws IOException
      */
     @FXML
     void createPackage(ActionEvent event) throws IOException {

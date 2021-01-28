@@ -1,6 +1,5 @@
 package fhtw;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

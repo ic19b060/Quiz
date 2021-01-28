@@ -1,6 +1,5 @@
 package fhtw;
 
-import javafx.collections.ObservableList;
 
 public class Highscore {
 
