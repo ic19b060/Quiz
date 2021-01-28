@@ -1,9 +1,5 @@
 package fhtw;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,8 +9,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
-
+/**
+ * Main ohne Server-Client Aufruf
+ *
+ */
 
 
 public class Main extends Application {
@@ -31,52 +29,6 @@ public class Main extends Application {
 
     public static void main(String[] args) throws IOException {
 
-/*
-        try (MongoClient client = MongoDB.connectToDb()) {
-            MongoDatabase db = MongoDB.getDB(client);
-            MongoCollection collections = db.getCollection("CustomGame");
-
-            CustomQuestionList cur = new CustomQuestionList();
-            cur.setName("1");
-            ArrayList<Question> objects = new ArrayList<>();
-            Question question = new Question();
-            question.setCorrectAnswer("ad");
-            question.setIncorrectAnswers(Arrays.asList("b", "c", "d"));
-            question.setQuestion("Frage");
-            objects.add(question);
-            cur.setQuestions(objects);
-
-            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-            String jsonString = gson.toJson(cur);
-            collections.insertOne(Document.parse(jsonString));
-
-            BasicDBObject criteria = new BasicDBObject();
-            criteria.append("name", "1");
-            FindIterable<Document> cur_profile = collections.find(criteria);
-            for (Document document : cur_profile) {
-                CustomQuestionList v = gson.fromJson(document.toJson(), CustomQuestionList.class);
-                System.out.println(v);
-            }
-
-            //collections.find("Name", name);
-
-        }
-        */
-
-
-      //  MongoDB.connect_to_db();
-        //create link for question set based on user choice
-        //connect with gui!
-       // String link = Link();
-
-        //create question set with created link for API
-       // JsonObject questionsjson = Json_complete(link);
-
-        //Gameplay logic
-     //   List<Question> questions = Answers.parseQuestionJson(questionsjson);
-       // QuestionRepository.getInstance().setQuestions(questions);
-        //singleplay(questions);
-        //multiplay(questions)
         launch(args);
 
     }

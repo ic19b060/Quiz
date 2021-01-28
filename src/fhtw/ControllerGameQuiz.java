@@ -295,26 +295,10 @@ public class ControllerGameQuiz implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //connecttoserver();
+
 
     }
 
-
-    public void connecttoserver() {
-
-        try {
-            client = new Socket("localhost", 1111);
-            System.out.println("Client connected to " + client.getInetAddress());
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-        public void log(String s) {
-        chatFenster.appendText(s + "\n");
-    }
     /**
      * Disables all the other unclicked Buttons.
      *
@@ -326,26 +310,6 @@ public class ControllerGameQuiz implements Initializable {
         one.setDisable(true);
         two.setDisable(true);
         three.setDisable(true);
-
-    }
-
-
-    @FXML
-    void sendButton(ActionEvent event) throws IOException {
-
-        out = client.getOutputStream();
-        String message = chatTextfenster.getText();
-       byte[] bmessage = message.getBytes();
-        out.write(bmessage);
-        log(message);
-        chatTextfenster.setText(null);
-
-       // InputStream in = client.getInputStream();
-      //  byte[] received = new byte[100]; //array mit 100 Stellen
-      //  int bytes = in.read(received);
-      //  String r = new String(String.valueOf(bytes));
-        // log("Message from server received: " + r);
-
 
     }
 

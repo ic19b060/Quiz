@@ -67,7 +67,7 @@ public class PersonalData {
         FileWriter out = new FileWriter(newFile.getAbsoluteFile(), true);
         BufferedWriter writer = new BufferedWriter(out);
         writer.write("User: \t" + username + "\n");
-        writer.write("Highscore: \t" + Highscore + "\n");
+        writer.write("last Game Highscore: \t" + tempScore + "\n");
         writer.write("****************************************" + "\n");
         writer.close();
         out.close();
