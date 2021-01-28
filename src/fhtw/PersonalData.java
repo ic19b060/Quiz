@@ -60,7 +60,7 @@ public class PersonalData {
      *
      * @throws IOException
      */
-    public void writerdatainFile() throws IOException {
+    public void writerDatainFile() throws IOException {
         File newFile = new File("Highscores.txt");
         FileWriter out = new FileWriter(newFile.getAbsoluteFile(), true);
         BufferedWriter writer = new BufferedWriter(out);

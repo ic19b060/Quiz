@@ -195,7 +195,7 @@ public class ControllerGameQuiz implements Initializable {
                     }
                 }
             }
-            PersonalData.getInstance().writerdatainFile();
+            PersonalData.getInstance().writerDatainFile();
 
 
         } else {

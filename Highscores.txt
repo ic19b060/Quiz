@@ -7,3 +7,9 @@ last Game Highscore: 	0
 User: 	neu
 last Game Highscore: 	40
 ****************************************
+User: 	neu
+last Game Highscore: 	40
+****************************************
+User: 	neu
+last Game Highscore: 	0
+****************************************
