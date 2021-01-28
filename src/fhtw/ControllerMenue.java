@@ -336,8 +336,8 @@ public class ControllerMenue implements Initializable {
         //Show in Profile:
         proflblname.setText(username);
         proflbljoker.setText(joker.toString());
-        //proflblhighscore.setText(highscore.toString());
-        //proflbltempscore.setText(curHighscore.toString());
+        proflblhighscore.setText(String.valueOf(highscore));
+        proflbltempscore.setText(String.valueOf(curHighscore));
         //highscoreFieldProf.setText(String.valueOf(curHighscore));
 
 
@@ -365,7 +365,9 @@ public class ControllerMenue implements Initializable {
                 h.setHighscoreFromDB(user.getInteger("Highscore"));
                 h.setUsernameHighscoreFromDB(user.getString("Username"));
                 //txtAreaHighscore.(h.getUsernameHighscoreFromDB());
-                //txtAreaHighscore.setItems(h.getHighscoreFromDB());
+                txtAreaHighscore.setText(String.valueOf((h.getUsernameHighscoreFromDB())) + String.valueOf((h.getHighscoreFromDB())));
+                //txtAreaHighscore.setText()
+                //txtLog.getText() + "\n" + s
             }
 
             StringBuilder b = new StringBuilder();

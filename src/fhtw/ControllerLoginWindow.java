@@ -103,6 +103,7 @@ public class ControllerLoginWindow implements Initializable {
             String passwordDB = "";
             Integer highscoreDB = 0;
             Integer jokerDB = 0;
+            Integer tempScoreDB = 0;
 
             while (cursor.hasNext()) {
                 Document userinfo = cursor.next();
@@ -110,6 +111,7 @@ public class ControllerLoginWindow implements Initializable {
                 passwordDB = userinfo.getString("Password");
                 highscoreDB = userinfo.getInteger("Highscore");
                 jokerDB = userinfo.getInteger("Joker");
+                tempScoreDB = userinfo.getInteger("TempScore");
 
                 if (usernameDB.equals(user)) {
                     break;
@@ -126,6 +128,7 @@ public class ControllerLoginWindow implements Initializable {
                     PersonalData.getInstance().setUsername(user);
                     PersonalData.getInstance().setHighscore(highscoreDB);
                     PersonalData.getInstance().setJoker(jokerDB);
+                    PersonalData.getInstance().setTempScore(tempScoreDB);
 
                     Parent root = FXMLLoader.load(getClass().getResource("menue.fxml"));
 
