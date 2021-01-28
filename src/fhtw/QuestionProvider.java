@@ -41,10 +41,26 @@ public class QuestionProvider {
      */
     public String getApiPath() {
 
+
+        String category = this.Category.toString();
+        String difficulty = this.difficulty;
+
+        if (category == null) {
+            category = "";
+        } else {
+            category = "&category=" + this.Category.getValue();
+        }
+
+        if (difficulty == null) {
+            difficulty = "";
+        } else {
+            difficulty = "&difficulty=" + this.difficulty;
+        }
+
         return "https://opentdb.com/api.php"
                 + "?amount=" + this.amount.toString()
-                + "&category=" + this.Category.getValue()
-                + "&difficulty=" + this.difficulty
+                + category
+                + difficulty
                 + "&type=" + this.type;
            }
 

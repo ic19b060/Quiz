@@ -198,12 +198,12 @@ public class ControllerGameQuiz implements Initializable {
                         usernameDB = userinfo.getString("Username");
 
                         if (usernameDB.equals(PersonalData.getInstance().getUsername())) {
+                            userCollection.updateOne(Filters.eq("Username", PersonalData.getInstance().getUsername()), Updates.set("TempScore", PersonalData.getInstance().getTempScore()));
                             if(tempscore >= PersonalData.getInstance().getHighscore() || PersonalData.getInstance().getHighscore() == null) {
                                 PersonalData.getInstance().setHighscore(tempscore);
                             userCollection.updateOne(Filters.eq("Username", PersonalData.getInstance().getUsername()), Updates.set("Highscore", PersonalData.getInstance().getHighscore()));
                             if (!PersonalData.getInstance().getJoker().equals(userinfo.getInteger("Joker"))){
                                 userCollection.updateOne(Filters.eq("Username", PersonalData.getInstance().getUsername()), Updates.set("Joker", PersonalData.getInstance().getJoker()));
-
                             }
                         }
 
