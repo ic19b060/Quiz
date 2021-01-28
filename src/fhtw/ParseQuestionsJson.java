@@ -18,7 +18,8 @@ public class ParseQuestionsJson {
 
     //create Array of questions
     static List<Question> parseQuestionJson(JsonObject json) {
-
+    String wrongChar1 = "&#039;";
+    String wrongChar2 = "&quot;";
         JsonArray questionArray = (JsonArray) json.get("results");
         List<Question> questions = new ArrayList<>();
 
@@ -27,13 +28,22 @@ public class ParseQuestionsJson {
             List<String> answers = new ArrayList<>();
             Question cur = new Question();
             JsonObject jsonQuestion = (JsonObject) question;
+
             JsonArray wrongAnswer = jsonQuestion.get("incorrect_answers").getAsJsonArray();
             for (JsonElement jsonElement : wrongAnswer) {
-               answers.add(jsonElement.getAsString());
+                String wrong = jsonElement.getAsString();
+                answers.add(checkString(wrong));
             }
-            cur.setCorrectAnswer(jsonQuestion.get("correct_answer").getAsString());
             cur.setIncorrectAnswers(answers);
-            cur.setQuestion(jsonQuestion.get("question").getAsString());
+
+            String answer = jsonQuestion.get("correct_answer").getAsString();
+            String correctAnswer = checkString(answer);
+            cur.setCorrectAnswer(correctAnswer);
+
+            String wrquestion = jsonQuestion.get("question").getAsString();
+            String correctquestion = checkString(wrquestion);
+            cur.setQuestion(correctquestion);
+
             questions.add(cur);
             //create Object for question
         }
@@ -68,6 +78,21 @@ public class ParseQuestionsJson {
         return questions;
     }
 
+static String checkString (String string){
+
+    String wrongChar1 = "&#039;";
+    String wrongChar2 = "&quot;";
+    String correctString = "";
+
+    if (string.contains(wrongChar1) || string.contains(wrongChar2)) {
+        correctString = string.replaceAll(wrongChar1, "'");
+        correctString = correctString.replaceAll(wrongChar2, "");
+    }
+    else {
+        correctString = string;
+    }
+        return correctString;
+}
 
     }
 

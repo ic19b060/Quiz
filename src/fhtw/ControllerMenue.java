@@ -91,18 +91,18 @@ public class ControllerMenue implements Initializable {
     @FXML
     private Tab profilTab;
 
-    @FXML
-    private TextArea nameFieldProf;
 
     @FXML
-    private TextArea highscoreFieldProf;
-
-
-    @FXML
-    private TextField generalHighscoreProfile;
+    private Label proflblname;
 
     @FXML
-    private TextField JokerTextAreaProfil;
+    private Label proflbltempscore;
+
+    @FXML
+    private Label proflblhighscore;
+
+    @FXML
+    private Label proflbljoker;
 
 
 
@@ -323,28 +323,18 @@ public class ControllerMenue implements Initializable {
         loadDataDiffbutton(comboDiff);
         loadDataCatbutton(comboCat);
         String username = PersonalData.getInstance().getUsername();
+        Integer highscore = PersonalData.getInstance().getHighscore();
         Integer curHighscore = PersonalData.getInstance().getTempScore();
         Integer joker = PersonalData.getInstance().getJoker();
 
         //TODO Textfield für joker + gesamthighscore
-        //("Hallo " + user + "! Du hast aktuell * " + joker + " Joker!")
+        //Show in Profile:
+        proflblname.setText(username);
+        proflbljoker.setText(joker.toString());
+        //proflblhighscore.setText(highscore.toString());
+        //proflbltempscore.setText(curHighscore.toString());
+        //highscoreFieldProf.setText(String.valueOf(curHighscore));
 
-        //
-        //    generalHighscoreProfile; - Feld für gesamthighscore des users
-        //
-        //
-        //   JokerTextAreaProfil;
-
-        nameFieldProf.setText(username);
-        highscoreFieldProf.setText(String.valueOf(curHighscore));
-
-        String name = PersonalData.getInstance().getUsername();
-        Integer highscore = PersonalData.getInstance().getHighscore();
-    /*    if (highscore == 0){
-            textfield.setText("Hallo " + name + ", dein persönlicher Highscore beträgt " + highscore + " Punkte, auweh! :(");
-        } else {
-            textfield.setText("Hallo " + name + ", dein persönlicher Highscore beträgt " + highscore + " Punkte, WOW nice! :)");
-        }*/
 
         try (MongoClient client = MongoDB.connectToDb()) {
             MongoDatabase db = MongoDB.getDB(client);
@@ -377,13 +367,8 @@ public class ControllerMenue implements Initializable {
             highscoreList.forEach(b::append);
 
             // Program to convert Object array to String array in Java
-
 //new textarea
-
                     QuestionCollectionCombo.getItems().addAll(gameNames);
-
-
-
         }
     }
 

@@ -9,16 +9,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<ScrollPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.ControllerSignUp">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.ControllerSignUp">
    <content>
       <TitledPane text="Sign_up">
          <content>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="356.0" style="-fx-background-color: #C7D0D7;">
                <children>
-                  <TextField fx:id="enterUserSignup" layoutX="70.0" layoutY="155.0" promptText="enter new user" />
-                  <PasswordField fx:id="enterPasswordSignup" layoutX="70.0" layoutY="225.0" promptText="enter new password" />
-                  <Button fx:id="okSignupBtn" layoutX="258.0" layoutY="267.0" mnemonicParsing="false" onAction="#signupNewuserentry" style="-fx-background-color: #657889;" text="Sign up" />
+                  <TextField fx:id="enterUserSignup" layoutX="70.0" layoutY="155.0" promptText="enter new username" />
+                  <PasswordField fx:id="enterPasswordSignup" layoutX="70.0" layoutY="217.0" promptText="enter new password" />
+                  <Button fx:id="okSignupBtn" layoutX="70.0" layoutY="272.0" mnemonicParsing="false" onAction="#signupNewuserentry" style="-fx-background-color: #657889;" text="Sign up" textFill="WHITE" />
                   <Label layoutX="70.0" layoutY="122.0" text="User" textFill="#657889">
                      <font>
                         <Font size="21.0" />
@@ -29,13 +28,13 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="42.0" prefHeight="58.0" prefWidth="186.0" text="New User - Sign up" textFill="#657889">
+                  <Label layoutX="64.0" layoutY="46.0" prefHeight="58.0" prefWidth="246.0" text="New User - Sign up" textFill="#657889">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="Century Gothic" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="signuplbl" layoutX="20.0" layoutY="270.0" prefHeight="44.0" prefWidth="182.0" textFill="#657889" />
-                  <Button fx:id="rtrnLogin" layoutX="220.0" layoutY="314.0" mnemonicParsing="false" onAction="#returnLogin" style="-fx-background-color: #657889;" text="return to Login" />
+                  <Label fx:id="signuplbl" layoutX="138.0" layoutY="263.0" prefHeight="44.0" prefWidth="182.0" textFill="#657889" />
+                  <Button fx:id="rtrnLogin" layoutX="70.0" layoutY="311.0" mnemonicParsing="false" onAction="#returnLogin" style="-fx-background-color: #657889;" text="Return to Login" textFill="WHITE" />
                </children>
             </Pane>
          </content>
